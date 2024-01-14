@@ -1,0 +1,31 @@
+service: filter-lambda
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: us-east-1
+  stackName: ${self:service}
+  versionFunctions: false
+  memorySize: 128
+  timeout: 30
+  accountId: 714387279390
+  profile: default
+  apiGateway:
+    shouldStartNameWithService: true
+    minimumCompressionSize: 1024
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:GetObject
+        - execute-api:Invoke
+        - secretsmanager:GetSecretValue 
+      Resource: "*"
+
+functions:
+  filterlambda:
+    handler: filterlambda.handler  # adjust this if you named your function/file differently
+    events:
+      - cloudFront:
+          eventType: viewer-request
+          origin: 's3://bismarter-site.s3.amazonaws.com' 
+
+  

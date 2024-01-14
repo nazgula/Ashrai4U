@@ -1,0 +1,119 @@
+@import '@/assets/styles/mixins';
+
+.messages-list {
+  display: flex;
+  flex-direction: column;
+  padding: rem(20px) rem(15px);
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  gap: rem(24px);
+
+  // .loading {
+  //   justify-content: flex-start;
+  // }
+
+  .message-wrapper {
+    display: flex;
+    width: 100%;
+    &.error {
+      .message {
+        .message__content {
+          background-color: #ff9f9f;
+          color: var(--black);
+        }
+      }
+    }
+  }
+  .message {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+    font-size: rem(14px);
+    line-height: 1.2;
+    &--right {
+      margin-left: auto;
+      .message__content {
+        // margin-inline-end: auto;
+        background-color: #7bb7f5;
+        color: var(--white);
+      }
+    }
+    &--left {
+      margin-right: auto;
+      .message__content {
+        background-color: #fff;
+        color: var(--black);
+        border-bottom-left-radius: inherit;
+      }
+    }
+    &__content {
+      padding: rem(12px) rem(10px) rem(24px);
+      border-radius: rem(10px);
+    }
+    &__attachment {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: rem(10px);
+      margin-top: rem(24px);
+
+      button {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        padding-top: rem(4px);
+        padding-bottom: rem(4px);
+        padding-inline-end: rem(10px);
+        padding-inline-start: rem(17px);
+        width: rem(220px);
+        height: rem(75px);
+        border-radius: rem(5px);
+        border: 1.5px solid #3ae;
+        background-color: #fff;
+        color: #3ae;
+        text-align: center;
+        font-size: rem(22px);
+        line-height: 0.8;
+        svg {
+          content-visibility: hidden;
+          position: absolute;
+        }
+        &.checked {
+          background-color: #3ae;
+          color: #fff;
+          svg {
+            content-visibility: visible;
+            top: rem(7px);
+            inset-inline-start: rem(8px);
+          }
+        }
+        &[disabled] {
+          cursor: not-allowed;
+        }
+        &:hover:not(.checked):not([disabled]) {
+          background-color: #33a9ee0f;
+        }
+
+        &.done {
+        }
+      }
+    }
+    &__attachment-done {
+      display: flex;
+      width: 100%;
+      button {
+        width: 100%;
+        height: rem(44px);
+        background-color: #3ae;
+        color: var(--white);
+        &:hover:not([disabled]) {
+          background-color: #7bb7f5 !important;
+        }
+      }
+    }
+  }
+}

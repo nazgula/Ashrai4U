@@ -1,0 +1,111 @@
+@import '@/assets/styles/mixins';
+
+.footer {
+  width: 100%;
+  background-color: #2c2348;
+  padding-top: rem(40px);
+  padding-bottom: rem(30px);
+  color: var(--white);
+
+  .container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__brand {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &-slogan {
+      font-size: rem(18px);
+      line-height: rem(33px);
+      font-weight: 600;
+      text-align: center;
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      bottom: rem(-30px);
+      width: 100%;
+      height: 1px;
+      background-color: var(--white);
+    }
+  }
+  &__brand {
+    & ~ div {
+      display: flex;
+    }
+  }
+
+  &__version {
+    position: absolute;
+    inset-inline-end: rem(16px);
+    bottom: 0;
+    font-size: rem(12px);
+    font-weight: 400;
+  }
+  nav {
+    display: inline-flex;
+    flex-direction: column;
+    margin-top: rem(60px);
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: rem(25px);
+      margin-inline-end: auto;
+      li {
+        a {
+          white-space: nowrap;
+          display: inline-flex;
+          color: inherit;
+          font-size: rem(15px);
+          line-height: 1;
+        }
+        &:hover {
+          color: var(--main-blue);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .footer {
+    &__brand {
+      &:before {
+        content: none;
+      }
+      ~ div {
+        justify-content: space-between;
+        flex-direction: row-reverse;
+      }
+    }
+    &__version {
+      position: initial;
+    }
+
+    nav {
+      flex-direction: initial;
+      margin-top: initial;
+      ul {
+        flex-direction: initial;
+        gap: rem(50px);
+        li {
+          a {
+            white-space: nowrap;
+            display: inline-flex;
+            color: inherit;
+            font-size: rem(15px);
+            line-height: 1;
+          }
+          &:hover {
+            color: var(--main-blue);
+          }
+        }
+      }
+    }
+  }
+}

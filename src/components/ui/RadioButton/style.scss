@@ -1,0 +1,70 @@
+@import '@/assets/styles/mixins';
+
+.radio {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  &__input {
+    appearance: none;
+    margin: 0;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #becad3;
+    border-radius: 50%;
+    transition: all 0.4s ease-in-out;
+
+    &::before {
+      content: '';
+      display: block;
+      border-radius: 50%;
+      width: 14px;
+      height: 14px;
+      margin: 2px;
+      transition: all 0.4s ease-in-out;
+    }
+    &:hover {
+      &:not(:checked) {
+        cursor: pointer;
+        &::before {
+          background-color: #becad3;
+        }
+      }
+      &:checked {
+        border-color: var(--main-blue-light);
+        &::before {
+          background-color: var(--main-blue-light);
+        }
+      }
+    }
+
+    &:checked {
+      border-color: var(--main-blue);
+      &::before {
+        background-color: var(--main-blue);
+      }
+    }
+
+    &[disabled] {
+      ~ .radio__label {
+        color: #becad3;
+        cursor: not-allowed;
+      }
+    }
+  }
+  &__label {
+    font-weight: 600;
+    font-size: rem(18px);
+    color: #3a4459;
+    cursor: default;
+  }
+}
+
+.radio-group {
+  border: none;
+  &__legend {
+  }
+  &__wrapper {
+    display: flex;
+    gap: rem(40px);
+  }
+}

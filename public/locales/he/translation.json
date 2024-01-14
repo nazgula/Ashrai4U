@@ -1,0 +1,318 @@
+{
+	"main": {
+		"header": {
+			"btn_login": "כניסה",
+			"btn_create_account": "הירשם"
+		},
+		"howItWorks": {
+			"relative": "בימים קשים אלו, <b>כאשר חוסר הודאות העסקית גדל</b> והרבה שאלות נותרות ללא מענה ,<span>אנחנו מנגישים טכנולוגיית AI לסייע לעסקים</span> ולעזור להם בקבלה ברורה ומהירה של הדרכים, ההטבות והמסלולים המתאימים להם <b>לקבלת סיוע אליו הם זכאים.<b/>",
+			"title": "איך זה עובד?",
+			"description": "נרשמים, מגדירים ל AI את תכונות העסק שלכם דרך צ'אט ומקבלים את ההטבות בשוק הקיימות עבורכם.",
+			"stepList": [
+				{
+					"step": "1",
+					"title": "הרשמה קצרה",
+					"description": "הירשם בתהליך קצר כולל אימות כדי להבטיח שהנתונים של העסק יהיו מאובטחים"
+				},
+				{
+					"step": "2",
+					"title": "פתיחת מסך ה צ׳אט", 
+					"description": "לאחר ההרשמה יעמוד לרשותך הצ’אט של חמ״ל AI"
+				},
+				{
+					"step": "3",
+					"title": "הזנה של נתוני העסק לקבלת הטבות מותאמות",
+					"description": "ענה על שאלות הצ’אט כדי לקבל מידע מותאם לעסק שלך על ההטבות ומסלולי הסיוע השונים"	
+				}
+			]
+		},
+		"ai": {
+			"title": "חמ״ל AI לעסקים",
+			"description": "הכוונה והגשת הפרטים לקבלת סיוע ממגוון תוכניות המדינה",
+			"chat": {
+				"header": {
+					"title": "חמ״ל AI לעסקים",
+					"description": "הכוונה והגשת הפרטים לקבלת סיוע ממגוון תוכניות המדינה"
+				},
+				"static-data": {
+					"start": [
+						{
+							"message": "ברוכים הבאים! נרשמת בהצלחה. נעים מאד, אני החמ״ל AI"
+						},
+						{
+							"message": "אשאל אותך עכשיו כמה שאלות על העסק שלך כדי למצוא עבורך את התוכניות סיוע והטבות שהכי מתאימות לעסק שלך"
+						}
+					],
+					"finish": [
+						{
+							"message": "זהו, סיימנו 😃 עכשיו כשאנחנו מכירים, תורך לשאול אותי כל שאלה בנושא סיוע והטבות לעסק שלך"
+						},
+						{
+							"message": "התשובות שלי יתבססו על המידע שענית לי. במידה ותרצה לשנות את המידע, לחץ על האייקון של \"פרופיל אישי\" בפינה העליונה בצד שמאל."
+						}
+					],
+					"quiz": {
+						"message__context_warLocation": "בואו נתחיל, באיזה איזור העסק שלך?",
+						"message__context_type": "מצויין! איך רשום העסק שלך?",
+						"message__context_domain": "מהו תחום העסק?",
+						"message__context_evacuated": "האם פוניתם על ידי גורם מדיני רשמי מביתם נכון לתאריך 7.11.23?",
+						"message__context_victom": "האם בעלי קרבה ראשונה להרוגי המלחמה או לחטופים או לנעדרים?",
+						"message__context_recruited": "האם אתה משרת במילואים ומגויס צו 8 בחודשים אוקטובר נובמבר?",
+						"message__context_damageStatus": "באיזו צורה העסק שלך נפגע?",
+						"message__context_income": "מה מחזור ההכנסות השנתי שלך?",
+						"message__context_obligo": "מה האובליגו של העסק? (סך התחייבויות שיש לעסק בבנק)",
+						"message__context_loanStatus": "הבנתי, יש לך הלוואה? (בבקשה כתוב האם כן או לא ומאיזה מוסד פיננסי קיבלת את ההלוואה)",
+						"message__context_bankAccount": "באיזה בנק העסק? (אתה יכול ללחוץ על כמה אפשרויות, לסיום לחץ על ״סיימתי״)",
+						"message__context_fullName": "מה השם שלך?",
+						"message__context_companyName": "מה שם העסק?",
+						"message__context_indetifier": "אוקי, כמעת סיימנו! חסר רק ח.פ. או ת.ז. לעסק מורשה"
+					},
+					"attachment": {
+						"warLocation": {
+							"label__context_NORTH": "צפון",
+							"label__context_SOUTH-30": "דרום-30",
+							"label__context_SOUTH-40": "דרום-40",
+							"label__context_NO": "לא"
+						},
+						"type": {
+							"label__context_COMPANY": "חברה",
+							"label__context_AUTHORIZED_DEALER": "סוכן מורשה",
+							"label__context_ASSOCIATION": "אגודה"
+						},
+						"domain": {
+							"label__context_INDUSTRY": "תעשייה",
+							"label__context_EXPORT_250": "יצוא_250",
+							"label__context_EXPORT_ABOVE_250": "יצוא_מעל_250",
+							"label__context_FOOD": "מזון",
+							"label__context_AGRICULTURE": "חקלאות",
+							"label__context_CULTURE": "תרבות",
+							"label__context_EDUCATION": "חינוך",
+							"label__context_HEALTH": "בריאות",
+							"label__context_MAN_POWER": "כוח אדם"
+						},
+						"evacuated": {
+							"label__context_YES": "כן",
+							"label__context_NO": "לא"
+						},
+						"victom": {
+							"label__context_YES": "כן",
+							"label__context_NO": "לא"
+						},
+						"recruited": {
+							"label__context_YES": "כן",
+							"label__context_NO": "לא"
+						},
+						"damageStatus": {
+							"label__context_NONE": "אין",
+							"label__context_DIRECT": "ישיר",
+							"label__context_INDIRECT": "עקיף"
+						},
+						"income": {
+							"label__context_<5": "פחות מ-5",
+							"label__context_5-25": "5-25",
+							"label__context_25-100": "25-100",
+							"label__context_>500": "יותר מ-500"
+						},
+						"obligo": {
+							"label__context_<2": "פחות מ-2",
+							"label__context_>2": "יותר מ-2"
+						},
+						"loanStatus": {
+							"label__context_MORTGAGE": "משכנתא",
+							"label__context_LOAN": "לְהַלווֹת",
+							"label__context_NONE": "אין",
+							"label__context_STATE_LOAN": "הלוואת מדינה"
+						},
+						"bankAccount": {
+							"label__context_LEUMI": "לאומי",
+							"label__context_POALIM": "פועלים",
+							"label__context_DISCONT": "דיסקונט",
+							"label__context_IGUD": "איגוד",
+							"label__context_BEN_LEUMI": "בן לאומי",
+							"label__context_MIZRCHI": "מזרחי",
+							"label__context_JERUSALEM": "ירושלים"
+						}
+					}
+				},
+				"btn-confirm": "סיימתי",
+				"loading-status__context_preparing-question": "בודק",
+				"loading-status__context_initiating-search": "בודק",
+				"loading-status__context_searching-bank": "בודק",
+				"loading-status__context_searching-authority": "בודק",
+				"loading-status__context_searching-internal": "בודק",
+				"loading-status__context_analyzing": "בודק"
+			}
+		},
+		"help": {
+			"title": "סיוע מהיר ומפורט לכל עסק <br/><span>בדוק את ההטבות המגיעות לעסק שלך</span>",
+			"btn": "לחמ”ל AI"
+		},
+		"security": {
+			"title": "<span>מידע מבוסס על ריכוז מידע</span><br/>מרשויות, בנקים, גופים חוץ בנקאיים, קרנות ועוד",
+			"btn": "לחמ”ל AI"
+		},
+		"sponsors": "בחסות",
+		"businessSupport": {
+			"title": "תומכים בעסקים",
+			"description": "חברות, גופים וקרנות שיכולים לתמוך בעסקים, נשמח להנגיש עבורכם את המידע על הסיוע לעסקים! - כתבו אלינו ונחזור אליכם",
+			"form": {
+				"companyName": "שם חברה",
+				"contactFullName": "איש קשר",
+				"phone": "מספר טלפון",
+				"email": "מייל",
+				"proposition": "הצעה",
+				"btn": "צור קשר"
+			},
+			"errorMessage": {
+				"companyName": "*נדרש",
+				"contactFullName": "*נדרש",
+				"phone": "*טלפון לא חוקי",
+				"email": "*אימייל שגוי",
+				"proposition": "*נדרש"
+			},
+			"handshake": "יחד ננצח",
+			"leadEnd": {
+				"title": "תומכים בעסקים",
+				"description": "חברות, גופים וקרנות שיכולים לתמוך בעסקים, נשמח להנגיש עבורכם את המידע על הסיוע לעסקים! - כתבו אלינו ונחזור אליכם",
+				"message": "קיבלנו את בקשתך, ניצור איתך קשר בהקדם",
+				"btn": "תודה"
+			}
+		},
+		"footer": {
+			"navList": [
+				{
+					"name": "תנאי שימוש"
+				},
+				{
+					"name": "פרטיות"
+				},
+				{
+					"name": "הצרת נגישות"
+				}
+			]
+		}
+	},
+	"admin": {
+		"login": {
+			"title": "היי, שנתחבר?",
+			"description": "ברוכים הבאים!",
+			"btnLink": "הסיסמה נשכחה?",
+			"btnGroup": "כניסה לחשבון",
+			"input": {
+				"identifier-placeholder": "מספר טלפון",
+				"password-placeholder": "סיסמא"
+			},
+			"checkList__context_validLength": "לפחות {{amountCharacters}} תווים",
+			"checkList__context_lowerCase": "מכיל לפחות אות קטנה אחת",
+			"checkList__context_upperCase": "מכיל לפחות אות אחת גדולה",
+			"checkList__context_hasNumber": "מכיל לפחות מספר אחד",
+			"checkList__context_specialChar": "מכיל לפחות תו מיוחד אחד",
+			"identifierErrorMessage": "הערך חייב להיות טלפון"
+		},
+		"registration": {
+			"title__context_signUp": "הירשם לחמ״ל AI",
+			"title__context_verify": "אמת חשבון",
+			"title__context_profile": "פריטים על העסק שלך",
+			"description__context_signUp": "בבקשה הירשם עם הטלפון ובחר סיסמא",
+			"description__context_verify": "אמת חשבון עם הקוד שנשלח אליך",
+			"description__context_profile": "מלא את פרטי העסק וסיימנו",
+			"input": {
+				"identifier-placeholder": "מספר טלפון",
+				"password-placeholder": "סיסמא",
+				"confirmPassword-placeholder": "חזרה על הסיסמא",
+				"indetifier-placeholder": "מספר עסק (ח.פ.) או ת.ז.",
+				"companyName-placeholder": "שם עסק",
+				"fullName-placeholder": "שם איש קשר"
+			},
+			"checkbox": {
+				"text": "קראתי ואישרתי את",
+				"link1": "תנאי השימוש",
+				"link2": "מדיניות הפרטיות"
+			},
+			"error": {
+				"confirmation": "סיסמה ואישור סיסמה אינם תואמים",
+				"identifier": "הערך חייב להיות טלפון"
+			},
+			"submit": "הבא",
+			"close":"סגור",
+			"decorate": "נתונים מאובטחים",
+			"verification": {
+				"newCode": "שלח קוד חדש",
+				"timer": "זמן שנותר",
+				"error": {
+					"invalidCode": "קוד לא תקין",
+					"expired": "פג תוקף הקוד"
+				}
+			}
+		},
+		"forgotPassword": {
+			"title__context": "שכחת סיסמה?",
+			"description__context": "אנא הזן את מספר טלפון המצורף לחשבון שלך",
+			"title__context_reset": "להגדיר סיסמה חדשה",
+			"description__context_reset": "הכוונה והנגשת פרטים על תוכניות סיוע ומימון ומגוון תוכניות ממשלתיות",
+			"submit": "הבא",
+			"input": {
+				"identifier-placeholder": "מספר טלפון",
+				"password-placeholder": "בחר סיסמא",
+				"confirmPassword-placeholder": "חזרה על הסיסמא"
+			},
+			"verification": {
+				"newCode": "שלח קוד חדש",
+				"timer": "זמן שנותר",
+				"error": {
+					"invalidCode": "קוד לא תקין",
+					"expired": "פג תוקף הקוד"
+				}
+			}
+		},
+
+		"logoutPrepare": {
+			"title": "רוצה להתנתק?",
+			"description": "אם אתה בטוח שאתה רוצה להתנתק? תצטרך להיכנס למערכת מחדש בפעם הבאה שתגיע לחמ\"ל",
+			"btn__context_logout": "להתנתק",
+			"btn__context_cancel": "ביטול"
+		}
+	},
+	"profile": {
+		"title": "הטופס האישי שלך",
+		"indetifier":" ח״פ / ת״ז",
+		"companyName": "שם העסק",
+		"fullName": "איש קשר",
+		"description": "כל הפרטים שמילאת כאן",
+		"companyDomainFinal":"תחום",
+		"companyDomain":{
+			"FOOD":"מזון", "HI-TECH":"הייטק", "AGRICULTURE":"חקלאות", "INDUSTRY":"תעשייה", "EXPORT":"ייבואֿ/ייצוא", "FINCANCE":"פיננסים", "FASHION":"אופנה", "TRADE":"מסחר", "MUSIC":"מוסיקה", "REAL_ESTATE":"נדלן","OTHER":"אחר"
+		},
+		"businessrevenueFinal":"מחזור שנתי",
+		"compnayBankFinal": "חשבון בנק",
+		"companyBank":{
+			"HAPOALIM":"בנק הפועלים", "LEUMI":"בנק לאומי", "BEN_LEUMI":"בנק הבנלאומי", "IGUD":"בנק איגוד", "JERUSALEM":"בנק ירושלים", "DISCONT":"בנק דיסקונט", "YAHAV":"בנק יהב", "ONE_ZERO":"בנק זירו", "MIZRACHI":"בנק מזרחי", "OTHER":"אחר"
+		},
+		"revenue":{
+			"18000-50000":"18,000 - 50,000", "50000-120000":"50,000 - 120,000","120000-150000":"120,000 - 150,000", "150000-200000":"150,000 - 200,000", "200000-250000":"200,000 - 250,000","250000-300000":"250,000 - 300,000", "300000-5000000":"300,000 - 5,000,000"," 5-25 milions":"5 - 25 מיליון" ,"25-100 milions":"25 - 100 מיליון","100-500 milions":"100 - 500 מיליון",">500 milions":"> 500 מיליון"
+		},
+		"companyType":{
+			"PRIVATE":"עוסק מורשה","COOPERATION":"חברה בעֿ״מ", "ASSOSIACTION":"עמותה" 
+		},
+		"companyTypeFinal": "סוג העסק",
+		"companyDamageStatusFinal": "סטטוס",
+		"companyDamage":{
+			"DIRECT":"נזק ישיר","INDIRECT":"נזק עקיף","NONE":"אין נזק"
+		},
+		"radioGroup": [
+			{
+				"label": "חברה בע״מ"
+			},
+			{
+				"label": "עוסק מורשה"
+			},
+			{
+				"label": "עמותה"
+			}
+		],
+		"buttons": {
+			"save": "שמור שינויים",
+			"cancel": "ביטול"
+		}
+	}
+}

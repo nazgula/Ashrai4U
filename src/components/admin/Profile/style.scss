@@ -1,0 +1,126 @@
+@import '@/assets/styles/mixins';
+.centered-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; // Adjust height as needed
+
+  // You may add more styling as required
+  text-align: center;
+}
+.profile {
+  width: 100%;
+  background-color: var(--white);
+  padding-top: rem(40px);
+  &__title,
+  &__description {
+    text-align: center;
+    text-wrap: balance;
+  }
+  &__title {
+    font-size: rem(35px);
+    line-height: rem(42px);
+  }
+  &__description {
+    font-size: rem(18px);
+    line-height: rem(21px);
+    color: #878181;
+  }
+  &__content {
+    margin-top: rem(26px);
+  }
+  &__handle {
+    display: flex;
+    justify-content: center;
+    margin-top: rem(26px);
+    gap: rem(32px);
+  }
+
+  * + &__description {
+    margin-top: rem(10px);
+  }
+}
+
+.profile-content {
+  margin: rem(30px) rem(0);
+  height: calc(80dvh - 250px);
+  overflow: auto;
+  border-radius: rem(16px);
+  background: #f8f8f8;
+  &__wrapper {
+    padding: rem(24px) rem(16px) rem(24px);
+    .radio-group {
+      display: flex;
+      justify-content: center;
+      &__wrapper {
+        flex-direction: column;
+      }
+    }
+  }
+  &__list {
+    margin-top: rem(40px);
+  }
+}
+
+.profile-content-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: rem(20px) rem(46px);
+
+  label {
+    color: #878181;
+    font-size: rem(18px);
+    line-height: rem(22px);
+    font-weight: 600;
+    & + * {
+      margin-top: rem(10px);
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .profile {
+    &__title {
+      font-size: rem(40px);
+      line-height: rem(44px);
+    }
+    &__description {
+      font-size: rem(22px);
+      line-height: rem(30);
+    }
+  }
+
+  .profile-content {
+    padding: rem(32px) rem(40px) rem(60px);
+    border-radius: rem(30px);
+    height: calc(80dvh - 320px);
+    &__wrapper {
+      .radio-group {
+        display: flex;
+        justify-content: center;
+        &__wrapper {
+          flex-direction: initial;
+        }
+      }
+    }
+    &__list {
+      margin-top: rem(40px);
+    }
+  }
+
+  .profile-content-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: rem(20px) rem(46px);
+
+    label {
+      color: #878181;
+      font-size: rem(18px);
+      line-height: rem(22px);
+      font-weight: 600;
+      & + * {
+        margin-top: rem(10px);
+      }
+    }
+  }
+}

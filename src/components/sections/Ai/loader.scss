@@ -1,0 +1,47 @@
+@import '@/assets/styles/mixins';
+
+.chat-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  &__description {
+    margin-top: rem(20px);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  svg {
+    width: rem(68px);
+    animation: rotate 2s linear infinite;
+  }
+
+  &--preparing {
+    color: #969696;
+  }
+  &--initiating-search {
+    color: #7bb7f5;
+  }
+  &--searching-bank {
+    color: #3ae;
+  }
+  &--searching-authority {
+    color: #1e75e5;
+  }
+  &--searching-internal {
+    color: #1e75e5;
+  }
+  &--analyzing {
+    color: #0cb79f;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

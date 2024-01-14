@@ -1,0 +1,22 @@
+@import '@/assets/styles/mixins';
+
+.pdf {
+  display: flex;
+  flex-direction: column;
+  &-navigate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: rem(16px);
+    &__pages {
+      font-size: rem(14px);
+    }
+    .button {
+      width: initial;
+      height: 24px;
+      font-size: rem(14px);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+  }
+}

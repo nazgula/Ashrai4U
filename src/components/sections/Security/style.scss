@@ -1,0 +1,82 @@
+@import '@/assets/styles/mixins';
+
+.security {
+  padding-top: rem(38px);
+  padding-bottom: rem(38px);
+  background-color: var(--white);
+  width: 100%;
+
+  .container {
+    gap: rem(100px);
+    svg {
+      max-width: rem(380px);
+      width: 100% !important;
+      height: rem(373px);
+      flex-shrink: 0;
+    }
+    > svg {
+      content-visibility: hidden;
+      height: 0;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: rem(550px);
+    margin-left: auto;
+    margin-right: auto;
+    > svg {
+      margin-top: rem(34px);
+    }
+    * + button {
+      margin-top: rem(50px);
+    }
+  }
+  &__title {
+    color: #3f455d;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 30px;
+    text-wrap: balance;
+    max-width: rem(300px);
+    span {
+      color: var(--main-blue);
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .security {
+    padding-top: rem(80px);
+    padding-bottom: rem(80px);
+    .container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      svg {
+        margin-left: initial;
+        margin-right: initial;
+        height: rem(373px);
+        content-visibility: visible;
+      }
+    }
+    &__content {
+      max-width: rem(550px);
+      width: 100%;
+      margin-left: initial;
+      margin-right: initial;
+      > svg {
+        content-visibility: hidden;
+        height: 0 !important;
+        margin: initial;
+      }
+    }
+    &__title {
+      max-width: initial;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+@import '@/assets/styles/mixins';
+
+.stepper {
+  display: inline-flex;
+  flex-direction: column;
+  color: inherit;
+}
+
+.stepper-list {
+  display: flex;
+  gap: rem(11px);
+  &__item {
+    display: inline-flex;
+    width: rem(36px);
+    height: rem(7px);
+    border-radius: rem(4px);
+    background-color: var(--main-blue);
+    opacity: 0.2;
+    &.active {
+      opacity: 1;
+    }
+  }
+}

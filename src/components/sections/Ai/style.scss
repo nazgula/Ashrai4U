@@ -1,0 +1,66 @@
+@import '@/assets/styles/mixins';
+
+.ai {
+  width: 100%;
+  padding-top: rem(64px);
+  padding-bottom: rem(84px);
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+  }
+
+  &__title {
+    color: #2c2348;
+    text-align: center;
+    font-size: rem(40px);
+    line-height: 105%;
+    font-weight: 600;
+  }
+  &__desc {
+    text-align: center;
+    text-wrap: balance;
+    font-family: var(--font-family-Poppins);
+    color: #969696;
+    font-size: rem(20px);
+    line-height: rem(25px);
+  }
+  &__chat {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+
+  * + &__desc {
+    margin-top: rem(15px);
+  }
+  * + &__chat {
+    margin-top: rem(50px);
+  }
+}
+
+div:has(section.ai) {
+  display: flex;
+  width: 100%;
+}
+
+@media screen and (min-width: 1024px) {
+  .ai {
+    padding-top: rem(90px);
+    padding-bottom: rem(70px);
+    &__title {
+      font-size: rem(50px);
+      line-height: rem(44px);
+    }
+    &__desc {
+      font-size: 30px;
+      line-height: rem(26px);
+    }
+    &__chat {
+      margin-top: rem(40px);
+    }
+    * + &__desc {
+      margin-top: rem(18px);
+    }
+  }
+}

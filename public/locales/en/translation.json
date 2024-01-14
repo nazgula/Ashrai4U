@@ -1,0 +1,293 @@
+{
+	"main": {
+		"header": {
+			"btn_login": "Login",
+			"btn_create_account": "Sign Up"
+		},
+		"howItWorks": {
+			"relative": "In these challenging days, <b>when business uncertainty is growing</b> and many questions remain unanswered, <span>we provide AI technology to assist businesses</span> and help them receive the ways, benefits, and paths that are suitable for them <b>to receive the assistance they are entitled to.</b>",
+			"title": "How It Works?",
+			"description": "Register, define your business properties to AI through chat, and receive the existing market benefits for you.",
+			"stepList": [
+				{
+					"step": "1",
+					"title": "Short Registration",
+					"description": "Register in a brief process, including verification, to ensure the security of your business data."
+				},
+				{
+					"step": "2",
+					"title": "Opening the Chat Screen",
+					"description": "After registration, you will have access to the HMAL AI chat."
+				},
+				{
+					"step": "3",
+					"title": "Entering Business Data for Tailored Benefits",
+					"description": "Answer the chat's questions to receive tailored information about benefits and various assistance options for your business."
+				}
+			]
+			
+		},
+		"ai": {
+			"title": "AI Assistance for Businesses",
+			"description": "Guidance and submission of details to receive assistance from various government programs",
+			"chat": {
+				"header": {
+					"title": "AI Assistance for Businesses",
+					"description": "Guidance and submission of details to receive assistance from various government programs"
+				},
+				"static-data": {
+					"start": [
+						{
+							"message": "Welcome! You have successfully registered. Very nice, I am the Hamal AI."
+						},
+						{
+							"message": "I will now ask you a few questions about your business to find the assistance plans and benefits that best suit your business."
+						}
+					],
+					"finish": [
+						{
+							"message": "That's it, we're done! 😃 Now, whenever you sell, feel free to ask me any questions about assistance and benefits for your business."
+						},
+						{
+							"message": "My answers will be based on the information you provided. If you want to change the information, click on the \"Personal Profile\" icon in the top left corner."
+						}
+					],
+					"quiz": {
+						"message__context_warLocation": "Let's begin. In which area is your business located?",
+						"message__context_type": "Excellent! How is your business registered?",
+						"message__context_domain": "What is the business sector?",
+						"message__context_evacuated": "Have you been evacuated by an official state entity from your home as of the date 7.11.23?",
+						"message__context_victom": "Are you close relatives to the war casualties, captives, or missing persons?",
+						"message__context_recruited": "Are you serving in the reserves and were recruited in a letter of call (Tzav 8) in the months of October or November?",
+						"message__context_damageStatus": "In what way was your business affected?",
+						"message__context_income": "What is your business's annual revenue?",
+						"message__context_obligo": "What is the business's obligation? (Total commitments the business has with the bank)",
+						"message__context_loanStatus": "Got it, do you have a loan? (Please write whether yes or no and from which financial institution you received the loan)",
+						"message__context_bankAccount": "In which bank is the business account? (You can select multiple options; click 'Done' when finished)",
+						"message__context_fullName": "What is your name?",
+						"message__context_companyName": "What is the name of the business?",
+						"message__context_indetifier": "Okay, we're almost done! All that's left is the VAT number or ID number for a licensed business."
+					},
+					"attachment": {
+						"warLocation": {
+							"label__context_NORTH": "North",
+							"label__context_SOUTH-30": "South-30",
+							"label__context_SOUTH-40": "South-40",
+							"label__context_NO": "No"
+						},
+						"type": {
+							"label__context_COMPANY": "Company",
+							"label__context_AUTHORIZED_DEALER": "Authorized Dealer",
+							"label__context_ASSOCIATION": "Association"
+						},
+						"domain": {
+							"label__context_INDUSTRY": "Industry",
+							"label__context_EXPORT_250": "Export_250",
+							"label__context_EXPORT_ABOVE_250": "Export_Above_250",
+							"label__context_FOOD": "Food",
+							"label__context_AGRICULTURE": "Agriculture",
+							"label__context_CULTURE": "Culture",
+							"label__context_EDUCATION": "Education",
+							"label__context_HEALTH": "Health",
+							"label__context_MAN_POWER": "Man Power"
+						},
+						"evacuated": {
+							"label__context_YES": "Yes",
+							"label__context_NO": "No"
+						},
+						"victom": {
+							"label__context_YES": "Yes",
+							"label__context_NO": "No"
+						},
+						"recruited": {
+							"label__context_YES": "Yes",
+							"label__context_NO": "No"
+						},
+						"damageStatus": {
+							"label__context_NONE": "None",
+							"label__context_DIRECT": "Direct",
+							"label__context_INDIRECT": "Indirect"
+						},
+						"income": {
+							"label__context_<5": "Less than 5",
+							"label__context_5-25": "5-25",
+							"label__context_25-100": "25-100",
+							"label__context_>500": "More than 500"
+						},
+						"obligo": {
+							"label__context_<2": "Less than 2",
+							"label__context_>2": "More than 2"
+						},
+						"loanStatus": {
+							"label__context_MORTGAGE": "Mortgage",
+							"label__context_LOAN": "Loans",
+							"label__context_NONE": "None",
+							"label__context_STATE_LOAN": "State Loan"
+						},
+						"bankAccount": {
+							"label__context_LEUMI": "Leumi",
+							"label__context_POALIM": "Poalim",
+							"label__context_DISCONT": "Discount",
+							"label__context_IGUD": "Igud",
+							"label__context_BEN_LEUMI": "Ben Leumi",
+							"label__context_MIZRCHI": "Mizrachi",
+							"label__context_JERUSALEM": "Jerusalem"
+						}
+					}
+				},
+				"btn-confirm": "I'm done",
+				"loading-status__context_preparing-question": "Preparing the question",
+				"loading-status__context_initiating-search": "Initiating the search process",
+				"loading-status__context_searching-bank": "Searching on bank websites",
+				"loading-status__context_searching-authority": "Searching on the authority's website",
+				"loading-status__context_searching-internal": "Searching in internal information",
+				"loading-status__context_analyzing": "Analyzing results"
+			}
+		},
+		"help": {
+			"title": "Quick and detailed assistance for every business<br/><span>Check the benefits for your business</span>",
+			"btn": "To HMAL AI"
+		},
+		"security": {
+			"title": "<span>Information based on data concentration</span><br/> from authorities, banks, non-banking entities, funds, and more",
+			"btn": "To HMAL AI"
+		},
+		"sponsors": "Sponsored by",
+		"businessSupport": {
+			"title": "Business Supporters",
+			"description": "Companies, organizations, and funds that can support businesses. We would be happy to provide you with information about business assistance! - Contact us, and we will get back to you.",
+			"form": {
+				"companyName": "Company Name",
+				"contactFullName": "Contact Person",
+				"phone": "Phone Number",
+				"email": "Email",
+				"proposition": "Proposal",
+				"btn": "Contact Us"
+			},
+			"errorMessage": {
+				"companyName": "*Required",
+				"contactFullName": "*Required",
+				"phone": "*Invalid phone number",
+				"email": "*Invalid email",
+				"proposition": "*Required"
+			},			
+			"handshake": "Together we will succeed",
+			"leadEnd": {
+				"title": "Business Supporters",
+				"description": "Companies, organizations, and funds that can support businesses. We would be happy to provide you with information about business assistance! - Contact us, and we will get back to you.",
+				"message": "We have received your request, and we will contact you soon.",
+				"btn": "Thank You"
+			}			
+		},
+		"footer": {
+			"navList": [
+				{
+					"name": "Terms of Use"
+				},
+				{
+					"name": "Privacy"
+				},
+				{
+					"name": "Accessibility Statement"
+				}
+			]
+		}
+	},
+	"admin": {
+		"login": {
+			"title": "Hey, ready to log in?",
+			"description": "Welcome!",
+			"btnLink": "Forgot Password?",
+			"btnGroup": "Log In",
+			"input": {
+				"identifier-placeholder": "Phone Number or Email",
+				"password-placeholder": "Password"
+			},
+			"checkList__context_validLength": "At least {{amountCharacters}} characters",
+			"checkList__context_lowerCase": "Contains at least one lowercase letter",
+			"checkList__context_upperCase": "Contains at least one uppercase letter",
+			"checkList__context_hasNumber": "Contains at least one number",
+			"checkList__context_specialChar": "Contains at least one special character",
+			"identifierErrorMessage": "Value must be an email or phone number"
+		},
+		"registration": {
+			"title__context_signUp": "Sign Up for AI Assistance",
+			"title__context_verify": "Verify Account",
+			"title__context_profile": "Details About Your Business",
+			"description__context_profile": "Fill in the details about your business, and we're done",
+			"description__context_signUp": "Please sign up with an email or phone and choose a password",
+			"description__context_verify": "Verify your account with the code sent to you",
+			"input": {
+				"identifier-placeholder": "Phone Number or Email",
+				"password-placeholder": "Password",
+				"confirmPassword-placeholder": "Confirm Password",
+				"indetifier-placeholder": "Business Number (VAT ID) or ID Number",
+				"companyName-placeholder": "Business Name",
+				"fullName-placeholder": "Contact Person's Name"
+			},
+			"checkbox": {
+				"text": "I have read and accepted",
+				"link": "the Terms of Service and Privacy Policy"
+			},
+			"error": {
+				"confirmation": "Password and confirmation do not match",
+				"identifier": "Value must be an email or phone number"
+			},
+			"submit": "Next",
+			"decorate": "Secure Data",
+			"verification": {
+				"newCode": "Resend Code",
+				"timer": "Time Remaining",
+				"error": {
+					"invalidCode": "Invalid Code",
+					"expired": "Code has expired"
+				}
+			}
+		},
+		"forgotPassword": {
+			"title__context_forgot": "Forgot Password?",
+			"title__context_reset": "Set a New Password",
+			"description__context_forgot": "Please enter the email or phone number associated with your account",
+			"description__context_reset": "Guidance and accessibility of information on assistance and funding plans, and a variety of government programs",
+			"submit": "Next",
+			"input": {
+				"identifier-placeholder": "Phone Number or Email",
+				"password-placeholder": "Choose Password",
+				"confirmPassword-placeholder": "Confirm Password"
+			},
+			"verification": {
+				"newCode": "Resend Code",
+				"timer": "Time Remaining",
+				"error": {
+					"invalidCode": "Invalid Code",
+					"expired": "Code has expired"
+				}
+			}
+		},
+		"logoutPrepare": {
+			"title": "Want to log out?",
+			"description": "If you are sure you want to log out, you will need to log in again the next time you come to HMAL.",
+			"btn__context_logout": "Log Out",
+			"btn__context_cancel": "Cancel"
+		}		
+	},
+	"profile": {
+		"title": "Your Personal Form",
+		"description": "All the details you fill in here",
+		"radioGroup": [
+			{
+				"label": "Company Limited (Ltd.)"
+			},
+			{
+				"label": "Licensed Business"
+			},
+			{
+				"label": "Association"
+			}
+		],
+		"buttons": {
+			"save": "Save Changes",
+			"cancel": "Cancel"
+		}
+	}
+}

@@ -1,0 +1,133 @@
+@import '@/assets/styles/mixins';
+
+.button {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: initial;
+  font-size: 22px;
+  font-weight: 600;
+  width: rem(185px);
+  height: rem(50px);
+  border-radius: rem(10px);
+  border: 1px solid var(--main-blue);
+  background-color: var(--main-blue);
+  color: #ffffff;
+  transition: 0.4s ease all;
+  outline: none;
+
+  &:hover,
+  &:active {
+    background-color: var(--white);
+    color: var(--main-blue);
+  }
+  &:focus {
+    background-color: var(--white);
+    color: var(--main-blue);
+  }
+  &[disabled] {
+    cursor: not-allowed;
+    background-color: var(--main-grey) !important;
+    border-color: var(--main-grey) !important;
+    color: var(--white);
+    &:hover,
+    &:active {
+      color: var(--white) !important;
+    }
+    &:focus {
+      color: var(--white) !important;
+    }
+  }
+  &--style2 {
+    background-color: var(--white);
+    color: var(--main-blue);
+    &:hover,
+    &:active {
+      background-color: var(--main-blue);
+      color: var(--white);
+    }
+    &:focus {
+      background-color: var(--main-blue);
+      color: var(--white);
+    }
+  }
+  &--login {
+    width: auto;
+    min-width: rem(134px);
+    padding-left: rem(18px);
+    padding-right: rem(18px);
+    color: #2c2348;
+    background-color: #e3e3e3;
+    border-color: #e3e3e3;
+    &:hover,
+    &:active {
+      border-color: #2c2348;
+      background-color: var(--white);
+      color: #2c2348;
+    }
+    &:focus {
+      border-color: #2c2348;
+      background-color: var(--white);
+      color: #2c2348;
+    }
+  }
+  &--create-account {
+    width: auto;
+    min-width: rem(155px);
+    padding-left: rem(18px);
+    padding-right: rem(18px);
+    color: var(--white);
+    background-color: #2c2348;
+    border-color: #2c2348;
+    &:hover,
+    &:active {
+      border-color: #2c2348;
+      background-color: var(--white);
+      color: #2c2348;
+    }
+    &:focus {
+      border-color: #2c2348;
+      background-color: var(--white);
+      color: #2c2348;
+    }
+  }
+
+  &--link {
+    &[disabled] {
+      background-color: initial !important;
+      color: #969696;
+      &:hover,
+      &:active {
+        background-color: initial !important;
+        color: #969696 !important;
+      }
+      &:focus {
+        color: #969696 !important;
+      }
+    }
+    &:hover,
+    &:active {
+      background-color: initial;
+      color: color-mix(in srgb, #1e75e5, #000 30%);
+    }
+    &:focus {
+      background-color: initial;
+    }
+    width: initial;
+    height: initial;
+    font-size: initial;
+    background: initial;
+    border: initial;
+    color: #1e75e5;
+    text-decoration: underline;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .button {
+    width: rem(173px);
+    height: rem(38px);
+    font-size: rem(18px);
+  }
+}

@@ -1,0 +1,59 @@
+@import '@/assets/styles/mixins';
+
+.logout-prepare {
+  padding-top: rem(60px);
+  padding-bottom: rem(40px);
+  text-align: center;
+  &__title {
+    font-size: rem(35px);
+    line-height: 1;
+    font-weight: 600;
+    text-wrap: balance;
+  }
+  &__desc {
+    color: #878181;
+    font-size: rem(18px);
+    font-weight: 600;
+    text-wrap: balance;
+  }
+  * + &__desc {
+    margin-top: rem(15px);
+  }
+  * + &__btns {
+    margin-top: rem(30px);
+  }
+  &__btns {
+    display: flex;
+    justify-content: center;
+    gap: rem(10px);
+    .button {
+      width: rem(137px);
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .logout-prepare {
+    padding-top: rem(100px);
+    padding-bottom: rem(80px);
+    &__title {
+      font-size: rem(40px);
+      line-height: rem(44px);
+    }
+    &__desc {
+      max-width: rem(600px);
+      line-height: 2;
+    }
+    * + &__desc {
+      margin-top: rem(22px);
+    }
+    * + &__btns {
+      margin-top: rem(16px);
+    }
+    &__btns {
+      .button {
+        width: rem(230px);
+      }
+    }
+  }
+}

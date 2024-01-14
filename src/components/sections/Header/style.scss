@@ -1,0 +1,105 @@
+@import '@/assets/styles/mixins';
+
+:root {
+  --color-primary: #2c2348;
+  --color-secondary: #e3e3e3;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  height: rem(100px);
+  width: 100%;
+  padding-left: rem(16px);
+  padding-right: rem(16px);
+
+  &__btnGroup {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    order: 1;
+  }
+
+  .brand {
+    order: 0;
+    text-align: center;
+    svg {
+      height: rem(22px);
+    }
+  }
+
+  .langSwitcher {
+    display: inline-flex;
+    position: relative;
+    margin-inline-start: rem(24px);
+
+    &__content {
+      cursor: pointer;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: rem(4px);
+    }
+    &__list {
+      position: absolute;
+      top: calc(100% + rem(4px));
+      display: flex;
+      flex-direction: column;
+      border-radius: rem(6px);
+    }
+    &__listItem {
+      cursor: pointer;
+      padding: rem(4px);
+      transition: 0.4s ease all;
+      &:hover {
+        background-color: var(--color-secondary);
+      }
+    }
+  }
+}
+@media screen and (max-width: 767px) {
+  .header {
+    &__btnGroup {
+      .button {
+        &--login,
+        &--create-account {
+          width: initial;
+          min-width: initial;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    position: relative;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    max-width: 1400px;
+
+    &__btnGroup {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: initial;
+      order: 0;
+      gap: rem(24px);
+
+      .brand {
+        position: absolute;
+        inset-inline-end: rem(16px);
+      }
+    }
+
+    .brand {
+      width: initial;
+      text-align: center;
+      svg {
+        height: rem(32px);
+      }
+    }
+  }
+}
