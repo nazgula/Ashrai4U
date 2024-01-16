@@ -9,7 +9,14 @@ export const useProfileStore: createStoreOption = {
         companyName: '',
         fullName: '',
         indetifier: '',
-      },
+        phone: '',
+        codeVerifier: '',
+        firstName: '',
+        lastName: '',
+        loanAmount: '',
+        loanPeriod: '',
+        loanReason: ''
+      }
     }
   },
   getters: {

@@ -1,4 +1,6 @@
-import { useCallback, useRef } from 'react'
+import { useCallback, useRef, useEffect } from 'react'
+
+
 import {
   Ai,
   BusinessSupport,
@@ -9,8 +11,14 @@ import {
   Security,
 } from '@/components/sections'
 
+import {OnBoarding} from '@/components/sections/OnBoarding/OnBoarding'
+
 export const MainPage = () => {
   const aiRef = useRef(null)
+
+  useEffect(() => {
+    
+  }, [])
 
   const scrollToAI = useCallback(() => {
     if (aiRef.current) {
@@ -25,14 +33,16 @@ export const MainPage = () => {
 
   return (
     <>
+      
       <Header />
-      <div ref={aiRef}>
+      <OnBoarding />
+      {/* <div ref={aiRef}>
         <Ai />
-      </div>
-      <HowItWorks />
+      </div> */}
+      {/* <HowItWorks />
       <Help onClick={scrollToAI} />
       <Security onClick={scrollToAI} />
-      <BusinessSupport />
+      <BusinessSupport /> */}
       <Footer />
     </>
   )

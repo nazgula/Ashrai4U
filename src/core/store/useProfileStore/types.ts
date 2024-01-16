@@ -30,4 +30,12 @@ export interface IProfile {
   fullName: string
   indetifier: string
   accountId: string
+  // --------
+  phone:string
+  codeVerifier:string
+  firstName:string
+  lastName:string
+  loanAmount:string
+  loanPeriod:string
+  loanReason:string
 }

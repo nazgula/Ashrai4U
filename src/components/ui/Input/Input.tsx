@@ -15,6 +15,7 @@ interface InputProps extends HTMLAttributes<HTMLInputElement> {
   error?: string
   disabled?: boolean
   readOnly?: boolean
+  
 }
 
 // eslint-disable-next-line react/display-name
@@ -31,11 +32,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <input
             {...{ ...rest }}
             type={
-              type === 'password'
-                ? isShowPassword
-                  ? 'text'
-                  : 'password'
-                : type
+              // type === 'password'
+              //   ? isShowPassword
+              //     ? 'text'
+              //     : 'password'
+              //   :
+                 type
             }
             ref={inputRef}
             value={value}
@@ -44,6 +46,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             disabled={disabled}
             readOnly={true}
             autoComplete="false"
+            className="margin20"
             onFocus={() => {
               console.log(
                 inputRef.current &&
@@ -52,7 +55,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               )
             }}
           />
-          {type === 'password' && (
+          {/* {type === 'password' && (
             <Button
               onClick={() => {
                 setPasswordVisibility(!isShowPassword)
@@ -64,7 +67,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                 <Icon viewBox="0 0 24 24" size={'26px'} icon={'eye'} />
               )}
             </Button>
-          )}
+          )} */}
           {<div className="error">{error}</div>}
         </div>
       </>

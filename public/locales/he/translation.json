@@ -207,7 +207,9 @@
 			"checkList__context_upperCase": "מכיל לפחות אות אחת גדולה",
 			"checkList__context_hasNumber": "מכיל לפחות מספר אחד",
 			"checkList__context_specialChar": "מכיל לפחות תו מיוחד אחד",
-			"identifierErrorMessage": "הערך חייב להיות טלפון"
+			
+			"identifierErrorMessage": "הערך חייב להיות טלפון",
+			"codeErrorMessage": "יש להזין מספר בן שש ספרות"
 		},
 		"registration": {
 			"title__context_signUp": "הירשם לחמ״ל AI",
@@ -315,4 +317,5 @@
 			"cancel": "ביטול"
 		}
 	}
+	
 }

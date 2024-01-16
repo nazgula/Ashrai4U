@@ -21,6 +21,7 @@ interface IPasswordCheck {
 
 export const Login = () => {
   const useProfileStore = useStore(EStore.profile)
+
   const { login } = useAuth()
   const { setModal } = useModal()
   const { t } = useTranslation()
@@ -117,10 +118,15 @@ export const Login = () => {
 
   const loginHandler = async (payload: TLoginApiCallPayload) => {
     try {
-      const response = await loginApiCall(payload)
 
       
+      const response = await loginApiCall(payload)
+
       if (response) {
+        // Change display to recive code
+        // sessionId should be passed to the next step
+
+        // Here we update the storage with the response
         login({ ...response, UserName: payload.username })
         setModal(null)
 
@@ -128,6 +134,8 @@ export const Login = () => {
           ...response,
           UserName: payload.username,
         })
+
+        // Update storage ^^
         useProfileStore.updateProfile({ ...profileData, type: EType.COMPANY })
   
       }

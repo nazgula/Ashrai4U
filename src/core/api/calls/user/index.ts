@@ -3,17 +3,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // import { v4 as uuidv4 } from 'uuid'
 import { EEndpoint, apiRequest } from '@/core/api'
+import CryptoJS from 'crypto-js'; 
+import { useStore } from 'react-pinia'
+
+
 import {
   EUserApiPath,
   TAddLeadApiCallPayload,
-  TLoginApiCallPayload,
   TLoginApiCallResponse,
   TProfileApiCallPayload,
   TSignUpApiCallPayload,
   TVerifyApiCallPayload,
+  TVerifyLoginApiCallPayload
 } from '@/core/api/types/user'
+import { useAuth } from '@/core/context';
 
 const apiEndpoint = EEndpoint.user
+
+interface CodeInfo {
+  codeVerifier: string;
+  codeChallenge: string;
+}
+
+// Authentication helpers
+// --------------------
 
 const getRecapchaToken = (action: string) =>
   new Promise((resolve, reject) => {
@@ -28,8 +41,136 @@ const getRecapchaToken = (action: string) =>
         reject(error.message)
       })
   })
+  
+  
+  const generateCodeVerifierAndChallenge = (): CodeInfo => {
+    // Generate a random codeVerifier
+    const codeVerifier = CryptoJS.lib.WordArray.random(128 / 8).toString(CryptoJS.enc.Base64);
+  
+    // Create a codeChallenge from the codeVerifier
+    const hashedCodeVerifier = CryptoJS.SHA256(codeVerifier);
+    const codeChallenge = CryptoJS.enc.Base64.stringify(hashedCodeVerifier);
+  
+    return {
+      codeVerifier,
+      codeChallenge,
+    };
+  };
 
 // Authentication
+
+
+// ----------------login/SignUp
+
+export const loginApiCall = async (username: string): Promise<TLoginApiCallResponse> => {
+  try {
+    const token = await getRecapchaToken('')
+    // console.log(token)
+    const { codeVerifier, codeChallenge } = generateCodeVerifierAndChallenge();
+    console.log('codeChallenge:', codeChallenge);
+    console.log('codeVerifier:', codeVerifier);
+    console.log('request:', {  codeChallenge: codeChallenge, username: username } )
+
+    
+    const response = await apiRequest({
+      apiEndpoint,
+      path: EUserApiPath.login,
+      options: {
+        method: 'POST',
+        headers: {
+          Authorization: `${token}`,
+        },
+        body: JSON.stringify({  codeChallenge: codeChallenge, username: username }),
+      },
+    })
+
+    
+  
+    //  return new Promise((resolve, reject) => {}) ; 
+    
+    if (Object.prototype.hasOwnProperty.call(response, 'session')) {
+      console.log('response:', response)
+      return {session: response.session, codeVerifier: codeVerifier, username: username}
+    } else {
+      const { message, status } = await response.json()
+      throw new Error(`${response.status}: ${message ? message : status}`)
+    }
+  } catch (error) {
+    console.log('error:', error)
+    throw error
+  }
+}
+
+
+// ----------------verifyLoginSginUp
+export const verifyLoginApiCall = async (data: TVerifyLoginApiCallPayload): Promise<any> => {
+  try {
+     const token = await getRecapchaToken('')
+     // console.log(token)
+    
+     console.log('request data:', data )
+
+    
+    const response = await apiRequest({
+      apiEndpoint,
+      path: EUserApiPath.verifyCode,
+      options: {
+        method: 'POST',
+        headers: {
+          Authorization: `${token}`,
+        },
+        body: JSON.stringify({  ...data }),
+      },
+    })
+
+    if (Object.prototype.hasOwnProperty.call(response, 'AccessToken')) {
+      console.log('login - token: ', response.AccessToken)
+      return response
+    } else {
+      const { message, status } = await response.json()
+      throw new Error(`${response.status}: ${message ? message : status}`)
+    }
+  
+  } catch (error) {
+    console.log('error:', error)
+    throw error
+  }
+}
+
+
+// Original
+// export const loginApiCall = async (
+//   data: TLoginApiCallPayload,
+// ): Promise<TLoginApiCallResponse> => {
+//   try {
+//     const token = await getRecapchaToken('')
+//     console.log(token)
+    
+//     const response = await apiRequest({
+//       apiEndpoint,
+//       path: EUserApiPath.login,
+//       options: {
+//         method: 'POST',
+//         headers: {
+//           Authorization: `${token}`,
+//         },
+//         body: JSON.stringify({ ...data }),
+//       },
+//     })
+
+//     if (Object.prototype.hasOwnProperty.call(response, 'AccessToken')) {
+//       console.log('login - token: ', response.AccessToken)
+//       return response
+//     } else {
+//       const { message, status } = await response.json()
+//       throw new Error(`${response.status}: ${message ? message : status}`)
+//     }
+//   } catch (error) {
+//     throw error
+//   }
+// }
+
+// OLD
 // ----------------signUp
 enum ESignUpResponseStatus {
   ERROR = 'ERROR',
@@ -65,36 +206,7 @@ export const signUpApiCall = async (data: TSignUpApiCallPayload) => {
     throw new Error(error.message)
   }
 }
-// ----------------login
-export const loginApiCall = async (
-  data: TLoginApiCallPayload,
-): Promise<TLoginApiCallResponse> => {
-  try {
-    const token = await getRecapchaToken('')
-    console.log(token)
-    const response = await apiRequest({
-      apiEndpoint,
-      path: EUserApiPath.login,
-      options: {
-        method: 'POST',
-        headers: {
-          Authorization: `${token}`,
-        },
-        body: JSON.stringify({ ...data }),
-      },
-    })
 
-    if (Object.prototype.hasOwnProperty.call(response, 'AccessToken')) {
-      console.log('login - token: ', response.AccessToken)
-      return response
-    } else {
-      const { message, status } = await response.json()
-      throw new Error(`${response.status}: ${message ? message : status}`)
-    }
-  } catch (error) {
-    throw error
-  }
-}
 
 // User Management
 // ----------------verify

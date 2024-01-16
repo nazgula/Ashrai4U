@@ -1,6 +1,6 @@
 {
-  "name": "bismarter",
-  "version": "0.8.2 - 30.11.2023 12:30",
+  "name": "ashrai4you",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "@craco/craco": "^7.1.0",
@@ -14,6 +14,7 @@
     "aws-sdk": "^2.1509.0",
     "axios": "^1.6.2",
     "classnames": "^2.3.2",
+    "crypto-js": "^4.2.0",
     "i18next": "^23.6.0",
     "i18next-browser-languagedetector": "^7.1.0",
     "i18next-http-backend": "^2.3.1",
@@ -80,6 +81,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@types/crypto-js": "^4.2.1",
     "@types/node-sass": "^4.11.6",
     "@types/react-google-recaptcha": "^2.1.8",
     "@types/react-pdf": "^7.0.0",
