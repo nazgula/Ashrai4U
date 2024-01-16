@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, ReactNode, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useStore } from 'react-pinia'
 import parsePhoneNumberFromString, { ParseError } from 'libphonenumber-js'
@@ -40,7 +40,7 @@ export const LoginByPhone = () => {
   // ------ identifier = phone
   const [isValidIdentifier, setIsValidIdentifier] = useState(false)
   // ------ verification code
-  const [isValidICode, setIsValidCode] = useState(false)
+  const [isValidCode, setIsValidCode] = useState(false)
   // ------ login
   const [verifyParams, setVerifyParams] = useState({codeVerifier: '', session: '', username: ''})
 
@@ -62,6 +62,15 @@ export const LoginByPhone = () => {
   }, [input.identifier])
 
 
+  useEffect(() => {
+
+    if (input.verificationCode.length === 6 && !isNaN(+input.verificationCode)) {
+      setIsValidCode(true)
+    } 
+    else {
+    setIsValidCode(false)
+    }
+  }, [input.verificationCode])
 
 // isNaN(+maybeNumber)
 
@@ -118,12 +127,9 @@ export const LoginByPhone = () => {
     }
   }
 
-
-  return (
-    <div className="login">
-      <div className="login__title">{t('admin.login.title')}</div>
-      <div className="login__description">{t('admin.login.description')}</div>
-
+  // --- display relevant form
+  const getPhoneForm  = () : ReactNode => {
+    return (
       <form className="login-form">
         <fieldset>
           <Input
@@ -136,7 +142,7 @@ export const LoginByPhone = () => {
           />
         </fieldset>
 
-        <Button isLinkView>{t('admin.login.btnLink')}</Button>
+        {/* <Button isLinkView>{t('admin.login.btnLink')}</Button> */}
 
         <div className="login-form__btn-group">
           <Button
@@ -153,15 +159,19 @@ export const LoginByPhone = () => {
           </Button>
         </div>
       </form>
+    )
+  }
 
-      <form className="verification-form">
+  const getCodeForm  = () : ReactNode => {
+    return (
+      <form className="login-form">
         <fieldset>
           <Input
             type="text"
             name="verificationCode"
-            placeholder={t('admin.login.input.identifier-placeholder')}
+            placeholder={t('admin.login.verification-code-placeholder')}
             value={input.verificationCode}
-             error={!isValidICode ? codeErrorMessage : ''}
+             error={!isValidCode ? codeErrorMessage : ''}
             onInput={onInputChange}
           />
         </fieldset>
@@ -171,18 +181,36 @@ export const LoginByPhone = () => {
         <div className="login-form__btn-group">
           <Button
             type={EButtonType.button}
-            // disabled={
-            //   input.identifier.length === 0 ||
-            //   !isValidIdentifier
-            // }
+            disabled={
+              input.verificationCode.length === 0 ||
+              !isValidCode
+            }
             onClick={() =>
               verificationHandler(input.verificationCode)
             }
           >
-            {t('admin.login.btnGroup')}
+            {t('admin.login.verification-btn')}
           </Button>
         </div>
       </form>
+    )
+  }
+
+  const getForm = () : ReactNode => {
+    if (verifyParams.codeVerifier.length === 0 || verifyParams.session.length === 0) {
+      return getPhoneForm()
+    }
+    else {
+      return getCodeForm()
+    }
+  }
+
+
+  return (
+    <div className="login">
+      <div className="login__title">{t('admin.login.title')}</div>
+      <div className="login__description">{t('admin.login.description')}</div>
+      {getForm()}
     </div>    
   )
 }

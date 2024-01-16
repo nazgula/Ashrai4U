@@ -8,7 +8,8 @@ import { useAuth, useModal, useStore } from '@/core/context'
 import { getAnswerApiCall, sendQuestionApiCall } from '@/core/api/calls'
 import { TSendQuestionApiCallPayload } from '@/core/api/types'
 
-import { Login, LogoutPrepare, Profile } from '@/components/admin'
+// Login
+import { LogoutPrepare, Profile } from '@/components/admin'
 import { ELoaderStatus } from '@/components/sections'
 import { Button, EButtonType, Icon } from '@/components/ui'
 import { EMessagePosition, EMessageType, IMessage } from '../MessagesList'
@@ -58,7 +59,7 @@ export const Chat = ({
     if (!user) {
       event.preventDefault()
       setTextAreaValue('')
-      setModal(<Login />)
+      // setModal(<Login />)
     } else {
       const { value } = event.target
       setTextAreaValue(value)
@@ -117,7 +118,7 @@ export const Chat = ({
             )
           }
           setLoadingState(null)
-          console.log(`setting focus if current exist`)
+          console.log('setting focus if current exist')
          
           messageCreator({
             position: EMessagePosition.left,
@@ -236,13 +237,13 @@ export const Chat = ({
         try {
           messageCreator({
             position: EMessagePosition.right,
-            text: "שלום",
+            text: 'שלום',
           })
           setTextAreaValue('')
           setLoadingState(ELoaderStatus.preparing)
   
           const tokenId = await sendQuestion({
-            question: "שלום",
+            question: 'שלום',
             history,
           })
   

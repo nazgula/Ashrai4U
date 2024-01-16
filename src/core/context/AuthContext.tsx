@@ -13,10 +13,10 @@ const AuthContext = createContext<{
   updateAuthCredentials: (data: TLoginApiCallResponse) => void
   profileUpdated: string
   
-  codeVerifier: string
-  setCodeVerifier: (codeVerifier: string) => void
-  session: string
-  setSession: (session: string) => void
+  // codeVerifier: string
+  // setCodeVerifier: (codeVerifier: string) => void
+  // session: string
+  // setSession: (session: string) => void
 }>()
 
 export const AuthProvider = ({ children }: any) => {
@@ -26,8 +26,8 @@ export const AuthProvider = ({ children }: any) => {
     (data: TLoginApiCallResponse | null) => void,
   ] = useLocalStorage('user', null)
   const [profileUpdated, setProfileUpdated] = useLocalStorage('profile', null) as [string, (status: string) => void];
-  const [session, setSession] = useLocalStorage('session', '') as [string, (session: string) => void];
-  const [codeVerifier, setCodeVerifier] = useLocalStorage('codeVerified', '') as [string, (codeVerifier: string) => void];
+  // const [session, setSession] = useLocalStorage('session', '') as [string, (session: string) => void];
+  // const [codeVerifier, setCodeVerifier] = useLocalStorage('codeVerified', '') as [string, (codeVerifier: string) => void];
 
   const login = async (data: TLoginApiCallResponse) => {
     setUser(data)
@@ -59,11 +59,12 @@ export const AuthProvider = ({ children }: any) => {
       logout,
       updateAuthCredentials,
       setProfile,
-      profileUpdated,
-      session,
-      setSession,
-      codeVerifier,
-      setCodeVerifier
+      profileUpdated
+      // ,
+      // session,
+      // setSession,
+      // codeVerifier,
+      // setCodeVerifier
     }),
     [user],
   )

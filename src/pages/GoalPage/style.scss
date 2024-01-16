@@ -1,0 +1,66 @@
+@import '@/assets/styles/mixins';
+
+
+.side-by-side{
+  display: flex;
+  flex-direction: row;
+  height: 90vh;
+  width:100%;
+}
+
+.left{
+  flex: 0.6;
+  overflow-y: auto; /* Enable vertical scroll if needed */
+  background-color: #6A4AE3;
+  padding: 20px;
+}
+
+
+.goal-page {
+  width: 60vw;
+  min-width: 320px;
+  &__title {
+    font-size: rem(40px);
+    line-height: rem(44px);
+    color: #F5F7FE;
+    margin-bottom: 30px;
+  }
+  &__description {
+    margin-top: rem(13px);
+    font-size: rem(22px);
+    line-height: 1;
+    color: #F5F7FE;
+  }
+  &__title,
+  &__description {
+    text-align: center;
+    
+  }
+
+  // &__fieldset {
+  //   width: 100%;
+  //   display: flex;
+  //   flex-direction: column;
+  //   gap: rem(36px);
+  //   + button {
+  //     margin-top: rem(22px);
+  //     margin-inline-start: auto;
+  //   }
+  // }
+  // &__btn-group {
+  //   text-align: center;
+  //   margin-top: rem(80px);
+  // }
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: rem(418px);
+    margin-top: rem(68px);
+    margin-left: auto;
+    margin-right: auto;
+    gap: rem(36px);
+    
+  }
+}

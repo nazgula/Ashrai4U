@@ -7,7 +7,7 @@ import { useAuth, useModal } from '@/core/context'
 import { TDeleteApiCallPayload } from '@/core/api/types'
 import { deleteUserApiCall } from '@/core/api/calls'
 
-import { Login, Registration } from '@/components/admin'
+// import { Login, Registration } from '@/components/admin'
 import { Brand } from '@/components/smart'
 
 import {
@@ -34,59 +34,59 @@ export const Header = () => {
   const { t, i18n } = useTranslation()
   const [isLocalesListOpen, setLocalesListStatus] = useState(false)
 
-  const openLoginModalHandler = () => {
-    if (user) return
-    setModal(<Login />)
-  }
+  // const openLoginModalHandler = () => {
+  //   if (user) return
+  //   setModal(<Login />)
+  // }
 
-  const openRegisterModalHandler = () => {
-    if (user) return
-    setModal(<Registration />)
-  }
+  // const openRegisterModalHandler = () => {
+  //   if (user) return
+  //   setModal(<Registration />)
+  // }
 
-  const removeUserHandler = async (
-    event: SyntheticEvent<HTMLButtonElement>,
-    payload = {
-      username: accountValue.value as string,
-      // username: '+380935543736',
-      // password: 'roiLand#906',
-      password: '4c2bcuqV!',
-    } as TDeleteApiCallPayload,
-  ) => {
-    event.preventDefault()
-    try {
-      const response = await deleteUserApiCall({ ...payload })
-      console.log('removeUserHandler: ', response)
-    } catch (error) {
-      console.log('removeUserHandler error: ', error)
-    }
-  }
+  // const removeUserHandler = async (
+  //   event: SyntheticEvent<HTMLButtonElement>,
+  //   payload = {
+  //     username: accountValue.value as string,
+  //     // username: '+380935543736',
+  //     // password: 'roiLand#906',
+  //     password: '4c2bcuqV!',
+  //   } as TDeleteApiCallPayload,
+  // ) => {
+  //   event.preventDefault()
+  //   try {
+  //     const response = await deleteUserApiCall({ ...payload })
+  //     console.log('removeUserHandler: ', response)
+  //   } catch (error) {
+  //     console.log('removeUserHandler error: ', error)
+  //   }
+  // }
 
-  const getLocalesIcon = (lang: ELangSupport) => {
-    switch (lang) {
-      case ELangSupport.en:
-        return (
-          <img
-            src="https://flagsapi.com/GB/flat/24.png"
-            alt={ELangSupport.en}
-          />
-        )
-      case ELangSupport.he:
-        return (
-          <img
-            src="https://flagsapi.com/IL/flat/24.png"
-            alt={ELangSupport.he}
-          />
-        )
-      default:
-        return (
-          <img
-            src="https://flagsapi.com/BE/flat/24.png"
-            alt={ELangSupport.en}
-          />
-        )
-    }
-  }
+  // const getLocalesIcon = (lang: ELangSupport) => {
+  //   switch (lang) {
+  //     case ELangSupport.en:
+  //       return (
+  //         <img
+  //           src="https://flagsapi.com/GB/flat/24.png"
+  //           alt={ELangSupport.en}
+  //         />
+  //       )
+  //     case ELangSupport.he:
+  //       return (
+  //         <img
+  //           src="https://flagsapi.com/IL/flat/24.png"
+  //           alt={ELangSupport.he}
+  //         />
+  //       )
+  //     default:
+  //       return (
+  //         <img
+  //           src="https://flagsapi.com/BE/flat/24.png"
+  //           alt={ELangSupport.en}
+  //         />
+  //       )
+  //   }
+  // }
 
   const LocalesList = () => {
     return (
@@ -107,10 +107,10 @@ export const Header = () => {
               })
             }}
           >
-            {getLocalesIcon(
+            {/* {getLocalesIcon(
               (locales[locale as ELangSupport] as { title: ELangSupport })
                 .title,
-            )}
+            )} */}
           </button>
         ))}
       </div>
@@ -133,21 +133,21 @@ export const Header = () => {
     <>
       <header className="header">
         <div className="header__btnGroup">
-          <Button
+          {/* <Button
             type={EButtonType.button}
             className="button--login"
             onClick={openLoginModalHandler}
           >
             {t('main.header.btn_login')}
-          </Button>
+          </Button> */}
           <Brand />
-          <Button
+          {/* <Button
             type={EButtonType.button}
             className="button--create-account"
             onClick={openRegisterModalHandler}
           >
             {t('main.header.btn_create_account')}
-          </Button>
+          </Button> */}
           {/* <div
             className="langSwitcher"
             onClick={() => {

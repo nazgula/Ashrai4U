@@ -306,6 +306,7 @@ export const getProfileApiCall = async (user: TLoginApiCallResponse) => {
       options: {
         method: 'GET',
         headers: {
+          // @ts-expect-error  old interface - not in use file deprected 
           Authorization: `${user.TokenType} ${user.AccessToken}`,
         },
       },
@@ -322,6 +323,7 @@ export const updateProfileApiCall = async (
   user: TLoginApiCallResponse,
 ) => {
   try {
+    // @ts-expect-error  old interface - not in use file deprected 
     console.log('updateProfileApiCall: ', user.AccessToken)
     const response = await apiRequest({
       apiEndpoint,
@@ -330,6 +332,7 @@ export const updateProfileApiCall = async (
         method: 'POST',
         headers: {
           // 'transaction-id': uuidv4(),
+          // @ts-expect-error  old interface - not in use file deprected 
           Authorization: `${user.TokenType} ${user.AccessToken}`,
         },
         body: JSON.stringify({ ...data }),

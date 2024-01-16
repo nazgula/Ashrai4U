@@ -28,17 +28,17 @@ export const Profile = () => {
   const { user } = useAuth()
 
   const [profile, setProfile] = useState({
-    "LocationFinal":"",
-    "companyName":"",
-    "fullName":"",
-    "companyObligoFinal":"",
-    "companyDamageStatusFinal":"",
-    "companyDomainFinal":"",
-    "businessrevenueFinal":"",
-    "compnayBankFinal":"",
-    "companyTypeFinal":"",
-    "indetifier":"",
-    "currentIncomeStatusFinal":""
+    'LocationFinal':'',
+    'companyName':'',
+    'fullName':'',
+    'companyObligoFinal':'',
+    'companyDamageStatusFinal':'',
+    'companyDomainFinal':'',
+    'businessrevenueFinal':'',
+    'compnayBankFinal':'',
+    'companyTypeFinal':'',
+    'indetifier':'',
+    'currentIncomeStatusFinal':''
   });
   const [loading, setLoading] = useState(false);
 

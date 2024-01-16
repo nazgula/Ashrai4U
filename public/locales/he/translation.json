@@ -197,7 +197,7 @@
 			"title": "היי, שנתחבר?",
 			"description": "ברוכים הבאים!",
 			"btnLink": "הסיסמה נשכחה?",
-			"btnGroup": "כניסה לחשבון",
+			"btnGroup": "שלח קוד",
 			"input": {
 				"identifier-placeholder": "מספר טלפון",
 				"password-placeholder": "סיסמא"
@@ -209,7 +209,11 @@
 			"checkList__context_specialChar": "מכיל לפחות תו מיוחד אחד",
 			
 			"identifierErrorMessage": "הערך חייב להיות טלפון",
-			"codeErrorMessage": "יש להזין מספר בן שש ספרות"
+			
+			"codeErrorMessage": "יש להזין מספר בן שש ספרות",
+			"verification-code-placeholder": "קוד אימות",
+			"verification-btn": "התחבר"
+			
 		},
 		"registration": {
 			"title__context_signUp": "הירשם לחמ״ל AI",
@@ -316,6 +320,17 @@
 			"save": "שמור שינויים",
 			"cancel": "ביטול"
 		}
-	}
+		
+	},
+		"goalPage": {
+			"title": "אפשר לדעת לאיזו מטרה הגעת אלינו?",
+			"action": "בואו נמשיך",
+			"goalDescriptionRadioGroup": {
+				"lodging": "הוצאה הקשורה לדיור",
+				"car": "קניית רכב",
+				"loans": "מיחזור הלוואה והקטנת החזר חודשי",
+				"other": "מטרה אחרת"
+			}
+		}
 	
 }

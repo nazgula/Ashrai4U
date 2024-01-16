@@ -2,10 +2,10 @@
 import { EEndpoint, apiRequest } from '@/core/api'
 import {
   EAiApiPath,
-  TLoginApiCallResponse,
+  TLoginApiCallResponse, 
   TSendQuestionApiCallPayload,
 } from '../../types'
-
+// TLoginApiCallResponse - difrent api then now
 const apiEndpoint = EEndpoint.ai
 
 export const sendQuestionApiCall = async (
@@ -20,6 +20,7 @@ export const sendQuestionApiCall = async (
         method: 'POST',
         headers: {
           'Content-Type': 'text/html; charset=utf-8',
+          // @ts-expect-error  old interface - not in use file deprected 
           Authorization: `${user.TokenType} ${user.AccessToken}`,
         },
         body: JSON.stringify({ ...payload }),
@@ -42,6 +43,7 @@ export const getAnswerApiCall = async (
       options: {
         method: 'GET',
         headers: {
+          // @ts-expect-error  old interface - not in use file deprected 
           Authorization: `${user.TokenType} ${user.AccessToken}`,
         },
       },
@@ -66,6 +68,7 @@ export const getHistoryApiCall = async (
       options: {
         method: 'GET',
         headers: {
+          // @ts-expect-error  old interface - not in use file deprected 
           Authorization: `${user.TokenType} ${user.AccessToken}`,
         },
       },

@@ -54,17 +54,26 @@
   &__label {
     font-weight: 600;
     font-size: rem(18px);
-    color: #3a4459;
+    color: #F5F7FE;
     cursor: default;
   }
 }
 
 .radio-group {
   border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: rem(40px);
+  
   &__legend {
   }
   &__wrapper {
+    margin-top: rem(40px);
     display: flex;
+    flex-direction: column;
     gap: rem(40px);
+    
+    
   }
 }

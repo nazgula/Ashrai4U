@@ -2,18 +2,20 @@ export enum EUserApiPath {
   // Authentication
   login = 'login',
   verifyCode = 'verifyCode',
-  // signUp = 'signup',
-  // refresh = 'refresh',
+  
+  // old
+  signUp = 'signup',
+   refresh = 'refresh',
   // User Management
-  // verify = 'verify',
-  // forgotPassword = 'forgetPasword',
-  // confirmForgotPassword = 'confirmForgotPassword',
-  // delete = 'delete',
-  // Profile
-  // profile = 'profile',
-  // updateProfile = 'updateProfile',
+   verify = 'verify',
+   forgotPassword = 'forgetPasword',
+   confirmForgotPassword = 'confirmForgotPassword',
+   delete = 'delete',
+   // Profile
+   profile = 'profile',
+   updateProfile = 'updateProfile',
   // Lead
-  // addLead = 'addLead',
+   addLead = 'addLead',
 }
 
 enum EUserApiTokenType {
@@ -83,6 +85,13 @@ interface ILoginApiCallResponse {
 
 export type TVerifyLoginApiCallResponse = ILoginApiCallResponse & {
   username: string
+}
+
+export enum ELoanReason {
+  CAR = 'CAR',
+  LODGING = 'LODGING',
+  LOANS = 'LOANS',
+  OTHER = 'OTHER'
 }
 
 export * from './editProfile'

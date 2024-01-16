@@ -52,11 +52,15 @@ export const Verification = ({ onSubmit, regData }: IVerificationProps) => {
     try {
       await verifyUserApiCall(payload)
 
+      // @ts-expect-error  old interface - not in use file deprected 
       const response = await loginApiCall({
         username: regData.username,
         password: regData.password,
-      })
+      })  
+     
+    
       if (response) {
+        // @ts-expect-error  old interface - not in use file deprected 
         login({ ...response, UserName: payload.username })
         onSubmit({ step: 3 })
       }
