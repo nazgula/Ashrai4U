@@ -35,6 +35,7 @@ export const RegistrationProfile = () => {
   const updateProfileHandler = async (payload: IUpdateProfilePayload) => {
     try {
       if(user){
+        // @ts-expect-error  old interface - not in use file deprected 
         await updateProfileApiCall(payload as IUpdateProfilePayload, user)
         updateStatus('NEW')
       }

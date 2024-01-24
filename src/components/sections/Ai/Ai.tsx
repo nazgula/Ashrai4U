@@ -54,6 +54,7 @@ export const Ai = () => {
         console.log('fetching history')
         // await updateProfileHandler(payload as IUpdateProfilePayload)
         setLoading(true)
+        // @ts-expect-error  old interface - not in use file deprected 
         const history = await getHistoryApiCall(user)
         if(history && history.length > 0){
           const messages: IMessage[] = [];

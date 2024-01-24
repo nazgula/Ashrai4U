@@ -29,7 +29,7 @@ export const LoginPage = (props: IWelcomePageProps) => {
       <div className="side-by-side">
         <RightSideContainer img='phone-page-right-img'/>
           <div className="left">
-            <LoginByPhone />
+            <LoginByPhone onClickNext={onClickNext} />
           </div>
         
       </div>

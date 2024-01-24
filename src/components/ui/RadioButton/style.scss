@@ -4,6 +4,8 @@
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  border: 2 solid white;
+  border-radius: 5px;
   &__input {
     appearance: none;
     margin: 0;
@@ -58,6 +60,10 @@
     cursor: default;
   }
 }
+// .radio__wraper {
+//   border: 1 solid #becad3;
+//   border-radius: 5px; 
+// }
 
 .radio-group {
   border: none;

@@ -147,6 +147,7 @@ export const Chat = ({
   const sendQuestion = useCallback(
     async (payload: TSendQuestionApiCallPayload) => {
       try {
+        // @ts-expect-error  old interface - not in use file deprected 
         const { response } = user && (await sendQuestionApiCall(payload, user))
         const { tokenId } = response
 
@@ -177,6 +178,7 @@ export const Chat = ({
     let time = 0
     let indexStatus = 0
     try {
+      // @ts-expect-error  old interface - not in use file deprected 
       const apiResponse = user && (await getAnswerApiCall(tokenId, user))
       if(apiResponse){
         setLoadingState(null)
@@ -198,6 +200,7 @@ export const Chat = ({
           } else {
             time = time + 5000
             setLoadingState(STATUSES[indexStatus])
+            // @ts-expect-error  old interface - not in use file deprected 
             const response = user && (await getAnswerApiCall(tokenId, user))
             indexStatus = indexStatus + 1
             indexStatus = indexStatus > 7 ? 7 : indexStatus

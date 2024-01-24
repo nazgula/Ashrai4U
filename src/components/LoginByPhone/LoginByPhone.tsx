@@ -26,9 +26,14 @@ interface ILoginVerification {
   session: string
 }
 
-export const LoginByPhone = () => {
+export interface ILoginByPhoneProps {
+  onClickNext: () => void
+}
+
+export const LoginByPhone = (props: ILoginByPhoneProps) => {
   const useProfileStore = useStore(EStore.profile)
-  const { login } = useAuth()
+  const { onClickNext } = props
+  const { login, user } = useAuth()
   const { setModal } = useModal()
   const { t } = useTranslation()
   const [input, setInput] = useState({
@@ -114,6 +119,10 @@ export const LoginByPhone = () => {
       if (response) {
         login({ ...response, username: callPayload.username })
         setModal(null)
+
+        console.log('user: ', user)
+        alert (`username: ${user?.username} \n AccessToken: ${user?.AccessToken}`)
+        onClickNext()
 
         // const profileData = await getProfileApiCall({
         //   ...response,

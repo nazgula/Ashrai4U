@@ -2,12 +2,12 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { createContext, useContext, useMemo } from 'react'
 import { useLocalStorage } from '../hooks'
-import { TLoginApiCallResponse } from '../api/types'
+import { TLoginApiCallResponse, TVerifyLoginApiCallResponse } from '../api/types'
 
 // @ts-ignore
 const AuthContext = createContext<{
-  user: TLoginApiCallResponse | null
-  login: (data: TLoginApiCallResponse) => Promise<void>
+  user: TVerifyLoginApiCallResponse | null
+  login: (data: TVerifyLoginApiCallResponse) => Promise<void>
   logout: () => void
   setProfile: (status: string) => void
   updateAuthCredentials: (data: TLoginApiCallResponse) => void
@@ -22,14 +22,14 @@ const AuthContext = createContext<{
 export const AuthProvider = ({ children }: any) => {
   // @ts-ignore
   const [user, setUser]: [
-    TLoginApiCallResponse | null,
-    (data: TLoginApiCallResponse | null) => void,
+    TVerifyLoginApiCallResponse | null,
+    (data: TVerifyLoginApiCallResponse | null) => void,
   ] = useLocalStorage('user', null)
   const [profileUpdated, setProfileUpdated] = useLocalStorage('profile', null) as [string, (status: string) => void];
   // const [session, setSession] = useLocalStorage('session', '') as [string, (session: string) => void];
   // const [codeVerifier, setCodeVerifier] = useLocalStorage('codeVerified', '') as [string, (codeVerifier: string) => void];
 
-  const login = async (data: TLoginApiCallResponse) => {
+  const login = async (data: TVerifyLoginApiCallResponse) => {
     setUser(data)
   }
 
@@ -46,6 +46,7 @@ export const AuthProvider = ({ children }: any) => {
   }
 
   const updateAuthCredentials = (data: TLoginApiCallResponse) => {
+    // @ts-expect-error  old interface - not in use file deprected 
     setUser(data)
   }
 

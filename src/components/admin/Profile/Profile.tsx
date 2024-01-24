@@ -47,6 +47,8 @@ export const Profile = () => {
       if(user){
       // Replace with your data fetching logic
       setLoading(true)
+
+        // @ts-expect-error  old interface - not in use file deprected 
         const profileData = await getProfileApiCall(user) 
         if(profileData.status === 403){
           // logout()

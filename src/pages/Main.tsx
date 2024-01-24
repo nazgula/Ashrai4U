@@ -1,17 +1,5 @@
 import { useCallback, useRef, useEffect, useState, ReactNode } from 'react'
-
-
-import {
-  Ai,
-  BusinessSupport,
-  Footer,
-  Header,
-  Help,
-  HowItWorks,
-  Security,
-} from '@/components/sections'
-
-import {OnBoarding} from '@/components/sections/OnBoarding/OnBoarding'
+import { Footer, Header } from '@/components/sections'
 import { WelcomePage } from './WelcomePage'
 import { GoalPage } from './GoalPage'
 import { LoginPage } from './LoginPage'
