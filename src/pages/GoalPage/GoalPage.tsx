@@ -13,11 +13,11 @@ import { updateLoanRequestApiCall } from '@/core/api/calls'
 import { useAuth } from '@/core/context'
 
 
-export interface IWelcomePageProps{
+export interface IGoalPageProps{
   onClickNext: () => void
 }
 
-export const GoalPage = (props:IWelcomePageProps ) => {
+export const GoalPage = (props:IGoalPageProps ) => {
   const { onClickNext } = props
   const [selectedValue, setSelectedValue] = useState('' as ELoanReason)
   const aiRef = useRef(null)

@@ -8,6 +8,7 @@ import { LoanResuestPage } from './LoanRequest'
 import { EmploymentTypePage } from './EmploymentTypePage'
 import { IncomePage } from './IncomePage'
 import { MaritalStatusPage } from './MaritalStatusPage'
+import { WhatsAppPage } from './WhatsAppPage'
 
 export enum ESteps {
   WELCOME = 'WELCOME',
@@ -21,7 +22,6 @@ export enum ESteps {
 }
 
 export const MainPage = () => {
-  const aiRef = useRef(null)
   const [step, setStep] = useState(ESteps.WELCOME)
 
   useEffect(() => {
@@ -30,8 +30,8 @@ export const MainPage = () => {
 
 
   const showPage = () : ReactNode => {
-    if (step == ESteps.WELCOME || step === ESteps.WHATSAPP) {
-        return <WelcomePage onClickNext={() => setStep(ESteps.GOAL)}/>
+    if (step == ESteps.WELCOME ) {
+        return <WelcomePage onClickNext={() => setStep(ESteps.WHATSAPP)}/>
     } 
     else {
       return ( 
@@ -62,24 +62,8 @@ export const MainPage = () => {
       return <IncomePage onClickNext={() => setStep(ESteps.WHATSAPP)}/>
     }
     else if (step == ESteps.WHATSAPP) {
-      return <WelcomePage onClickNext={() => setStep(ESteps.GOAL)}/>
+      return <WhatsAppPage />
     }
-    
-
-    //     // return <LoginPage onClickNext={() => setStep(2)}/>
-    //   case 2:
-    //     return <GoalPage step={step} onClickNext={() => setStep(0)}/>
-    //   case 3:
-    //     // loan page
-    //   case 4:
-    //     // employment type
-    //   case 5:
-    //     // merital status
-    //   case 6:
-    //     // income
-    //   case 7:
-    //     // whatsApp
-    // }
   }
 
   return (
