@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { LoginByPhone } from '@/components/LoginByPhone'
 import { ESteps } from '@/pages/Main'
+import { ImageTest } from '@/components/ui/Image'
 export interface IRightSideContainer {
   step: ESteps
   img: string
@@ -26,10 +27,14 @@ export const RightSideContainer = (props: IRightSideContainer) => {
   return (
     <div className={`${props.className} p-20 flex flex-col items-center bg-purple`}>
 
-      {/* <h1 className="text-white bold text-4xl text-center"> {t(`innerPageRightTitle.${props.step}${tSubStep}`)}</h1>
-      <h2 className="text-white text-xl text-center mt-3"> {t(`innerPageRightSubTitle.${props.step}${tSubStep}`)}</h2>  */}
-      {/* <div className="flex-grow flex"> */}
-        <img src={require('@/assets/images/g1.png')} alt={t(`innerPageRightTitle.${props.step}${tSubStep}`)} className="mt-auto pb-20" />
+      {/* <h1 className="text-4xl text-center text-white bold"> {t(`innerPageRightTitle.${props.step}${tSubStep}`)}</h1>
+      <h2 className="mt-3 text-xl text-center text-white"> {t(`innerPageRightSubTitle.${props.step}${tSubStep}`)}</h2>  */}
+      {/* <div className="flex flex-grow">
+
+       alt={t(`innerPageRightTitle.${props.step}${tSubStep}`)} className="pb-20 mt-auto"
+      */}
+
+        <ImageTest />
       {/* </div> */}
     </div>
   )
