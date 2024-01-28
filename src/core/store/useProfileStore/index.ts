@@ -7,17 +7,6 @@ export const useProfileStore: createStoreOption = {
   state: (): IProfileInitialState => {
     return {
       profile: {
-        // accountId: '',
-        // companyName: '',
-        // fullName: '',
-        // indetifier: '',
-        // phone: '',
-        // codeVerifier: '',
-        // firstName: '',
-        // lastName: '',
-        // loanAmount: '',
-        // loanPeriod: '',
-        // loanReason: ''
         phone: '',
         codeVerifier: '',
         agentId: '',

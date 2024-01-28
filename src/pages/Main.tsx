@@ -9,6 +9,7 @@ import { EmploymentTypePage } from './EmploymentTypePage'
 import { IncomePage } from './IncomePage'
 import { MaritalStatusPage } from './MaritalStatusPage'
 import { WhatsAppPage } from './WhatsAppPage'
+import { useAuth } from '@/core/context'
 
 export enum ESteps {
   WELCOME = 'WELCOME',
@@ -22,12 +23,14 @@ export enum ESteps {
 }
 
 export const MainPage = () => {
-  const [step, setStep] = useState(ESteps.WELCOME)
+  const { user } = useAuth()
+  const [step, setStep] = useState(user && user.username ? ESteps.LOGIN: ESteps.WELCOME)
 
   useEffect(() => {
     
   }, [])
 
+  
 
   const showPage = () : ReactNode => {
     if (step == ESteps.WELCOME ) {

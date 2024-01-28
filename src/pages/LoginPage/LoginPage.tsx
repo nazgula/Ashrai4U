@@ -14,6 +14,8 @@ import { Button, EButtonType, Input } from '@/components/ui'
 
 // import './style.scss'
 import { LeftTitles } from '@/components/sections/LeftTitles'
+import { use } from 'i18next'
+import { TUpdateLoanRequestPayload } from '@/core/api/types'
 
 
 export interface ILoginPageProps {
@@ -21,9 +23,9 @@ export interface ILoginPageProps {
 }
 
 export const LoginPage = (props: ILoginPageProps) => {
-  const useProfileStore = useStore(EStore.profile)
+  // const useProfileStore = useStore(EStore.profile)
   const { onClickNext } = props
-  const { login, user } = useAuth()
+  const { login, user, loanRequest, setProfile } = useAuth()
   const { setModal } = useModal()
   const { t } = useTranslation()
   const [input, setInput] = useState({
@@ -33,6 +35,7 @@ export const LoginPage = (props: ILoginPageProps) => {
     lastName: ''
   })
 
+  
 
   // ------ identifier = phone
   const [isValidIdentifier, setIsValidIdentifier] = useState(false)
@@ -44,6 +47,7 @@ export const LoginPage = (props: ILoginPageProps) => {
 
   const identifierErrorMessage = t('admin.login.identifierErrorMessage')
   const codeErrorMessage = t('admin.login.codeErrorMessage')
+
 
   useEffect(() => {
     const isPhoneNumberValid = isNumberValid(input.identifier)
@@ -105,18 +109,23 @@ export const LoginPage = (props: ILoginPageProps) => {
 
   const verificationHandler = async (code: string) => {
     try {
-      const callPayload = {code: code, ...verifyParams}
-      let response = await verifyLoginApiCall(callPayload)
+      const vPayload = {code: code, ...verifyParams}
+      let response = await verifyLoginApiCall(vPayload)
 
       if (response) {
-        login({ ...response, username: callPayload.username })
-        
+        login({ ...response, username: vPayload.username })
         console.log('user: ', user)
 
         if (user) {
           try {
-            response =   await updateLoanRequestApiCall({firstName: input.firstName, lastName: input.lastName}, user)
-
+            
+             const uPayload = {firstName: input.firstName, lastName: input.lastName}
+            
+            response =   await updateLoanRequestApiCall(uPayload, user)
+            // storage
+            setProfile(uPayload as TUpdateLoanRequestPayload)
+            console.log('get profile key: ', loanRequest?.firstName, loanRequest?.lastName, loanRequest?.resone)
+           
             if (response) onClickNext()
           } catch (error) {
             console.log(error)
@@ -132,6 +141,8 @@ export const LoginPage = (props: ILoginPageProps) => {
       console.log(error)
     }
   }
+
+  
 // ------------- render -------------
 
   const getfirstNameInput = () : ReactNode => {
@@ -188,14 +199,14 @@ export const LoginPage = (props: ILoginPageProps) => {
     if (verifyParams.codeVerifier.length > 0 && verifyParams.session.length > 0) {
       return (
         <div className="flex justify-between">
-          <Button isLinkView={true} className="text-black text-sm" 
+          <Button isLinkView={true} className="text-sm text-black" 
           onClick={() => { 
               setIsResending(true) 
               loginHandler(input.identifier)
             }}>
             {t('login.send-again')}
           </Button>
-          <Button isLinkView={true} className="text-black text-sm" onClick={() => setVerifyParams({codeVerifier: '', session: '', username: ''})}>
+          <Button isLinkView={true} className="text-sm text-black" onClick={() => setVerifyParams({codeVerifier: '', session: '', username: ''})}>
             {t('login.change-phone')}
           </Button>
         </div>

@@ -2,21 +2,19 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { createContext, useContext, useMemo } from 'react'
 import { useLocalStorage } from '../hooks'
-import { TLoginApiCallResponse, TVerifyLoginApiCallResponse } from '../api/types'
+import { TLoginApiCallResponse, TUpdateLoanRequestPayload, TVerifyLoginApiCallResponse } from '../api/types'
 
 // @ts-ignore
 const AuthContext = createContext<{
   user: TVerifyLoginApiCallResponse | null
   login: (data: TVerifyLoginApiCallResponse) => Promise<void>
   logout: () => void
-  setProfile: (status: string) => void
+  // setProfile: (status: string) => void
   updateAuthCredentials: (data: TLoginApiCallResponse) => void
   profileUpdated: string
+  setProfile: (data: TUpdateLoanRequestPayload) => Promise<void>
+  loanRequest: TUpdateLoanRequestPayload | null
   
-  // codeVerifier: string
-  // setCodeVerifier: (codeVerifier: string) => void
-  // session: string
-  // setSession: (session: string) => void
 }>()
 
 export const AuthProvider = ({ children }: any) => {
@@ -25,20 +23,29 @@ export const AuthProvider = ({ children }: any) => {
     TVerifyLoginApiCallResponse | null,
     (data: TVerifyLoginApiCallResponse | null) => void,
   ] = useLocalStorage('user', null)
+  
+  // @ts-ignore
+  const [loanRequest, setLoanRequest]: [
+    TUpdateLoanRequestPayload | null,
+    (data: TUpdateLoanRequestPayload | null) => void,
+  ] = useLocalStorage(`A4U-${user?.username }` , null)
+  
   const [profileUpdated, setProfileUpdated] = useLocalStorage('profile', null) as [string, (status: string) => void];
-  // const [session, setSession] = useLocalStorage('session', '') as [string, (session: string) => void];
-  // const [codeVerifier, setCodeVerifier] = useLocalStorage('codeVerified', '') as [string, (codeVerifier: string) => void];
-
+ 
   const login = async (data: TVerifyLoginApiCallResponse) => {
     setUser(data)
   }
 
-  const setProfile = async (status: string) => {
-    console.log(`status ${status}`)
-    if(status){
-      setProfileUpdated(status)
-    }
+  const setProfile = async (data: TUpdateLoanRequestPayload) => {
+    setLoanRequest(data)
   }
+  
+  // const setProfile = async (status: string) => {
+  //   console.log(`status ${status}`)
+  //   if(status){
+  //     setProfileUpdated(status)
+  //   }
+  // }
 
 
   const logout = () => {
@@ -60,7 +67,9 @@ export const AuthProvider = ({ children }: any) => {
       logout,
       updateAuthCredentials,
       setProfile,
-      profileUpdated
+      profileUpdated,
+      loanRequest
+
       // ,
       // session,
       // setSession,

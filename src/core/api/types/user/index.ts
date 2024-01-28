@@ -75,16 +75,18 @@ TLoginApiCallResponse & {
 }
 
 export type TUpdateLoanRequestPayload = {
+  agentId?: string;
   firstName?: string;
   lastName?: string;
-  resone?: string;
+  resone?: ELoanReason;
   carYear?: string;
   carValue?: string;
   carBrand?: string;
   requestedLoan?: string;
   monthlyReturn?: string;
-  employmentType?: string;
-  maritalStatus?: string;
+  employmentType?: EEmplymentType;
+  maritalStatus?: EMaritalStatus;
+  partnerEmploymentType?: EEmplymentType;
   salary?: string;
   alimony?: string;
   pension?: string;
