@@ -1,21 +1,44 @@
 import { createStoreOption } from 'react-pinia'
 import { IProfileInitialState } from './types'
+import { EEmplymentType, ELoanReason, EMaritalStatus } from '@/core/api/types'
+
 
 export const useProfileStore: createStoreOption = {
   state: (): IProfileInitialState => {
     return {
       profile: {
-        accountId: '',
-        companyName: '',
-        fullName: '',
-        indetifier: '',
+        // accountId: '',
+        // companyName: '',
+        // fullName: '',
+        // indetifier: '',
+        // phone: '',
+        // codeVerifier: '',
+        // firstName: '',
+        // lastName: '',
+        // loanAmount: '',
+        // loanPeriod: '',
+        // loanReason: ''
         phone: '',
         codeVerifier: '',
+        agentId: '',
+        username: '',
         firstName: '',
         lastName: '',
-        loanAmount: '',
-        loanPeriod: '',
-        loanReason: ''
+        resone: '' as ELoanReason,
+        carYear: '',
+        carValue: '',
+        carBrand: '',
+        requestedLoan: '',
+        monthlyReturn: '',
+        employmentType: '' as EEmplymentType,
+        maritalStatus: '' as EMaritalStatus,
+        partnerEmploymentType: '' as EEmplymentType,
+        salary: '',
+        alimony: '',
+        pension: '',
+        allowance: '',
+        rent: ''
+
       }
     }
   },
