@@ -29,24 +29,24 @@ export const EmploymentTypePage = (props:IEmploymentTypePageProps ) => {
 
   const saveGoalHandler = async () => {
     console.log('employmentType:', employmentType)
-    onClickNext()
-    return
-    // if (user) {
-    //   try {
-    //     const response =   await updateLoanRequestApiCall({resone: selectedValue}, user)
+    // onClickNext()
+    // return
+    if (user) {
+      try {
+        const response =   await updateLoanRequestApiCall({employmentType: employmentType}, user)
 
-    //     if (response) {
-    //       console.log ('save goal response', response)
-    //       onClickNext()
-    //     }
-    //   } catch (error) {
-    //     console.log(error)
-    //   } 
-    // }
-    // else {
-    //   // Alert ERROR
-    //   console.log('user not found')
-    // }
+        if (response) {
+          console.log ('save employmentType response', response)
+          onClickNext()
+        }
+      } catch (error) {
+        console.log(error)
+      } 
+    }
+    else {
+      // Alert ERROR
+      console.log('user not found')
+    }
   }
 
   const radioList = [

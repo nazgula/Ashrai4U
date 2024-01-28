@@ -31,7 +31,7 @@ export const MainPage = () => {
 
   const showPage = () : ReactNode => {
     if (step == ESteps.WELCOME ) {
-        return <WelcomePage onClickNext={() => setStep(ESteps.WHATSAPP)}/>
+        return <WelcomePage onClickNext={() => setStep(ESteps.LOGIN)}/>
     } 
     else {
       return ( 

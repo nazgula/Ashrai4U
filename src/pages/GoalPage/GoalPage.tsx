@@ -1,13 +1,9 @@
-import { useCallback, useRef, useEffect, ChangeEvent, useState } from 'react'
+import { useRef, useEffect, ChangeEvent, useState } from 'react'
 import './style.scss'
 
-import {Button, Input, RadioButtonGroup} from '@/components/ui'
-import { Link } from 'react-router-dom'
+import {Button, RadioButtonGroup} from '@/components/ui'
 import { useTranslation } from 'react-i18next'
-import { LoginByPhone } from '@/components/LoginByPhone'
-import { RightSideContainer } from '@/components/sections/RightSideContainer'
 import { ELoanReason } from '@/core/api/types'
-import classNames from 'classnames'
 import { LeftTitles } from '@/components/sections/LeftTitles'
 import { updateLoanRequestApiCall } from '@/core/api/calls'
 import { useAuth } from '@/core/context'
@@ -20,7 +16,6 @@ export interface IGoalPageProps{
 export const GoalPage = (props:IGoalPageProps ) => {
   const { onClickNext } = props
   const [selectedValue, setSelectedValue] = useState('' as ELoanReason)
-  const aiRef = useRef(null)
   const { t } = useTranslation()
   const { user } = useAuth()
   useEffect(() => {
@@ -28,25 +23,25 @@ export const GoalPage = (props:IGoalPageProps ) => {
   }, [])
 
   const saveGoalHandler = async () => {
+    // onClickNext()
+    // return
+    
+    if (user) {
+      try {
+        const response =   await updateLoanRequestApiCall({resone: selectedValue}, user)
 
-    onClickNext()
-    return
-    // if (user) {
-    //   try {
-    //     const response =   await updateLoanRequestApiCall({resone: selectedValue}, user)
-
-    //     if (response) {
-    //       console.log ('save goal response', response)
-    //       onClickNext()
-    //     }
-    //   } catch (error) {
-    //     console.log(error)
-    //   } 
-    // }
-    // else {
-    //   // Alert ERROR
-    //   console.log('user not found')
-    // }
+        if (response) {
+          console.log ('save goal response', response)
+          onClickNext()
+        }
+      } catch (error) {
+        console.log(error)
+      } 
+    }
+    else {
+      // Alert ERROR
+      console.log('user not found')
+    }
   }
 
   const radioList = [

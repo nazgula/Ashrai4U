@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { EEmplymentType, EMaritalStatus } from '@/core/api/types'
 import { LeftTitles } from '@/components/sections/LeftTitles'
 import { useAuth } from '@/core/context'
+import { updateLoanRequestApiCall } from '@/core/api/calls'
 
 
 export interface IMaritalStatusPageProps{
@@ -24,25 +25,33 @@ export const MaritalStatusPage = (props:IMaritalStatusPageProps ) => {
   }, [])
 
   const saveGoalHandler = async () => {
-    console.log('maritalStatus:', maritalStatus)
-    onClickNext()
-    return
-    // if (user) {
-    //   try {
-    //     const response =   await updateLoanRequestApiCall({resone: selectedValue}, user)
+    // onClickNext()
+    // return
 
-    //     if (response) {
-    //       console.log ('save goal response', response)
-    //       onClickNext()
-    //     }
-    //   } catch (error) {
-    //     console.log(error)
-    //   } 
-    // }
-    // else {
-    //   // Alert ERROR
-    //   console.log('user not found')
-    // }
+    const palyload = { 
+      maritalStatus: maritalStatus, 
+      partnersEmployment: maritalStatus === EMaritalStatus.MARRIED ? partnersEmployment : ''
+    }
+
+    console.log('maritalStatus:', palyload)
+
+
+    if (user) {
+      try {
+        const response =   await updateLoanRequestApiCall(palyload, user)
+
+        if (response) {
+          console.log ('save marital status response', response)
+          onClickNext()
+        }
+      } catch (error) {
+        console.log(error)
+      } 
+    }
+    else {
+      // Alert ERROR
+      console.log('user not found')
+    }
   }
 
   const MSradioList = [
@@ -100,7 +109,7 @@ export const MaritalStatusPage = (props:IMaritalStatusPageProps ) => {
         return (
           <div className='mt-4'>
             <div>{t('maritalStatusPage.partnerEmployment')}</div>
-            <RadioButtonGroup label="" options={PETradioList} onChange={partenrEmploymentRBHandler} className="bg-red   flex-row gap-0 justify-between"/> 
+            <RadioButtonGroup label="" options={PETradioList} onChange={partenrEmploymentRBHandler} className="flex-row justify-between gap-0 bg-red"/> 
           </div>
         )
       }

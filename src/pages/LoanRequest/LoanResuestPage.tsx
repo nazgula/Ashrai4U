@@ -1,11 +1,11 @@
-import { useCallback, useRef, useEffect, ChangeEvent, useState } from 'react'
-
+import { useEffect, ChangeEvent, useState } from 'react'
 import {Button, Input, RadioButtonGroup} from '@/components/ui'
 import { useTranslation } from 'react-i18next'
 import { ELoanReason } from '@/core/api/types'
 import { LeftTitles } from '@/components/sections/LeftTitles'
 import { useAuth } from '@/core/context'
 import { formatNumber, unformatNumber } from '@/utilities/utilities'
+import { updateLoanRequestApiCall } from '@/core/api/calls'
 
 
 export interface ILoanRequestPageProps{
@@ -14,11 +14,10 @@ export interface ILoanRequestPageProps{
 
 export const LoanResuestPage = (props:ILoanRequestPageProps ) => {
   const { onClickNext } = props
-  const [selectedValue, setSelectedValue] = useState('0' as ELoanReason)
+  const [loanRequest, setLoanRequest] = useState('0' as ELoanReason)
   const [loanReturn, setLoanReturn] = useState('');
   const [errorReurnAmoune, setErrorReurnAmoune] = useState('');
 
-  const aiRef = useRef(null)
   const { t } = useTranslation()
   const { user } = useAuth()
   useEffect(() => {
@@ -27,31 +26,31 @@ export const LoanResuestPage = (props:ILoanRequestPageProps ) => {
 
   const updateProfileHandler = async () => {
 
-    console.log('monthlyReturn:', loanReturn, 'requestedLoan:', selectedValue) 
-    onClickNext()
-    return
-    // if (user) {
-    //   try {
-    //     const response =   await updateLoanRequestApiCall({resone: selectedValue}, user)
+    console.log('monthlyReturn:', loanReturn, 'requestedLoan:', loanRequest) 
+    // onClickNext()
+    // return
+    if (user) {
+      try {
+        const response =   await updateLoanRequestApiCall({monthlyReturn: loanReturn, requestedLoan: loanRequest}, user)
 
-    //     if (response) {
-    //       console.log ('save goal response', response)
-    //       onClickNext()
-    //     }
-    //   } catch (error) {
-    //     console.log(error)
-    //   } 
-    // }
-    // else {
-    //   // Alert ERROR
-    //   console.log('user not found')
-    // }
+        if (response) {
+          console.log ('save loan request response', response)
+          onClickNext()
+        }
+      } catch (error) {
+        console.log(error)
+      } 
+    }
+    else {
+      // Alert ERROR
+      console.log('user not found')
+    }
   }
 
   const handleRangeChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(event.target.value, 10);
     const roundedValue = Math.round(newValue / 5000) * 5000; // Round to the nearest 5000
-    setSelectedValue(roundedValue.toString() as ELoanReason);
+    setLoanRequest(roundedValue.toString() as ELoanReason);
   };
 
 
@@ -70,31 +69,22 @@ export const LoanResuestPage = (props:ILoanRequestPageProps ) => {
     <div>
       <LeftTitles title="loanRequest.title" description="loanRequest.subTitle" />
           
-      <form className="form flex justify-center items-center">
+      <form className="flex items-center justify-center form">
           <div className="py-4 text-2xl">
-              {formatNumber(selectedValue)}
+              {formatNumber(loanRequest)}
           </div>
           <fieldset className="w-full">
             <div className="relative mt-10">
               
               {/* add to input diffrent color to the unselected side of the range */}
-              <input
-                id="labels-range-input"
-                type="range"
-                value={selectedValue}
-                min="0"
-                max="500000"
-                step="5000"
-                onChange={handleRangeChange}
-                className="w-full h-3 bg-sky rounded-lg appearance-none cursor-pointer"
-                dir="ltr"
-              />
+              <input id="labels-range-input" type="range" value={loanRequest} min="0" max="500000" step="5000" dir="ltr"
+                onChange={handleRangeChange} className="w-full h-3 rounded-lg appearance-none cursor-pointer bg-sky"/>
               
-              <span className="text-sm text-sky absolute end-0 -bottom-6">0</span>
-              <span className="text-sm text-sky absolute start-0 -bottom-6">500,000</span>
+              <span className="absolute text-sm text-sky end-0 -bottom-6">0</span>
+              <span className="absolute text-sm text-sky start-0 -bottom-6">500,000</span>
 
             </div>
-            <div className="mt-14 w-full flex flex-col">
+            <div className="flex flex-col w-full mt-14">
               <div className="text-xl text-sky">{t('loanRequest.return')}</div>
               <Input type="text" id="loanReturn" name="loanReturn" value={loanReturn} onInput={onInputChange} error={errorReurnAmoune}/>
               <div className="pt-6 text-md text-sky ]">{t('loanRequest.returnDisclaimer')}</div>
@@ -102,7 +92,7 @@ export const LoanResuestPage = (props:ILoanRequestPageProps ) => {
           </fieldset>
           
           <div className="form-button-group">
-            <Button onClick={updateProfileHandler} disabled={!( Number(loanReturn)  && Number(selectedValue))  ? true : false}> {t('goalPage.action')}</Button>
+            <Button onClick={updateProfileHandler} disabled={!( Number(loanReturn)  && Number(loanRequest))  ? true : false}> {t('goalPage.action')}</Button>
           </div>
       </form>
 

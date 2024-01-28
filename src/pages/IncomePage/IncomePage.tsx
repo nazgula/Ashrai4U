@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ChangeEvent, ReactNode, useEffect, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useStore } from 'react-pinia'
 import parsePhoneNumberFromString, { ParseError } from 'libphonenumber-js'
 
 import { EStore } from '@/core/store'
 import { useAuth, useModal } from '@/core/context'
-import { loginApiCall, updateLoanRequestApiCall, verifyLoginApiCall } from '@/core/api/calls'
+import { updateLoanRequestApiCall } from '@/core/api/calls'
 import { Button, EButtonType, Input } from '@/components/ui'
 
 
@@ -24,8 +24,7 @@ export interface IIncomePageProps {
 export const IncomePage = (props: IIncomePageProps) => {
   const useProfileStore = useStore(EStore.profile)
   const { onClickNext } = props
-  const { login, user } = useAuth()
-  const { setModal } = useModal()
+  const {  user } = useAuth()
   const { t } = useTranslation()
   const [input, setInput] = useState({
     salary: '',
@@ -35,43 +34,6 @@ export const IncomePage = (props: IIncomePageProps) => {
     rent: '',
   })
 
-
-  // // ------ identifier = phone
-  // const [isValidIdentifier, setIsValidIdentifier] = useState(false)
-  // // ------ verification code
-  // const [isValidCode, setIsValidCode] = useState(false)
-  // // ------ login
-  // const [verifyParams, setVerifyParams] = useState({codeVerifier: '', session: '', username: ''})
-  // const [isResending, setIsResending] = useState(false)
-
-  // const identifierErrorMessage = t('admin.login.identifierErrorMessage')
-  // const codeErrorMessage = t('admin.login.codeErrorMessage')
-
-  // useEffect(() => {
-  //   const isPhoneNumberValid = isNumberValid(input.identifier)
-
-  //   if (input.identifier.length === 0) {
-  //     setIsValidIdentifier(true)
-  //   } else if (
-  //   isPhoneNumberValid && input.identifier.length > 0
-  //   ) {
-  //     setIsValidIdentifier(true)
-  //   } else {
-  //     setIsValidIdentifier(false)
-  //   }
-  // }, [input.identifier])
-
-
-  // useEffect(() => {
-  //   if (input.verificationCode.length === 6 && !isNaN(+input.verificationCode) || input.verificationCode.length === 0) {
-  //     setIsValidCode(true)
-  //   } 
-  //   else {
-  //     setIsValidCode(false)
-  //   }
-  // }, [input.verificationCode])
-
-// isNaN(+maybeNumber)
 
   const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -97,24 +59,24 @@ export const IncomePage = (props: IIncomePageProps) => {
   const incomeHandler = async (salary: string, alimony: string, pension: string, allowance: string, rent: string) => {
     try {
       console.log('incomeHandler:', salary, alimony, pension, allowance, rent)
-      onClickNext()
-      return
-      // if (user) {
-      //   try {
-      //     const response =   await updateLoanRequestApiCall({resone: selectedValue}, user)
+      // onClickNext()
+      // return
+      if (user) {
+        try {
+          const response =   await updateLoanRequestApiCall({salary: salary, alimony: alimony, pension: pension, allowance: allowance, rent: rent}, user)
   
-      //     if (response) {
-      //       console.log ('save goal response', response)
-      //       onClickNext()
-      //     }
-      //   } catch (error) {
-      //     console.log(error)
-      //   } 
-      // }
-      // else {
-      //   // Alert ERROR
-      //   console.log('user not found')
-      // }
+          if (response) {
+            console.log ('save income response', response)
+            onClickNext()
+          }
+        } catch (error) {
+          console.log(error)
+        } 
+      }
+      else {
+        // Alert ERROR
+        console.log('user not found')
+      }
       
     } catch (error) {
       console.log(error)
@@ -130,7 +92,7 @@ export const IncomePage = (props: IIncomePageProps) => {
       {/* {getForm()} */}
 
       <form className="form">
-        <fieldset className='w-full flex flex-col items-center'>
+        <fieldset className='flex flex-col items-center w-full'>
           <Input type="text" name="salary" value={input.salary} placeholder={t('incomePage.salary')} onInput={onInputChange}/>
           <div>{t('incomePage.extraIncome')}</div>
           <Input type="text" name="alimony" value={input.alimony} placeholder={t('incomePage.alimony')} onInput={onInputChange}/>
