@@ -13,8 +13,10 @@ import {
   TLoginApiCallResponse,
   TProfileApiCallPayload,
   TSignUpApiCallPayload,
+  TUpdateLoanRequestPayload,
   TVerifyApiCallPayload,
-  TVerifyLoginApiCallPayload
+  TVerifyLoginApiCallPayload,
+  TVerifyLoginApiCallResponse
 } from '@/core/api/types/user'
 import { useAuth } from '@/core/context';
 
@@ -133,6 +135,32 @@ export const verifyLoginApiCall = async (data: TVerifyLoginApiCallPayload): Prom
   
   } catch (error) {
     console.log('error:', error)
+    throw error
+  }
+}
+
+// ----------------updateLoanRequest
+export const updateLoanRequestApiCall = async (
+  data: TUpdateLoanRequestPayload,
+  user: TVerifyLoginApiCallResponse,
+) => {
+  try {
+   
+    console.log('updateProfileApiCall: ', user.AccessToken)
+    const response = await apiRequest({
+      apiEndpoint,
+      path: EUserApiPath.updateProfile,
+      options: {
+        method: 'POST',
+        headers: {
+          // 'transaction-id': uuidv4(),
+          Authorization: `${user.TokenType} ${user.AccessToken}`,
+        },
+        body: JSON.stringify({ ...data }),
+      },
+    })
+    return response.message
+  } catch (error) {
     throw error
   }
 }

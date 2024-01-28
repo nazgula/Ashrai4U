@@ -6,20 +6,20 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { LoginByPhone } from '@/components/LoginByPhone'
 import { RightSideContainer } from '@/components/sections/RightSideContainer'
-import { ELoanReason } from '@/core/api/types'
+import { EEmplymentType } from '@/core/api/types'
 import classNames from 'classnames'
 import { LeftTitles } from '@/components/sections/LeftTitles'
 import { updateLoanRequestApiCall } from '@/core/api/calls'
 import { useAuth } from '@/core/context'
 
 
-export interface IWelcomePageProps{
+export interface IEmploymentTypePageProps{
   onClickNext: () => void
 }
 
-export const GoalPage = (props:IWelcomePageProps ) => {
+export const EmploymentTypePage = (props:IEmploymentTypePageProps ) => {
   const { onClickNext } = props
-  const [selectedValue, setSelectedValue] = useState('' as ELoanReason)
+  const [employmentType, setEmploymentType] = useState('' as EEmplymentType)
   const aiRef = useRef(null)
   const { t } = useTranslation()
   const { user } = useAuth()
@@ -28,7 +28,7 @@ export const GoalPage = (props:IWelcomePageProps ) => {
   }, [])
 
   const saveGoalHandler = async () => {
-
+    console.log('employmentType:', employmentType)
     onClickNext()
     return
     // if (user) {
@@ -51,42 +51,32 @@ export const GoalPage = (props:IWelcomePageProps ) => {
 
   const radioList = [
     {
-      value: ELoanReason.LODGING,
+      value: EEmplymentType.CONTRACT,
       name: 'button-types',
-      label: t('goalPage.goalDescriptionRadioGroup.lodging'),
+      label: t('employmentTypePage.type.contract'),
     },
     {
-      value: ELoanReason.CAR,
+      value: EEmplymentType.FREELANCER,
       name: 'button-types',
-      label: t('goalPage.goalDescriptionRadioGroup.car'),
-    },
-    {
-      value: ELoanReason.LOANS,
-      name: 'button-types',
-      label: t('goalPage.goalDescriptionRadioGroup.loans'),
-    },
-    {
-      value: ELoanReason.OTHER,
-      name: 'button-types',
-      label: t('goalPage.goalDescriptionRadioGroup.other'),
+      label: t('employmentTypePage.type.freelancer'),
     },
   ]
 
    const radioGroupHandler = (event: ChangeEvent<HTMLInputElement>) => {
-      setSelectedValue(event.target.value as ELoanReason)
+      setEmploymentType(event.target.value as EEmplymentType)
     }
 
 
   return (
 
     <div>
-      <LeftTitles title="goalPage.title" description="goalPage.subTitle" />
+      <LeftTitles title="employmentTypePage.title" description="employmentTypePage.subTitle" showLoanAmount={true}/>
 
       <form className="form">
-          <RadioButtonGroup label="" options={radioList} onChange={radioGroupHandler}/> 
+          <RadioButtonGroup label="" options={radioList} onChange={radioGroupHandler} className="flex-row"/> 
           
           <div className="form-button-group">
-            <Button onClick={saveGoalHandler}> {t('goalPage.action')}</Button>
+            <Button onClick={saveGoalHandler} disabled={!employmentType ? true : false}> {t('goalPage.action')}</Button>
           </div>
       </form>
 

@@ -2,7 +2,8 @@ export enum EUserApiPath {
   // Authentication
   login = 'login',
   verifyCode = 'verifyCode',
-  
+  // update loan request
+  update = 'update',  
   // old
   signUp = 'signup',
    refresh = 'refresh',
@@ -68,11 +69,27 @@ export type TLoginApiCallResponse = {
   username:string
 }
 
-
-
 export type TVerifyLoginApiCallPayload = 
 TLoginApiCallResponse & {
   code: string
+}
+
+export type TUpdateLoanRequestPayload = {
+  firstName?: string;
+  lastName?: string;
+  resone?: string;
+  carYear?: string;
+  carValue?: string;
+  carBrand?: string;
+  requestedLoan?: string;
+  monthlyReturn?: string;
+  employmentType?: string;
+  maritalStatus?: string;
+  salary?: string;
+  alimony?: string;
+  pension?: string;
+  allowance?: string;
+  rent?: string;
 }
 
 interface ILoginApiCallResponse {
@@ -89,9 +106,23 @@ export type TVerifyLoginApiCallResponse = ILoginApiCallResponse & {
 
 export enum ELoanReason {
   CAR = 'CAR',
-  LODGING = 'LODGING',
-  LOANS = 'LOANS',
+  LODGING = 'LANDING',
+  LOANS = 'LOAN_REDUCTION',
   OTHER = 'OTHER'
 }
+
+export enum EEmplymentType {
+  CONTRACT = 'CONTRACT',
+  FREELANCER = 'FREELANCER'
+}
+
+export enum EMaritalStatus {
+  SINGLE = 'SINGLE',
+  MARRIED = 'MARRIED',
+  DIVORCED = 'DIVORCED',
+  WIDOWED = 'WIDOWED'
+}
+
+
 
 export * from './editProfile'

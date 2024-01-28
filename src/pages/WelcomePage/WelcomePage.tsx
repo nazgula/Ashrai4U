@@ -33,15 +33,15 @@ export const WelcomePage = (props:IWelcomePageProps) => {
 
 
   return (
-
-      <div className="welcome-page">
-        <div className="welcome-page__image">
-          <img src={require('@/assets/images/welcome-page-top-img.png')} alt="welcome" />
+ 
+      <div className="h-[90vh] w-full flex flex-col items-center">
+        <div className="mt-[-100px]">
+          <img src={require('@/assets/images/welcome-page-top-img.png')} alt="welcome"  />
         </div>
-        <div className="bottom-container">
+        <div className="flex flex-col items-center justify-center p-10 bg-purple w-full">
           <h1> עוד טקסט מלהיב שמישהו יכתוב ויגיד מלא דברים</h1>
           <h2> אי אפשר לעמד כשלא ידוע התוכן</h2>
-          <Button onClick={onClickNext}>מעניין אותי</Button>
+          <Button onClick={onClickNext} isLinkView={true}>מעניין אותי</Button>
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
-
+import './styles.css';
 import { MainLayout } from '@/layout'
 import { MainPage } from '@/pages'
 

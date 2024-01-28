@@ -130,16 +130,10 @@ export const icons: TIconContents = {
   logo: {
     group: EIconGroup.logo,
     jsx: (
-      <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="167"
-      height="27"
-      fill="none"
-      viewBox="0 0 167 27"
-    >
+      <>
       <mask
         id="mask0_2302_156"
-        style={{ maskType: "luminance" }}
+        style={{ maskType: 'luminance' }}
         width="20"
         height="20"
         x="7"
@@ -151,7 +145,7 @@ export const icons: TIconContents = {
       <g mask="url(#mask0_2302_156)">
         <mask
           id="mask1_2302_156"
-          style={{ maskType: "luminance" }}
+          style={{ maskType: 'luminance' }}
           width="21"
           height="20"
           x="6"
@@ -169,7 +163,7 @@ export const icons: TIconContents = {
       </g>
       <mask
         id="mask2_2302_156"
-        style={{ maskType: "luminance" }}
+        style={{ maskType: 'luminance' }}
         width="20"
         height="20"
         x="0"
@@ -181,7 +175,7 @@ export const icons: TIconContents = {
       <g mask="url(#mask2_2302_156)">
         <mask
           id="mask3_2302_156"
-          style={{ maskType: "luminance" }}
+          style={{ maskType: 'luminance' }}
           width="20"
           height="20"
           x="0"
@@ -205,7 +199,7 @@ export const icons: TIconContents = {
         fill="#000"
         d="M31.777 6.942h5.303c3.056 0 2.998 5.055-.055 5.055h-5.248V6.942zM29 4.277v19.409h8.776c3.72 0 5.635-2.944 5.635-5.859 0-1.833-.804-3.888-3.025-4.831 1.942-1.388 2.193-3.61 1.415-5.525-.722-1.805-2.278-3.194-4.721-3.194H29zm2.777 10.497h5.999c1.887 0 2.831 1.554 2.831 3.082 0 1.525-.944 3.108-2.831 3.108h-6v-6.19zM54.378 4.277H44.356v2.776h3.608V20.88h-3.608v2.805h10.022V20.88H50.77V7.053h3.608V4.277zM69.428 9.163c-.499-3.554-3.61-5.108-6.608-5.108-2.25 0-4.58.89-5.887 2.582-.832 1.084-1.165 2.388-1.056 3.694v-.029c.308 4.055 3.861 4.72 6.889 5.027 1.942.193 3.942.443 4.276 1.914.054.25.08.472.08.667 0 2-2.275 3.166-4.356 3.166-1.807 0-4-.944-4.195-2.748v.11l-.027-.416-2.831.055.026.527c.362 3.47 4 5.248 6.998 5.248 3.499 0 7.22-2.166 7.22-5.913 0-.389-.057-.863-.14-1.278-.75-3.11-4.053-3.804-6.72-4.137-2.08-.195-4.276-.444-4.414-2.443-.055-.668.083-1.306.472-1.805.777-1 2.221-1.444 3.527-1.473 1.693-.026 3.58.723 3.969 2.472l2.777-.112zM74.73 9.997l5.08 7.553h1.583l5.082-7.553v13.689h2.777V4.248H87.03l-6.414 9.441-6.414-9.44h-2.278v19.437h2.805V9.997zM99.11 8.47l2.389 6.859h-4.831l2.443-6.86zm5.804 15.215h2.999L100.111 4h-2.054l-7.803 19.685h3.026c.61-1.61 1.583-3.942 2.332-5.72h6.969l2.333 5.72zM112.465 15.162l7.082 8.524h3.637l-6.138-7.303c3.333-.582 5.027-3.192 5.027-5.942 0-3.082-2.111-6.193-6.331-6.193h-7.081v19.438h2.777V7.082h4.304c2.36 0 3.526 1.692 3.526 3.359 0 1.694-1.166 3.387-3.526 3.387h-3.277v1.334zM131.484 23.769V6.86h5.859V4.248h-14.549V6.86h5.887V23.77h2.803zM141.759 15.384h8.802v-2.832h-8.802v-5.47h8.995V4.277h-11.827v19.408h11.856V20.88h-9.024v-5.496zM156.279 15.162l7.081 8.524h3.637l-6.137-7.303c3.332-.582 5.027-3.192 5.027-5.942 0-3.082-2.112-6.193-6.331-6.193h-7.081v19.438h2.777V7.082h4.304c2.36 0 3.525 1.692 3.525 3.359 0 1.694-1.165 3.387-3.525 3.387h-3.277v1.334z"
       ></path>
-    </svg>
+    </>
     ),
   },
   logoFooter: {
@@ -220,7 +214,7 @@ export const icons: TIconContents = {
     >
       <mask
         id="mask0_2302_156"
-        style={{ maskType: "luminance" }}
+        style={{ maskType: 'luminance' }}
         width="20"
         height="20"
         x="7"
@@ -232,7 +226,7 @@ export const icons: TIconContents = {
       <g mask="url(#mask0_2302_156)">
         <mask
           id="mask1_2302_156"
-          style={{ maskType: "luminance" }}
+          style={{ maskType: 'luminance' }}
           width="21"
           height="20"
           x="6"
@@ -250,7 +244,7 @@ export const icons: TIconContents = {
       </g>
       <mask
         id="mask2_2302_156"
-        style={{ maskType: "luminance" }}
+        style={{ maskType: 'luminance' }}
         width="20"
         height="20"
         x="0"
@@ -262,7 +256,7 @@ export const icons: TIconContents = {
       <g mask="url(#mask2_2302_156)">
         <mask
           id="mask3_2302_156"
-          style={{ maskType: "luminance" }}
+          style={{ maskType: 'luminance' }}
           width="20"
           height="20"
           x="0"

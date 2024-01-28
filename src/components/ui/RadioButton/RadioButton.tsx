@@ -1,5 +1,5 @@
 import { InputHTMLAttributes } from 'react'
-import './style.scss'
+  import './style.scss'
 
 interface IRadioButtonProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string
@@ -7,16 +7,19 @@ interface IRadioButtonProps extends InputHTMLAttributes<HTMLInputElement> {
   value: string
   error?: boolean
   disabled?: boolean
+  className?: string
 }
 export const RadioButton = ({
   id,
   label,
   value,
   disabled,
+  className,
   ...rest
 }: IRadioButtonProps) => {
+  console.log('className', className)
   return (
-    <div className="radio">
+    <div className=" flex border-2 border-solid border-sky rounded-lg py-6 px-4 hover:border-gray   ">
       
         <input
           id={id}
@@ -24,12 +27,13 @@ export const RadioButton = ({
           type="radio"
           disabled={disabled}
           {...rest}
-          className="radio__input"
+          className={`radio__input ${className}`}
         />
-        <label htmlFor={id} className="radio__label">
-          {label}
+        
+        <label htmlFor={id} className="text-xl mr-2 text-sky">
+           {label}
         </label>
-      
     </div>
   )
+
 }

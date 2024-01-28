@@ -38,7 +38,9 @@ export const LoginByPhone = (props: ILoginByPhoneProps) => {
   const { t } = useTranslation()
   const [input, setInput] = useState({
     identifier: '',
-    verificationCode: ''
+    verificationCode: '',
+    firstName: '',
+    lastName: ''
   })
 
 
@@ -139,8 +141,25 @@ export const LoginByPhone = (props: ILoginByPhoneProps) => {
   // --- display relevant form
   const getPhoneForm  = () : ReactNode => {
     return (
-      <form className="login-form">
+      <form className="form">
         <fieldset>
+          <Input
+            type="text"
+            name="firstName"
+            placeholder={t('first name')}
+            value={input.firstName}
+            error={!isValidIdentifier ? identifierErrorMessage : ''}
+            onInput={onInputChange}
+          />
+          <Input
+            type="text"
+            name="lastName"
+            placeholder={t('last name')}
+            value={input.identifier}
+            error={!isValidIdentifier ? identifierErrorMessage : ''}
+            onInput={onInputChange}
+          />
+
           <Input
             type="text"
             name="identifier"
@@ -153,10 +172,12 @@ export const LoginByPhone = (props: ILoginByPhoneProps) => {
 
         {/* <Button isLinkView>{t('admin.login.btnLink')}</Button> */}
 
-        <div className="login-form__btn-group">
+        <div className="form-button-group">
           <Button
             type={EButtonType.button}
             disabled={
+              input.firstName.length === 0 ||
+              input.lastName.length === 0 ||
               input.identifier.length === 0 ||
               !isValidIdentifier
             }
@@ -173,7 +194,7 @@ export const LoginByPhone = (props: ILoginByPhoneProps) => {
 
   const getCodeForm  = () : ReactNode => {
     return (
-      <form className="login-form">
+      <form className="form">
         <fieldset>
           <Input
             type="text"
@@ -187,7 +208,7 @@ export const LoginByPhone = (props: ILoginByPhoneProps) => {
 
         <Button isLinkView>{t('admin.login.btnLink')}</Button>
 
-        <div className="login-form__btn-group">
+        <div className="form-button-group">
           <Button
             type={EButtonType.button}
             disabled={

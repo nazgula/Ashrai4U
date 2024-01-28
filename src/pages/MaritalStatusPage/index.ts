@@ -1,0 +1,1 @@
+export { MaritalStatusPage } from './MaritalStatusPage'

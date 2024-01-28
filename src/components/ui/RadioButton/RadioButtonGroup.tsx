@@ -1,29 +1,28 @@
 import { RadioButton } from './RadioButton'
-import './style.scss'
+// import './style.scss'
 
 interface IOption {
   label: string
   value: string
   name?: string
   disabled?: boolean
+  className?: string
 }
 
 interface IRadioButtonGroupProps {
   label: string
   options: IOption[]
+  selectedValue?: string
   hasFullWidth?: boolean
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  className?: string
 }
 
-export const RadioButtonGroup = ({
-  label,
-  options,
-  onChange,
-}: IRadioButtonGroupProps) => {
+export const RadioButtonGroup = (props: IRadioButtonGroupProps) => {
   const renderOptions = () => {
-    return options.map(({ label, name, value, disabled }: IOption, index) => {
-      const shortenedOptionLabel = label.replace(/\s+/g, '')
-      const optionId = `radio-option-${shortenedOptionLabel}`
+    return props.options.map(({ label, name, value, disabled, className }: IOption, index) => {
+      // const shortenedOptionLabel = label.replace(/\s+/g, '')
+      const optionId = `radio-option-${value}`
 
       return (
         <RadioButton
@@ -33,16 +32,17 @@ export const RadioButtonGroup = ({
           id={optionId}
           name={name}
           disabled={disabled}
-          defaultChecked={index === 0}
-          onChange={onChange}
+          defaultChecked={props.selectedValue === value}
+          onChange={props.onChange}
+          className={className}
         />
       )
     })
   }
   return (
     <fieldset className="radio-group">
-      <legend className="radio-group__legend">{label}</legend>
-      <div className="radio-group__wrapper">{renderOptions()}</div>
+      <legend className="radio-group__legend">{props.label}</legend>
+      <div className={`radio-group__wrapper ${props.className}`}>{renderOptions()}</div>
     </fieldset>
   )
 }

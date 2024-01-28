@@ -1,5 +1,47 @@
 @import '@/assets/styles/mixins';
 
+
+// <button class="button inline-flex items-center justify-center px-4 font-semibold text-xl w-[185px] h-[50px] rounded-[10px] border border-main-blue bg-yellow-300 text-dark-blue transition ease-in-out duration-400 focus:outline-none hover:bg-white hover:text-main-blue active:bg-white active:text-main-blue disabled:cursor-not-allowed disabled:bg-main-grey disabled:border-main-grey disabled:text-white disabled:hover:text-white disabled:focus:text-white md:w-[173px] md:h-[38px] md:font-size-[18px]">
+//   <!-- Button content goes here -->
+// </button>
+
+// <button class="button--style2 inline-flex items-center justify-center px-4 font-semibold text-xl bg-white text-main-blue hover:bg-main-blue hover:text-white focus:bg-main-blue focus:text-white">
+//   <!-- Button content goes here -->
+// </button>
+
+// <button class="button--login inline-flex items-center justify-center min-w-[134px] px-[18px] text-dark-purple bg-gray-200 border-gray-200 hover:border-dark-purple hover:bg-white hover:text-dark-purple focus:border-dark-purple focus:bg-white focus:text-dark-purple">
+//   <!-- Button content goes here -->
+// </button>
+
+// <button class="button--create-account inline-flex items-center justify-center min-w-[155px] px-[18px] text-white bg-dark-purple border-dark-purple hover:border-dark-purple hover:bg-white hover:text-dark-purple focus:border-dark-purple focus:bg-white focus:text-dark-purple">
+//   <!-- Button content goes here -->
+// </button>
+
+// <a href="#" class="button--link hover:text-link-hover active:text-link-active focus:text-link-hover disabled:cursor-not-allowed disabled:hover:text-link-hover disabled:focus:text-link-hover">
+//   <!-- Link content goes here -->
+// </a>
+
+// <button class="button inline-flex items-center justify-center px-4 font-semibold text-xl w-48 h-12 rounded-2xl border border-blue-500 bg-yellow-300 text-gray-800 transition ease-in-out duration-400 focus:outline-none hover:bg-white hover:text-blue-500 active:bg-white active:text-blue-500 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:border-gray-400 disabled:text-white disabled:hover:text-white disabled:focus:text-white md:w-44 md:h-9 md:font-semibold md:text-base">
+//   <!-- Button content goes here -->
+// </button>
+
+// <button class="button--style2 inline-flex items-center justify-center px-4 font-semibold text-xl bg-white text-blue-500 hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white">
+//   <!-- Button content goes here -->
+// </button>
+
+// <button class="button--login inline-flex items-center justify-center min-w-36 px-5 text-dark-purple bg-gray-200 border-gray-200 hover:border-dark-purple hover:bg-white hover:text-dark-purple focus:border-dark-purple focus:bg-white focus:text-dark-purple">
+//   <!-- Button content goes here -->
+// </button>
+
+// <button class="button--create-account inline-flex items-center justify-center min-w-40 px-5 text-white bg-dark-purple border-dark-purple hover:border-dark-purple hover:bg-white hover:text-dark-purple focus:border-dark-purple focus:bg-white focus:text-dark-purple">
+//   <!-- Button content goes here -->
+// </button>
+
+// <a href="#" class="button--link hover:text-blue-700 active:text-blue-800 focus:text-blue-700 disabled:cursor-not-allowed disabled:hover:text-gray-600 disabled:focus:text-gray-600">
+//   <!-- Link content goes here -->
+// </a>
+
+
 .button {
   cursor: pointer;
   display: inline-flex;

@@ -60,12 +60,15 @@ export const Button = ({
     [onClick],
   )
 
+  const getCss = (): string => {
+    if (isLinkView) return 'text-sky underline hover:text-blue active:text-blue-800 focus:text-blue-700 disabled:hover:text-gray-600 disabled:focus:text-gray-600'
+    else return 'w-48 py-6 rounded-xl border border-sky text-white active:bg-white active:text-blue-500 hover:bg-yellow disabled:bg-gray-400 disabled:border-gray-400 disabled:text-white disabled:hover:text-white disabled:focus:text-white md:w-44 md:h-9 md:font-semibold md:text-base md:px-4 md:text-xl'
+  }
+
   return (
     <button
-      className={cn('button', {
-        'button--link': isLinkView,
-        [`${customClassName}`]: customClassName,
-      })}
+       // className={cn('button', {'button--link': isLinkView,[`${customClassName}`]: customClassName,})}
+      className={`inline-flex items-center justify-center cursor-pointer text-lg font-semibold transition ease-in-out duration-400 disabled:cursor-not-allowed bg-purple disabled:bg-gray  ${getCss()} ${customClassName}`}
       type={type}
       onClick={handleClick}
       disabled={showLoader || isInternalLoading || disabled}

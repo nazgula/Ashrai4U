@@ -1,6 +1,49 @@
 @import '@/assets/styles/mixins';
 
 
+
+
+// Certainly! Here's the equivalent Tailwind CSS code for the provided SCSS:
+
+// html
+// Copy code
+// <div class="welcome-page h-90v flex flex-col items-center">
+//   <!-- Content for welcome page -->
+// </div>
+
+// <div class="welcome-page__image mt-[-100px]">
+//   <!-- Content for welcome page image -->
+// </div>
+
+// <div class="bottom-container flex flex-col items-center justify-center p-16 bg-purple-600 w-full">
+//   <h1 class="text-white text-4xl font-bold mb-8">Your Title</h1>
+//   <h2 class="text-white text-3xl font-semibold mb-16">Your Subtitle</h2>
+//   <!-- Additional content for the bottom container -->
+// </div>
+
+// <div class="loading inline-flex justify-center gap-2 w-full text-current">
+//   <div class="loading__dot animate-dot"></div>
+//   <div class="loading__dot animate-dot delay-500"></div>
+//   <div class="loading__dot animate-dot delay-1000"></div>
+// </div>
+
+// <style>
+//   @keyframes animate-dot {
+//     0% {
+//       opacity: 0.4;
+//       transform: scale(1, 1);
+//     }
+//     50% {
+//       opacity: 1;
+//       transform: scale(1.2, 1.2);
+//     }
+//     100% {
+//       opacity: 0.4;
+//       transform: scale(1, 1);
+//     }
+//   }
+// </style>
+
 .welcome-page {
   height: 90vh;
   width:100%;
