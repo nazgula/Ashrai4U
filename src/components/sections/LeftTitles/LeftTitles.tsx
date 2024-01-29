@@ -6,6 +6,7 @@ export interface ILeftTitlesProps {
   description?:string
   showLoanAmount?:boolean
   className?: string
+  titleParam?: object
 }
 
 export const LeftTitles = (props: ILeftTitlesProps) => {
@@ -18,7 +19,7 @@ export const LeftTitles = (props: ILeftTitlesProps) => {
 const renderLoanAmount = () => {
   if (showLoanAmount) {
     return (
-      <div className="w-6/12 text-white bg-sky rounded-xl text-3xl font-extrabold text-center p-4 mb-2"> 250,000 </div> 
+      <div className="w-6/12 p-4 mb-2 text-3xl font-extrabold text-center text-white bg-sky rounded-xl"> 250,000 </div> 
     )
   }
   return null
@@ -28,8 +29,8 @@ const renderLoanAmount = () => {
   return (
     <div className={`${props.className} ${showLoanAmount ? '' : 'p-10'}  flex flex-col items-center`}>
       {renderLoanAmount()}
-      <div className="text-black bold text-4xl text-center"> {t(props.title)}</div>
-      <div className="text-black text-xl text-center mt-3"> {t(props?.description || '')}</div> 
+      <div className="text-4xl text-center text-black bold"> {props.titleParam ? t(props.title, props.titleParam as {key : string}) : t(props.title)}</div>
+      <div className="mt-3 text-xl text-center text-black"> {t(props?.description || '')}</div> 
       
     </div>
   )

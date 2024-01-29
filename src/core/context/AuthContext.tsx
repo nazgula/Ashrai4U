@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { createContext, useContext, useMemo } from 'react'
+import { createContext, useContext, useMemo, useState } from 'react'
 import { useLocalStorage } from '../hooks'
 import { TLoginApiCallResponse, TUpdateLoanRequestPayload, TVerifyLoginApiCallResponse } from '../api/types'
 
@@ -14,6 +14,8 @@ const AuthContext = createContext<{
   profileUpdated: string
   setProfile: (data: TUpdateLoanRequestPayload) => Promise<void>
   loanRequest: TUpdateLoanRequestPayload | null
+  isScriptLoaded: boolean
+  setIsScriptLoaded: (isLoaded: boolean) => void
   
 }>()
 
@@ -31,6 +33,7 @@ export const AuthProvider = ({ children }: any) => {
   ] = useLocalStorage(`A4U-${user?.username }` , null)
   
   const [profileUpdated, setProfileUpdated] = useLocalStorage('profile', null) as [string, (status: string) => void];
+  const [isScriptLoaded, setScriptLoaded] = useLocalStorage('isScriptLoaded', false) as [boolean, (isLoaded: boolean) => void];
  
   const login = async (data: TVerifyLoginApiCallResponse) => {
     setUser(data)
@@ -39,6 +42,13 @@ export const AuthProvider = ({ children }: any) => {
   const setProfile = async (data: TUpdateLoanRequestPayload) => {
     setLoanRequest(data)
   }
+
+  const setIsScriptLoaded = async (isLoaded: boolean) => {
+    console.log(`isLoaded ${isLoaded}`)
+    setScriptLoaded(true)
+    console.log(`isScriptLoaded ${isScriptLoaded}`)
+  }
+
   
   // const setProfile = async (status: string) => {
   //   console.log(`status ${status}`)
@@ -68,7 +78,9 @@ export const AuthProvider = ({ children }: any) => {
       updateAuthCredentials,
       setProfile,
       profileUpdated,
-      loanRequest
+      loanRequest,
+      isScriptLoaded,
+      setIsScriptLoaded
 
       // ,
       // session,

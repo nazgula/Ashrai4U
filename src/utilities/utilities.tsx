@@ -32,3 +32,8 @@ const parsedNumber = Number(stringWithoutCommas);
       return '0'; // Return '0' if the result is NaN
     }
   }
+
+  export function getQueryParamFromLocation(location: string, name: string): string | null {
+    const urlParams = new URLSearchParams(location);
+    return urlParams.get(name) as string | null;
+}

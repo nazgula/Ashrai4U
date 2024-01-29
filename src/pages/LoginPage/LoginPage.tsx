@@ -2,30 +2,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ChangeEvent, ReactNode, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useStore } from 'react-pinia'
 import parsePhoneNumberFromString, { ParseError } from 'libphonenumber-js'
-
-import { EStore } from '@/core/store'
 import { useAuth, useModal } from '@/core/context'
-import { loginApiCall, updateLoanRequestApiCall, verifyLoginApiCall } from '@/core/api/calls'
+import { getLoanRequestApiCall, loginApiCall, updateLoanRequestApiCall, verifyLoginApiCall } from '@/core/api/calls'
 import { Button, EButtonType, Input } from '@/components/ui'
-
-
-
-// import './style.scss'
 import { LeftTitles } from '@/components/sections/LeftTitles'
-import { use } from 'i18next'
 import { TUpdateLoanRequestPayload } from '@/core/api/types'
+import { ESteps } from '../Main'
 
+
+export enum EStage {
+  LOGIN = 'LOGIN',
+  VERIFICATION = 'VERIFICATION'
+}
 
 export interface ILoginPageProps {
-  onClickNext: () => void
+  // signIn: boolean
+  onClickNext: (loanRequest: TUpdateLoanRequestPayload) => void
 }
 
 export const LoginPage = (props: ILoginPageProps) => {
   // const useProfileStore = useStore(EStore.profile)
   const { onClickNext } = props
-  const { login, user, loanRequest, setProfile } = useAuth()
+  const { login, user, setProfile, isScriptLoaded } = useAuth()
+
   const { setModal } = useModal()
   const { t } = useTranslation()
   const [input, setInput] = useState({
@@ -35,45 +35,53 @@ export const LoginPage = (props: ILoginPageProps) => {
     lastName: ''
   })
 
-  
 
   // ------ identifier = phone
   const [isValidIdentifier, setIsValidIdentifier] = useState(false)
-  // ------ verification code
   const [isValidCode, setIsValidCode] = useState(false)
-  // ------ login
-  const [verifyParams, setVerifyParams] = useState({codeVerifier: '', session: '', username: ''})
+  const [verifyParams, setVerifyParams] = useState({ codeVerifier: '', session: '', username: '' })
   const [isResending, setIsResending] = useState(false)
+  const [stage, setStage] = useState(user && user?.username ? EStage.VERIFICATION : EStage.LOGIN)
 
-  const identifierErrorMessage = t('admin.login.identifierErrorMessage')
-  const codeErrorMessage = t('admin.login.codeErrorMessage')
+  const identifierErrorMessage = t('loginPage.identifierErrorMessage')
+  const codeErrorMessage = t('loginPage.codeErrorMessage')
 
+  useEffect(() => {
+    console.log(user, user?.username)
+
+    if (user && user?.username && isScriptLoaded) {
+      loginHandler(user.username)
+    }
+  }, [])
+
+  // useEffect(() => {
+  //   console.log(user , user?.username )
+
+  //   if (user && user?.username && isScriptLoaded) {
+  //     loginHandler (user.username)
+  //   }
+  // }, [isScriptLoaded])
 
   useEffect(() => {
     const isPhoneNumberValid = isNumberValid(input.identifier)
 
-    if (input.identifier.length === 0) {
-      setIsValidIdentifier(true)
-    } else if (
-    isPhoneNumberValid && input.identifier.length > 0
-    ) {
-      setIsValidIdentifier(true)
-    } else {
-      setIsValidIdentifier(false)
-    }
+    if (input.identifier.length === 0) setIsValidIdentifier(true)
+    else if (isPhoneNumberValid && input.identifier.length > 0) setIsValidIdentifier(true)
+    else setIsValidIdentifier(false)
+
   }, [input.identifier])
 
 
   useEffect(() => {
     if (input.verificationCode.length === 6 && !isNaN(+input.verificationCode) || input.verificationCode.length === 0) {
       setIsValidCode(true)
-    } 
+    }
     else {
       setIsValidCode(false)
     }
   }, [input.verificationCode])
 
-// isNaN(+maybeNumber)
+  // isNaN(+maybeNumber)
 
   const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -98,10 +106,11 @@ export const LoginPage = (props: ILoginPageProps) => {
 
   const loginHandler = async (phone: string) => {
     try {
+      if (stage === EStage.LOGIN) setStage(EStage.VERIFICATION)
       const response = await loginApiCall(phone)
 
-      if (response)  setVerifyParams(response)
-      
+      if (response) setVerifyParams(response)
+
     } catch (error) {
       console.log(error)
     }
@@ -109,7 +118,7 @@ export const LoginPage = (props: ILoginPageProps) => {
 
   const verificationHandler = async (code: string) => {
     try {
-      const vPayload = {code: code, ...verifyParams}
+      const vPayload = { code: code, ...verifyParams }
       let response = await verifyLoginApiCall(vPayload)
 
       if (response) {
@@ -118,37 +127,63 @@ export const LoginPage = (props: ILoginPageProps) => {
 
         if (user) {
           try {
-            
-             const uPayload = {firstName: input.firstName, lastName: input.lastName}
-            
-            response =   await updateLoanRequestApiCall(uPayload, user)
-            // storage
-            setProfile(uPayload as TUpdateLoanRequestPayload)
-            console.log('get profile key: ', loanRequest?.firstName, loanRequest?.lastName, loanRequest?.resone)
-           
-            if (response) onClickNext()
+            // get loan request, update storage and sefine next step
+            const loanRequest = await getLoanRequestApiCall(user)
+
+            // if first name or last name are missing from the loan request save them
+            if (loanRequest && !loanRequest.firstName || !loanRequest.lastName) {
+              const uPayload = { firstName: input.firstName, lastName: input.lastName }
+              response = await updateLoanRequestApiCall(uPayload, user)
+              // storage
+              setProfile(uPayload as TUpdateLoanRequestPayload)
+            }
+            else {
+              Object.keys(loanRequest).forEach((key) => {
+                // Check if the property value is "N/A"
+                if (loanRequest[key] === 'N/A') {
+                  // Update the property value to an empty string
+                  loanRequest[key] = '';
+                }
+              });
+              setProfile(loanRequest as TUpdateLoanRequestPayload)
+            }
+
+            console.log('get loan request: ', loanRequest)
+            onClickNext(loanRequest)
+
           } catch (error) {
             console.log(error)
-          } 
+          }
         }
         else {
           // Alert ERROR
           console.log('user not found')
         }
-  
-       }
+
+      }
     } catch (error) {
       console.log(error)
     }
   }
 
-  
-// ------------- render -------------
+  // ------------- define which step is next
+  const getNextStep = (loanRequest: TUpdateLoanRequestPayload): ESteps => {
+    // acording to the loan request and user pages define which is the users next needed step - use step order
+    if (!loanRequest.resone) return ESteps.GOAL
+    else if (!loanRequest.requestedLoan || loanRequest.requestedLoan === '0' ||
+      !loanRequest.monthlyReturn || loanRequest.monthlyReturn === '0') return ESteps.LOAN
+    else if (!loanRequest.employmentType) return ESteps.EMPLOYMENT
+    else if (!loanRequest.maritalStatus) return ESteps.MERITAL_STATUS
+    else if (!loanRequest.partnerEmploymentType && loanRequest.maritalStatus === 'MARRIED') return ESteps.MERITAL_STATUS
+    else if (!loanRequest.salary || loanRequest.salary === '0') return ESteps.INCOME
+    else return ESteps.WHATSAPP
+  }
+  // ------------- render -------------
 
-  const getfirstNameInput = () : ReactNode => {
-    if (verifyParams.codeVerifier.length === 0 || verifyParams.session.length === 0) {
+  const getfirstNameInput = (): ReactNode => {
+    if (stage === EStage.LOGIN) {
       return (
-        <Input type="text" name="firstName" placeholder={t('firstName')} value={input.firstName} onInput={onInputChange}/>
+        <Input type="text" name="firstName" placeholder={t('firstName')} value={input.firstName} onInput={onInputChange} />
       )
     }
     else {
@@ -156,10 +191,10 @@ export const LoginPage = (props: ILoginPageProps) => {
     }
   }
 
-  const getlastNameInput = () : ReactNode => {
-    if (verifyParams.codeVerifier.length === 0 || verifyParams.session.length === 0) {
+  const getlastNameInput = (): ReactNode => {
+    if (stage === EStage.LOGIN) {
       return (
-        <Input type="text" name="lastName" placeholder={t('lastName')} value={input.lastName} onInput={onInputChange}/>
+        <Input type="text" name="lastName" placeholder={t('lastName')} value={input.lastName} onInput={onInputChange} />
       )
     }
     else {
@@ -167,10 +202,10 @@ export const LoginPage = (props: ILoginPageProps) => {
     }
   }
 
-  const getIdentifierInput = () : ReactNode => {
-    if (verifyParams.codeVerifier.length === 0 || verifyParams.session.length === 0) {
+  const getIdentifierInput = (): ReactNode => {
+    if (stage === EStage.LOGIN) {
       return (
-        <Input type="text" name="identifier" placeholder={t('admin.login.input.identifier-placeholder')}
+        <Input type="text" name="identifier" placeholder={t('loginPage.phonePlaceholder')}
           value={input.identifier} error={!isValidIdentifier ? identifierErrorMessage : ''} onInput={onInputChange}
         />
       )
@@ -180,11 +215,11 @@ export const LoginPage = (props: ILoginPageProps) => {
     }
   }
 
-  const getVerificationCodeInput = () : ReactNode => {
-    if (verifyParams.codeVerifier.length > 0 && verifyParams.session.length > 0) {
+  const getVerificationCodeInput = (): ReactNode => {
+    if (stage === EStage.VERIFICATION) {
       return (
         <Input type="text" name="verificationCode" value={input.verificationCode}
-          placeholder={t('admin.login.verification-code-placeholder')}
+          placeholder={t('loginPage.verificationPlaceholder')}
           error={!isValidCode ? codeErrorMessage : ''} onInput={onInputChange}
         />
       )
@@ -194,20 +229,22 @@ export const LoginPage = (props: ILoginPageProps) => {
     }
   }
 
-  const getResendAndChangePhone = () : ReactNode => {
-    
-    if (verifyParams.codeVerifier.length > 0 && verifyParams.session.length > 0) {
+  const getResendAndChangePhone = (): ReactNode => {
+
+    if (stage === EStage.VERIFICATION) {
       return (
         <div className="flex justify-between">
-          <Button isLinkView={true} className="text-sm text-black" 
-          onClick={() => { 
-              setIsResending(true) 
-              loginHandler(input.identifier)
+          <Button isLinkView={true} className="text-sm text-black"
+            onClick={() => {
+              setIsResending(true)
+              loginHandler(user?.username || '')
             }}>
-            {t('login.send-again')}
+            {t('loginPage.sendAgain')}
           </Button>
-          <Button isLinkView={true} className="text-sm text-black" onClick={() => setVerifyParams({codeVerifier: '', session: '', username: ''})}>
-            {t('login.change-phone')}
+          <Button isLinkView={true} className="text-sm text-black" onClick={() => {
+            setStage(EStage.LOGIN); setVerifyParams({ codeVerifier: '', session: '', username: '' })
+          }}>
+            {t('loginPage.changePhone')}
           </Button>
         </div>
       )
@@ -217,9 +254,9 @@ export const LoginPage = (props: ILoginPageProps) => {
     }
   }
 
-  const getButton = () : ReactNode => {
-    
-    if (verifyParams.codeVerifier.length === 0 || verifyParams.session.length === 0) {
+  const getButton = (): ReactNode => {
+
+    if (stage === EStage.LOGIN) {
       return (
         <Button
           type={EButtonType.button}
@@ -228,7 +265,7 @@ export const LoginPage = (props: ILoginPageProps) => {
           }
           onClick={() => loginHandler(input.identifier)}
         >
-          {t('admin.login.btnGroup')}
+          {t('loginPage.sendCode')}
         </Button>
       )
     }
@@ -239,15 +276,23 @@ export const LoginPage = (props: ILoginPageProps) => {
           disabled={input.verificationCode.length === 0 || !isValidCode}
           onClick={() => verificationHandler(input.verificationCode)}
         >
-          {t('admin.login.verification-btn')}
+          {t('loginPage.next')}
         </Button>
       )
     }
   }
 
+  const getFormatedPhone = (): string => {
+    const originalString = user && user?.username || input.identifier
+    return `${originalString.slice(-4)}`
+    // return `${originalString.substring(0, 4)}${'x'.repeat(originalString.length - 6)}${originalString.slice(-2)}`
+  }
+
+  console.log('getFormatedPhone', getFormatedPhone())
   return (
     <div>
-      <LeftTitles title="admin.login.title" description="admin.login.description" />
+      <LeftTitles title={`loginPage.title.${stage}`} description={`loginPage.subTitle.${stage}`}
+        titleParam={stage == EStage.VERIFICATION ? { phone: getFormatedPhone() } as object : undefined} />
       {/* {getForm()} */}
 
       <form className="form">
@@ -259,12 +304,12 @@ export const LoginPage = (props: ILoginPageProps) => {
           {getResendAndChangePhone()}
           {/* {getChangePhone()} */}
         </fieldset>
-        
+
         <div className="form-button-group">
           {getButton()}
         </div>
       </form>
 
-    </div>    
+    </div>
   )
 }

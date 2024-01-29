@@ -1,4 +1,5 @@
 import { useCallback, useRef, useEffect, useState, ReactNode } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Footer, Header } from '@/components/sections'
 import { WelcomePage } from './WelcomePage'
 import { GoalPage } from './GoalPage'
@@ -10,6 +11,8 @@ import { IncomePage } from './IncomePage'
 import { MaritalStatusPage } from './MaritalStatusPage'
 import { WhatsAppPage } from './WhatsAppPage'
 import { useAuth } from '@/core/context'
+import { TUpdateLoanRequestPayload } from '@/core/api/types'
+import { getQueryParamFromLocation } from '@/utilities/utilities'
 
 export enum ESteps {
   WELCOME = 'WELCOME',
@@ -24,45 +27,61 @@ export enum ESteps {
 
 export const MainPage = () => {
   const { user } = useAuth()
-  const [step, setStep] = useState(user && user.username ? ESteps.LOGIN: ESteps.WELCOME)
 
-  useEffect(() => {
-    
-  }, [])
-
+  const location = useLocation()
+  const [agentId, setAgentId] = useState(getQueryParamFromLocation(location.search, 'agentId'))
   
+  const [step, setStep] = useState(user && user.username ? ESteps.LOGIN : ESteps.WELCOME)
+  
+  useEffect(() => {
 
-  const showPage = () : ReactNode => {
-    if (step == ESteps.WELCOME ) {
-        return <WelcomePage onClickNext={() => setStep(ESteps.LOGIN)}/>
-    } 
+  }, [])
+  
+  const showPage = (): ReactNode => {
+    if (step == ESteps.WELCOME) {
+      return <WelcomePage onClickNext={() => setStep(ESteps.LOGIN)} />
+    }
     else {
-      return ( 
+      return (
         <InnerPage step={step}>
           {showInnerPage()}
         </InnerPage>
       )
-    } 
+    }
   }
 
-  const showInnerPage = () : ReactNode => {
+
+  const nextStepAfterLogin = (loanRequest: TUpdateLoanRequestPayload) => {
+    // acording to the loan request and user pages define which is the users next needed step - use step order
+    if (!loanRequest.resone) setStep(ESteps.GOAL)
+    else if (!loanRequest.requestedLoan || loanRequest.requestedLoan === '0'|| !loanRequest.monthlyReturn || loanRequest.monthlyReturn === '0') setStep(ESteps.LOAN)
+    else if (!loanRequest.employmentType) setStep(ESteps.EMPLOYMENT)
+    else if (!loanRequest.maritalStatus) setStep(ESteps.MERITAL_STATUS)
+    else if (!loanRequest.partnerEmploymentType && loanRequest.maritalStatus === 'MARRIED') setStep(ESteps.MERITAL_STATUS)
+    else if (!loanRequest.salary || loanRequest.salary === '0') setStep(ESteps.INCOME)
+    else setStep(ESteps.WHATSAPP)
+  }
+
+
+  const showInnerPage = (): ReactNode => {
     if (step == ESteps.LOGIN) {
-      return <LoginPage onClickNext={() => setStep(ESteps.GOAL)}/>
+      // signIn={user && user.username ? true : false}
+      return <LoginPage onClickNext={nextStepAfterLogin}/>
     }
     else if (step == ESteps.GOAL) {
-      return <GoalPage onClickNext={() => setStep(ESteps.LOAN)}/>
+      return <GoalPage onClickNext={() => setStep(ESteps.LOAN)} />
     }
     else if (step == ESteps.LOAN) {
-      return <LoanResuestPage onClickNext={() => setStep(ESteps.EMPLOYMENT)}/>
+      return <LoanResuestPage onClickNext={() => setStep(ESteps.EMPLOYMENT)} />
     }
     else if (step == ESteps.EMPLOYMENT) {
-      return <EmploymentTypePage onClickNext={() => setStep(ESteps.MERITAL_STATUS)}/>
+      return <EmploymentTypePage onClickNext={() => setStep(ESteps.MERITAL_STATUS)} />
     }
     else if (step == ESteps.MERITAL_STATUS) {
-      return <MaritalStatusPage onClickNext={() => setStep(ESteps.INCOME)}/>
+      return <MaritalStatusPage onClickNext={() => setStep(ESteps.INCOME)} />
     }
     else if (step == ESteps.INCOME) {
-      return <IncomePage onClickNext={() => setStep(ESteps.WHATSAPP)}/>
+      return <IncomePage onClickNext={() => setStep(ESteps.WHATSAPP)} />
     }
     else if (step == ESteps.WHATSAPP) {
       return <WhatsAppPage />
@@ -70,8 +89,8 @@ export const MainPage = () => {
   }
 
   return (
-    <> 
-      <Header/>
+    <>
+      <Header />
       {showPage()}
       <Footer />
     </>

@@ -1,12 +1,14 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import './styles.css';
 import { MainLayout } from '@/layout'
 import { MainPage } from '@/pages'
+import { useAuth } from '@/core/context'
 
 function App() {
+  const { isScriptLoaded, setIsScriptLoaded } = useAuth()
   useEffect(() => {
-    const loadScriptByURL = (id: string, url: string, callback: () => void) => {
+    const loadScriptByURL = async (id: string, url: string, callback: () => void) => {
       const isScriptExist = document.getElementById(id)
 
       if (!isScriptExist) {
@@ -25,11 +27,13 @@ function App() {
     // load the script by passing the URL
     loadScriptByURL(
       'recaptcha-key',
-      `https://www.google.com/recaptcha/api.js?render=${
-        process.env.REACT_APP_RECAPCHA_PUB_KEY as string
+      `https://www.google.com/recaptcha/api.js?render=${process.env.REACT_APP_RECAPCHA_PUB_KEY as string
       }`,
       function () {
-        console.log('Script loaded!')
+        
+        setIsScriptLoaded(true)
+        console.log('Script Loaded', isScriptLoaded)
+
       },
     )
   }, [])

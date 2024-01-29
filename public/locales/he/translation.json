@@ -322,6 +322,23 @@
 		}
 		
 	},
+	"loginPage": {
+		"title": {
+			"LOGIN": "היי, שנתחבר?",
+			"VERIFICATION": "שלחנו קוד לנייד המסתיים בספרות {{phone}}"
+		},
+		"subTitle": {
+			"LOGIN": "היי, שנתחבר?",
+			"VERIFICATION": "יש להזין אותו בתיבה"
+		},
+		"sendAgain": "שלח שוב קוד",
+		"changePhone": "שנה מספר נייד",
+		"identifier-placeholder": "מספר טלפון",
+		"verificationPlaceholder": "קוד אימות",
+		"identifierErrorMessage": "הערך חייב להיות טלפון",	
+		"codeErrorMessage": "יש להזין מספר בן שש ספרות",
+		"next": "שלח לי קוד"
+	},
 	"goalPage": {
 		"title": "אפשר לדעת לאיזו מטרה הגעת אלינו?",
 		"subTitle": "כדי שנוכל לתת לך את הפתרון שהכי נכון עבורך",
@@ -333,9 +350,7 @@
 			"other": "מטרה אחרת"
 		}
 	},
-	"loginPage": {
-		"next": "שלח לי קוד"
-	},
+	
 	"loanRequest": {
 		"title": "הלוואות ללקוחות כל הבנקים",
 		"subTitle": "מה גובה המימון שתצטרך?",

@@ -27,7 +27,6 @@ export const useProfileStore: createStoreOption = {
         pension: '',
         allowance: '',
         rent: ''
-
       }
     }
   },

@@ -67,6 +67,7 @@ const getRecapchaToken = (action: string) =>
 export const loginApiCall = async (username: string): Promise<TLoginApiCallResponse> => {
   try {
     const token = await getRecapchaToken('')
+
     // console.log(token)
     const { codeVerifier, codeChallenge } = generateCodeVerifierAndChallenge();
     console.log('codeChallenge:', codeChallenge);
@@ -165,6 +166,52 @@ export const updateLoanRequestApiCall = async (
   }
 }
 
+// ----------------getLoanRequest
+export const getLoanRequestApiCall = async (user: TVerifyLoginApiCallResponse) => {
+  try {
+    const response = await apiRequest({
+      apiEndpoint,
+      path: EUserApiPath.profile,
+      options: {
+        method: 'GET',
+        headers: {
+          Authorization: `${user.TokenType} ${user.AccessToken}`,
+        },
+      },
+    })
+    return response
+  } catch (error) {
+    return ''
+  }
+}
+
+// ------------------deleteLoanRequest
+enum EDeleteUserResponseStatus {
+  ERROR = 'ERROR',
+  SUCCESS = 'USER_DELETED',
+}
+export const deleteLoanRequestApiCall = async ({username, password}: {username: string, password: string}) => {
+  try {
+    const token = await getRecapchaToken('')
+    // eslint-disable-next-line no-debugger
+    debugger
+    const response = (await apiRequest({
+      apiEndpoint,
+      path: `${EUserApiPath.delete}/${username}`,
+      options: {
+        method: 'DELETE',
+        headers: {
+          Authorization: `${token}`,
+        },
+        body: JSON.stringify({ password }),
+      },
+    })) as { status: EDeleteUserResponseStatus; error?: string }
+
+    return response
+  } catch (error) {
+    throw error
+  }
+}
 
 // Original
 // export const loginApiCall = async (
@@ -291,10 +338,10 @@ export const forgotPasswordUserApiCall = async (username: string) => {
   }
 }
 // ----------------delete
-enum EDeleteUserResponseStatus {
-  ERROR = 'ERROR',
-  SUCCESS = 'USER_DELETED',
-}
+// enum EDeleteUserResponseStatus {
+//   ERROR = 'ERROR',
+//   SUCCESS = 'USER_DELETED',
+// }
 export const deleteUserApiCall = async ({
   username,
   password,

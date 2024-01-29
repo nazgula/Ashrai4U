@@ -61,7 +61,7 @@ export const Button = ({
   )
 
   const getCss = (): string => {
-    if (isLinkView) return 'text-sky underline hover:text-blue active:text-blue-800 focus:text-blue-700 disabled:hover:text-gray-600 disabled:focus:text-gray-600'
+    if (isLinkView) return 'text-sky underline hover:text-blue bg-white active:text-blue-800 focus:text-blue-700 disabled:hover:text-gray-600 disabled:focus:text-gray-600'
     else return 'w-48 py-6 rounded-xl border border-sky text-white active:bg-white active:text-blue-500 hover:bg-yellow disabled:bg-gray-400 disabled:border-gray-400 disabled:text-white disabled:hover:text-white disabled:focus:text-white md:w-44 md:h-9 md:font-semibold md:text-base md:px-4 md:text-xl'
   }
 
