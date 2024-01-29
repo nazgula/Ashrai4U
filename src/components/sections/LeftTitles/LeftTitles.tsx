@@ -7,6 +7,7 @@ export interface ILeftTitlesProps {
   showLoanAmount?:boolean
   className?: string
   titleParam?: object
+  subTitleParam?: object
 }
 
 export const LeftTitles = (props: ILeftTitlesProps) => {
@@ -30,7 +31,7 @@ const renderLoanAmount = () => {
     <div className={`${props.className} ${showLoanAmount ? '' : 'p-10'}  flex flex-col items-center`}>
       {renderLoanAmount()}
       <div className="text-4xl text-center text-black bold"> {props.titleParam ? t(props.title, props.titleParam as {key : string}) : t(props.title)}</div>
-      <div className="mt-3 text-xl text-center text-black"> {t(props?.description || '')}</div> 
+      <div className="mt-3 text-xl text-center text-black"> {props.description ? t(props.description, props.subTitleParam as {key : string}) : t(props.description || '') }</div> 
       
     </div>
   )

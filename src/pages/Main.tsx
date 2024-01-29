@@ -53,7 +53,7 @@ export const MainPage = () => {
 
   const nextStepAfterLogin = (loanRequest: TUpdateLoanRequestPayload) => {
     // acording to the loan request and user pages define which is the users next needed step - use step order
-    if (!loanRequest.resone) setStep(ESteps.GOAL)
+    if (!loanRequest.reason) setStep(ESteps.GOAL)
     else if (!loanRequest.requestedLoan || loanRequest.requestedLoan === '0'|| !loanRequest.monthlyReturn || loanRequest.monthlyReturn === '0') setStep(ESteps.LOAN)
     else if (!loanRequest.employmentType) setStep(ESteps.EMPLOYMENT)
     else if (!loanRequest.maritalStatus) setStep(ESteps.MERITAL_STATUS)

@@ -16,7 +16,7 @@ export interface IMaritalStatusPageProps{
 export const MaritalStatusPage = (props:IMaritalStatusPageProps ) => {
   const { onClickNext } = props
   const [maritalStatus, setMaritalStatus] = useState('' as EMaritalStatus)
-  const [partnersEmployment, setPartnersEmployment] = useState('' as EEmplymentType)
+  const [partnerEmployment, setPartnerEmployment] = useState('' as EEmplymentType)
   const aiRef = useRef(null)
   const { t } = useTranslation()
   const { user } = useAuth()
@@ -30,7 +30,7 @@ export const MaritalStatusPage = (props:IMaritalStatusPageProps ) => {
 
     const palyload = { 
       maritalStatus: maritalStatus, 
-      partnersEmployment: maritalStatus === EMaritalStatus.MARRIED ? partnersEmployment : ''
+      partnerEmploymentType: maritalStatus === EMaritalStatus.MARRIED ? partnerEmployment as EEmplymentType : '' as EEmplymentType
     }
 
     console.log('maritalStatus:', palyload)
@@ -101,7 +101,7 @@ export const MaritalStatusPage = (props:IMaritalStatusPageProps ) => {
     }
 
     const partenrEmploymentRBHandler = (event: ChangeEvent<HTMLInputElement>) => {
-      setPartnersEmployment(event.target.value as EEmplymentType)
+      setPartnerEmployment(event.target.value as EEmplymentType)
     }
 
     const renderPartnerEmploymentType = () => {
@@ -126,7 +126,7 @@ export const MaritalStatusPage = (props:IMaritalStatusPageProps ) => {
           {renderPartnerEmploymentType()}
           
           <div className="form-button-group">
-            <Button onClick={saveGoalHandler} disabled={maritalStatus === EMaritalStatus.MARRIED && !partnersEmployment || !maritalStatus}> {t('goalPage.action')}</Button>
+            <Button onClick={saveGoalHandler} disabled={maritalStatus === EMaritalStatus.MARRIED && !partnerEmployment || !maritalStatus}> {t('goalPage.action')}</Button>
           </div>
       </form>
 

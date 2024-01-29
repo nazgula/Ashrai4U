@@ -1,3 +1,4 @@
+import React from 'react'
 import { RadioButton } from './RadioButton'
 // import './style.scss'
 
@@ -16,6 +17,9 @@ interface IRadioButtonGroupProps {
   hasFullWidth?: boolean
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   className?: string
+  randerOnCondition?: () => React.ReactNode
+  conditionValue?: string
+  isCondition?: boolean
 }
 
 export const RadioButtonGroup = (props: IRadioButtonGroupProps) => {
@@ -25,17 +29,20 @@ export const RadioButtonGroup = (props: IRadioButtonGroupProps) => {
       const optionId = `radio-option-${value}`
 
       return (
-        <RadioButton
-          value={value}
-          label={label}
-          key={optionId}
-          id={optionId}
-          name={name}
-          disabled={disabled}
-          defaultChecked={props.selectedValue === value}
-          onChange={props.onChange}
-          className={className}
-        />
+        <div key={`div-${optionId}`}>
+          <RadioButton
+            value={value}
+            label={label}
+            key={optionId}
+            id={optionId}
+            name={name}
+            disabled={disabled}
+            defaultChecked={props.selectedValue === value}
+            onChange={props.onChange}
+            className={className}
+          />
+        {props.conditionValue === value && props.isCondition && props.randerOnCondition ? props.randerOnCondition() : null}
+        </div>
       )
     })
   }

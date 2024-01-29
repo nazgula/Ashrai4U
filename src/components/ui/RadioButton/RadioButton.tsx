@@ -19,7 +19,7 @@ export const RadioButton = ({
 }: IRadioButtonProps) => {
   console.log('className', className)
   return (
-    <div className=" flex border-2 border-solid border-sky rounded-lg py-6 px-4 hover:border-gray   ">
+    <div className="flex px-4 py-6 border-2 border-solid rounded-lg  border-sky hover:border-gray">
       
         <input
           id={id}
@@ -29,8 +29,8 @@ export const RadioButton = ({
           {...rest}
           className={`radio__input ${className}`}
         />
-        
-        <label htmlFor={id} className="text-xl mr-2 text-sky">
+
+        <label htmlFor={id} className="mr-2 text-xl text-sky">
            {label}
         </label>
     </div>

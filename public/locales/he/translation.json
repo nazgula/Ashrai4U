@@ -333,11 +333,14 @@
 		},
 		"sendAgain": "שלח שוב קוד",
 		"changePhone": "שנה מספר נייד",
-		"identifier-placeholder": "מספר טלפון",
+		"phonePlaceholder": "מספר טלפון",
 		"verificationPlaceholder": "קוד אימות",
 		"identifierErrorMessage": "הערך חייב להיות טלפון",	
 		"codeErrorMessage": "יש להזין מספר בן שש ספרות",
-		"next": "שלח לי קוד"
+		"firstName": "שם פרטי",
+		"lastName": "שם משפחה",
+		"next": "אישור",
+		"sendCode": "שלח לי קוד"
 	},
 	"goalPage": {
 		"title": "אפשר לדעת לאיזו מטרה הגעת אלינו?",
@@ -348,7 +351,10 @@
 			"car": "קניית רכב",
 			"loans": "מיחזור הלוואה והקטנת החזר חודשי",
 			"other": "מטרה אחרת"
-		}
+		},
+		"carYear": "שנה",
+		"carPrice": "מחיר",
+		"carBrand": "מותג"
 	},
 	
 	"loanRequest": {

@@ -15,18 +15,18 @@ interface InputProps extends HTMLAttributes<HTMLInputElement> {
   error?: string
   disabled?: boolean
   readOnly?: boolean
-  
+  className?: string
 }
 
 // eslint-disable-next-line react/display-name
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ type, value, name, placeholder, disabled, error, ...rest }, ref) => {
+  ({ type, value, name, placeholder, disabled, error, className, ...rest }, ref) => {
     const [isShowPassword, setPasswordVisibility] = useState<boolean>(false)
     const inputRef = useRef(null)
     return (
       <>
         <div
-          className={classNames('input-wrapper', { 'has-error': error })}
+          className={classNames(className, 'input-wrapper', { 'has-error': error })}
           {...{ ...rest, ref }}
         >
           <input

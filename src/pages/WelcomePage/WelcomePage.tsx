@@ -38,10 +38,10 @@ export const WelcomePage = (props:IWelcomePageProps) => {
         <div className="mt-[-100px]">
           <img src={require('@/assets/images/welcome-page-top-img.png')} alt="welcome"  />
         </div>
-        <div className="flex flex-col items-center justify-center p-10 bg-purple w-full">
-          <h1> עוד טקסט מלהיב שמישהו יכתוב ויגיד מלא דברים</h1>
-          <h2> אי אפשר לעמד כשלא ידוע התוכן</h2>
-          <Button onClick={onClickNext} isLinkView={true}>מעניין אותי</Button>
+        <div className="flex flex-col items-center justify-center w-full p-10 bg-purple h-1/2">
+          <h1 className="text-4xl text-center text-white bold"> עוד טקסט מלהיב שמישהו יכתוב ויגיד מלא דברים</h1>
+          <h2 className="mt-3 text-xl text-center text-white"> אי אפשר לעמד כשלא ידוע התוכן</h2>
+          <Button onClick={onClickNext}  className="mt-20 bg-yellow">מעניין אותי</Button>
         </div>
       </div>
 

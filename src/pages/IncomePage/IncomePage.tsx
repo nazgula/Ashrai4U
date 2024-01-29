@@ -94,11 +94,11 @@ export const IncomePage = (props: IIncomePageProps) => {
       <form className="form">
         <fieldset className='flex flex-col items-center w-full'>
           <Input type="text" name="salary" value={input.salary} placeholder={t('incomePage.salary')} onInput={onInputChange}/>
-          <div>{t('incomePage.extraIncome')}</div>
-          <Input type="text" name="alimony" value={input.alimony} placeholder={t('incomePage.alimony')} onInput={onInputChange}/>
-          <Input type="text" name="pension" value={input.pension} placeholder={t('incomePage.pension')} onInput={onInputChange}/>
-          <Input type="text" name="allowance" value={input.allowance} placeholder={t('incomePage.allowance')} onInput={onInputChange}/>
-          <Input type="text" name="rent" value={input.rent} placeholder={t('incomePage.rent')} onInput={onInputChange}/>
+          <div className="text-xl text-justify text-sky">{t('incomePage.extraIncome')}</div>
+          <Input type="text" name="alimony" value={input.alimony} placeholder={t('incomePage.alimony')} onInput={onInputChange} className="w-1/2"/>
+          <Input type="text" name="pension" value={input.pension} placeholder={t('incomePage.pension')} onInput={onInputChange} className="w-1/2"/>
+          <Input type="text" name="allowance" value={input.allowance} placeholder={t('incomePage.allowance')} onInput={onInputChange} className="w-1/2"/>
+          <Input type="text" name="rent" value={input.rent} placeholder={t('incomePage.rent')} onInput={onInputChange} className="w-1/2"/>
         </fieldset>
         
         <div className="form-button-group">

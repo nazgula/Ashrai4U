@@ -78,7 +78,7 @@ export type TUpdateLoanRequestPayload = {
   agentId?: string;
   firstName?: string;
   lastName?: string;
-  resone?: ELoanReason;
+  reason?: ELoanReason;
   carYear?: string;
   carValue?: string;
   carBrand?: string;

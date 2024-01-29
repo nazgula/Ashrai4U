@@ -166,24 +166,24 @@ export const LoginPage = (props: ILoginPageProps) => {
     }
   }
 
-  // ------------- define which step is next
-  const getNextStep = (loanRequest: TUpdateLoanRequestPayload): ESteps => {
-    // acording to the loan request and user pages define which is the users next needed step - use step order
-    if (!loanRequest.resone) return ESteps.GOAL
-    else if (!loanRequest.requestedLoan || loanRequest.requestedLoan === '0' ||
-      !loanRequest.monthlyReturn || loanRequest.monthlyReturn === '0') return ESteps.LOAN
-    else if (!loanRequest.employmentType) return ESteps.EMPLOYMENT
-    else if (!loanRequest.maritalStatus) return ESteps.MERITAL_STATUS
-    else if (!loanRequest.partnerEmploymentType && loanRequest.maritalStatus === 'MARRIED') return ESteps.MERITAL_STATUS
-    else if (!loanRequest.salary || loanRequest.salary === '0') return ESteps.INCOME
-    else return ESteps.WHATSAPP
-  }
+  // ------------- define whi ch step is next
+  // const getNextStep = (loanRequest: TUpdateLoanRequestPayload): ESteps => {
+  //   // acording to the loan request and user pages define which is the users next needed step - use step order
+  //   if (!loanRequest.reason) return ESteps.GOAL
+  //   else if (!loanRequest.requestedLoan || loanRequest.requestedLoan === '0' ||
+  //     !loanRequest.monthlyReturn || loanRequest.monthlyReturn === '0') return ESteps.LOAN
+  //   else if (!loanRequest.employmentType) return ESteps.EMPLOYMENT
+  //   else if (!loanRequest.maritalStatus) return ESteps.MERITAL_STATUS
+  //   else if (!loanRequest.partnerEmploymentType && loanRequest.maritalStatus === 'MARRIED') return ESteps.MERITAL_STATUS
+  //   else if (!loanRequest.salary || loanRequest.salary === '0') return ESteps.INCOME
+  //   else return ESteps.WHATSAPP
+  // }
   // ------------- render -------------
 
   const getfirstNameInput = (): ReactNode => {
     if (stage === EStage.LOGIN) {
       return (
-        <Input type="text" name="firstName" placeholder={t('firstName')} value={input.firstName} onInput={onInputChange} />
+        <Input type="text" name="firstName" placeholder={t('loginPage.firstName')} value={input.firstName} onInput={onInputChange} />
       )
     }
     else {
@@ -194,7 +194,7 @@ export const LoginPage = (props: ILoginPageProps) => {
   const getlastNameInput = (): ReactNode => {
     if (stage === EStage.LOGIN) {
       return (
-        <Input type="text" name="lastName" placeholder={t('lastName')} value={input.lastName} onInput={onInputChange} />
+        <Input type="text" name="lastName" placeholder={t('loginPage.lastName')} value={input.lastName} onInput={onInputChange} />
       )
     }
     else {
@@ -284,15 +284,18 @@ export const LoginPage = (props: ILoginPageProps) => {
 
   const getFormatedPhone = (): string => {
     const originalString = user && user?.username || input.identifier
-    return `${originalString.slice(-4)}`
-    // return `${originalString.substring(0, 4)}${'x'.repeat(originalString.length - 6)}${originalString.slice(-2)}`
+    // return `${originalString.slice(-4)}`
+    if (originalString.length > 0)
+      return `${originalString.slice(-2)}${'*'.repeat(originalString.length - 6)}-${originalString.substring(0, 4)}`
+    else return '' 
+
   }
 
   console.log('getFormatedPhone', getFormatedPhone())
   return (
     <div>
       <LeftTitles title={`loginPage.title.${stage}`} description={`loginPage.subTitle.${stage}`}
-        titleParam={stage == EStage.VERIFICATION ? { phone: getFormatedPhone() } as object : undefined} />
+        subTitleParam={stage == EStage.VERIFICATION ? { phone: getFormatedPhone() } as object : undefined} className='' />
       {/* {getForm()} */}
 
       <form className="form">
