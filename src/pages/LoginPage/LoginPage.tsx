@@ -8,7 +8,6 @@ import { getLoanRequestApiCall, loginApiCall, updateLoanRequestApiCall, verifyLo
 import { Button, EButtonType, Input } from '@/components/ui'
 import { LeftTitles } from '@/components/sections/LeftTitles'
 import { TUpdateLoanRequestPayload } from '@/core/api/types'
-import { ESteps } from '../Main'
 import { useLocation } from 'react-router-dom'
 import { getQueryParamFromLocation } from '@/utilities/utilities'
 
@@ -66,13 +65,6 @@ export const LoginPage = (props: ILoginPageProps) => {
     }
   }, [])
 
-  // useEffect(() => {
-  //   console.log(user , user?.username )
-
-  //   if (user && user?.username && isScriptLoaded) {
-  //     loginHandler (user.username)
-  //   }
-  // }, [isScriptLoaded])
 
   useEffect(() => {
     const isPhoneNumberValid = isNumberValid(input.identifier)
@@ -234,8 +226,8 @@ export const LoginPage = (props: ILoginPageProps) => {
     if (stage === EStage.VERIFICATION) {
       return (
         <Input type="text" name="verificationCode" value={input.verificationCode}
-          placeholder={t('loginPage.verificationPlaceholder')}
-          error={!isValidCode ? codeErrorMessage : ''} onInput={onInputChange}
+          placeholder={t('loginPage.verificationPlaceholder')} autofocus={true}
+          error={!isValidCode && input.verificationCode.length >= 6 ? codeErrorMessage : ''} onInput={onInputChange}
         />
       )
     }
@@ -248,15 +240,15 @@ export const LoginPage = (props: ILoginPageProps) => {
 
     if (stage === EStage.VERIFICATION) {
       return (
-        <div className="flex justify-between">
-          <Button isLinkView={true} className="text-sm text-black"
+        <div className="flex justify-between mt-2">
+          <Button isLinkView={true} className="text-sm font-thin "
             onClick={() => {
               setIsResending(true)
               loginHandler(user?.username || '')
             }}>
             {t('loginPage.sendAgain')}
           </Button>
-          <Button isLinkView={true} className="text-sm text-black" onClick={() => {
+          <Button isLinkView={true} className="text-sm font-thin" onClick={() => {
             setStage(EStage.LOGIN); setVerifyParams({ codeVerifier: '', session: '', username: '' })
           }}>
             {t('loginPage.changePhone')}

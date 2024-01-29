@@ -16,11 +16,12 @@ interface InputProps extends HTMLAttributes<HTMLInputElement> {
   disabled?: boolean
   readOnly?: boolean
   className?: string
+  autofocus?: boolean
 }
 
 // eslint-disable-next-line react/display-name
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ type, value, name, placeholder, disabled, error, className, ...rest }, ref) => {
+  ({ type, value, name, placeholder, disabled, error, className, autofocus,  ...rest }, ref) => {
     const [isShowPassword, setPasswordVisibility] = useState<boolean>(false)
     const inputRef = useRef(null)
     return (
@@ -46,7 +47,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             disabled={disabled}
             readOnly={true}
             autoComplete="false"
-            className="margin20"
+            className="cursor-not-allowed margin20"
+            autoFocus={autofocus}
             onFocus={() => {
               console.log(
                 inputRef.current &&
