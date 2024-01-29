@@ -6,7 +6,7 @@ import { MainPage } from '@/pages'
 import { useAuth } from '@/core/context'
 
 function App() {
-  const { isScriptLoaded, setIsScriptLoaded } = useAuth()
+  // const { isScriptLoaded, setIsScriptLoaded } = useAuth()
   useEffect(() => {
     const loadScriptByURL = async (id: string, url: string, callback: () => void) => {
       const isScriptExist = document.getElementById(id)
@@ -31,8 +31,8 @@ function App() {
       }`,
       function () {
         
-        setIsScriptLoaded(true)
-        console.log('Script Loaded', isScriptLoaded)
+        // setIsScriptLoaded(true)
+        console.log('Script Loaded')
 
       },
     )

@@ -9,6 +9,8 @@ import { Button, EButtonType, Input } from '@/components/ui'
 import { LeftTitles } from '@/components/sections/LeftTitles'
 import { TUpdateLoanRequestPayload } from '@/core/api/types'
 import { ESteps } from '../Main'
+import { useLocation } from 'react-router-dom'
+import { getQueryParamFromLocation } from '@/utilities/utilities'
 
 
 export enum EStage {
@@ -18,13 +20,13 @@ export enum EStage {
 
 export interface ILoginPageProps {
   // signIn: boolean
-  onClickNext: (loanRequest: TUpdateLoanRequestPayload) => void
+  onClickNext: (loanRequest: TUpdateLoanRequestPayload | null) => void
 }
 
 export const LoginPage = (props: ILoginPageProps) => {
   // const useProfileStore = useStore(EStore.profile)
   const { onClickNext } = props
-  const { login, user, setProfile, isScriptLoaded } = useAuth()
+  const { login, user, setProfile } = useAuth()
 
   const { setModal } = useModal()
   const { t } = useTranslation()
@@ -46,10 +48,15 @@ export const LoginPage = (props: ILoginPageProps) => {
   const identifierErrorMessage = t('loginPage.identifierErrorMessage')
   const codeErrorMessage = t('loginPage.codeErrorMessage')
 
+
+  const location = useLocation()
+  const [agentId, setAgentId] = useState(getQueryParamFromLocation(location.search, 'agentId'))
+
+
   useEffect(() => {
     console.log(user, user?.username)
 
-    if (user && user?.username && isScriptLoaded) {
+    if (user && user?.username ) {
       loginHandler(user.username)
     }
   }, [])
@@ -129,55 +136,58 @@ export const LoginPage = (props: ILoginPageProps) => {
           try {
             // get loan request, update storage and sefine next step
             const loanRequest = await getLoanRequestApiCall(user)
-
-            // if first name or last name are missing from the loan request save them
-            if (loanRequest && !loanRequest.firstName || !loanRequest.lastName) {
-              const uPayload = { firstName: input.firstName, lastName: input.lastName }
-              response = await updateLoanRequestApiCall(uPayload, user)
-              // storage
-              setProfile(uPayload as TUpdateLoanRequestPayload)
-            }
-            else {
-              Object.keys(loanRequest).forEach((key) => {
-                // Check if the property value is "N/A"
-                if (loanRequest[key] === 'N/A') {
-                  // Update the property value to an empty string
-                  loanRequest[key] = '';
+            console.log('loanRequest', loanRequest)
+            // if first/last name are missing (first login) or new agentId
+            if (loanRequest) {
+              const uPayload : TUpdateLoanRequestPayload = {}
+              if (loanRequest?.firstName === 'N/A') 
+                { 
+                  uPayload.firstName = input.firstName
+                  loanRequest.firstName = input.firstName
                 }
-              });
+              if (loanRequest?.lastName === 'N/A') {
+                  uPayload.lastName = input.lastName
+                  loanRequest.lastName = input.lastName
+                }
+              if (agentId !== '' && loanRequest.agentId !== agentId) {
+                uPayload.agentId = agentId
+                loanRequest.agentId = agentId
+              }
+
+    
+              if ( Object.keys(uPayload).length > 0) {
+                try {
+                  response = await updateLoanRequestApiCall(uPayload, user)
+                } catch (error) {
+                  // @ts-ignore
+                  alert (error.message) 
+                }
+              }
+
               setProfile(loanRequest as TUpdateLoanRequestPayload)
+
             }
 
             console.log('get loan request: ', loanRequest)
             onClickNext(loanRequest)
 
           } catch (error) {
-            console.log(error)
+            console.log ('user not found:' , user, error)
+            onClickNext(null)
           }
         }
         else {
-          // Alert ERROR
-          console.log('user not found')
+          onClickNext(null)
         }
 
       }
     } catch (error) {
       console.log(error)
+      // @ts-ignore
+      alert(error?.message || 'error')
     }
   }
 
-  // ------------- define whi ch step is next
-  // const getNextStep = (loanRequest: TUpdateLoanRequestPayload): ESteps => {
-  //   // acording to the loan request and user pages define which is the users next needed step - use step order
-  //   if (!loanRequest.reason) return ESteps.GOAL
-  //   else if (!loanRequest.requestedLoan || loanRequest.requestedLoan === '0' ||
-  //     !loanRequest.monthlyReturn || loanRequest.monthlyReturn === '0') return ESteps.LOAN
-  //   else if (!loanRequest.employmentType) return ESteps.EMPLOYMENT
-  //   else if (!loanRequest.maritalStatus) return ESteps.MERITAL_STATUS
-  //   else if (!loanRequest.partnerEmploymentType && loanRequest.maritalStatus === 'MARRIED') return ESteps.MERITAL_STATUS
-  //   else if (!loanRequest.salary || loanRequest.salary === '0') return ESteps.INCOME
-  //   else return ESteps.WHATSAPP
-  // }
   // ------------- render -------------
 
   const getfirstNameInput = (): ReactNode => {
@@ -287,7 +297,7 @@ export const LoginPage = (props: ILoginPageProps) => {
     // return `${originalString.slice(-4)}`
     if (originalString.length > 0)
       return `${originalString.slice(-2)}${'*'.repeat(originalString.length - 6)}-${originalString.substring(0, 4)}`
-    else return '' 
+    else return ''
 
   }
 
@@ -305,7 +315,6 @@ export const LoginPage = (props: ILoginPageProps) => {
           {getIdentifierInput()}
           {getVerificationCodeInput()}
           {getResendAndChangePhone()}
-          {/* {getChangePhone()} */}
         </fieldset>
 
         <div className="form-button-group">

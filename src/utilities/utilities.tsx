@@ -33,7 +33,7 @@ const parsedNumber = Number(stringWithoutCommas);
     }
   }
 
-  export function getQueryParamFromLocation(location: string, name: string): string | null {
+  export function getQueryParamFromLocation(location: string, name: string): string | undefined {
     const urlParams = new URLSearchParams(location);
-    return urlParams.get(name) as string | null;
+    return urlParams.get(name) as string | undefined;
 }

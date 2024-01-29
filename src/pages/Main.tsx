@@ -28,9 +28,6 @@ export enum ESteps {
 export const MainPage = () => {
   const { user } = useAuth()
 
-  const location = useLocation()
-  const [agentId, setAgentId] = useState(getQueryParamFromLocation(location.search, 'agentId'))
-  
   const [step, setStep] = useState(user && user.username ? ESteps.LOGIN : ESteps.WELCOME)
   
   useEffect(() => {
@@ -51,9 +48,9 @@ export const MainPage = () => {
   }
 
 
-  const nextStepAfterLogin = (loanRequest: TUpdateLoanRequestPayload) => {
+  const nextStepAfterLogin = (loanRequest: TUpdateLoanRequestPayload | null) => {
     // acording to the loan request and user pages define which is the users next needed step - use step order
-    if (!loanRequest.reason) setStep(ESteps.GOAL)
+    if (!loanRequest || !loanRequest.reason) setStep(ESteps.GOAL)
     else if (!loanRequest.requestedLoan || loanRequest.requestedLoan === '0'|| !loanRequest.monthlyReturn || loanRequest.monthlyReturn === '0') setStep(ESteps.LOAN)
     else if (!loanRequest.employmentType) setStep(ESteps.EMPLOYMENT)
     else if (!loanRequest.maritalStatus) setStep(ESteps.MERITAL_STATUS)
