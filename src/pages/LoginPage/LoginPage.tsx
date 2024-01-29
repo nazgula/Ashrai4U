@@ -44,6 +44,7 @@ export const LoginPage = (props: ILoginPageProps) => {
   const [verifyParams, setVerifyParams] = useState({ codeVerifier: '', session: '', username: '' })
   const [isResending, setIsResending] = useState(false)
   const [stage, setStage] = useState(user && user?.username ? EStage.VERIFICATION : EStage.LOGIN)
+  
 
   const identifierErrorMessage = t('loginPage.identifierErrorMessage')
   const codeErrorMessage = t('loginPage.codeErrorMessage')
@@ -57,6 +58,10 @@ export const LoginPage = (props: ILoginPageProps) => {
     console.log(user, user?.username)
 
     if (user && user?.username ) {
+      // wait 2000 ms for script to load before calling loginHandler
+      setTimeout(() => {
+        loginHandler(user.username)
+      }, 2000)
       loginHandler(user.username)
     }
   }, [])

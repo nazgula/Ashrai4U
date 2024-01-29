@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom'
 import './styles.css';
 import { MainLayout } from '@/layout'
 import { MainPage } from '@/pages'
-import { useAuth } from '@/core/context'
 
 function App() {
   // const { isScriptLoaded, setIsScriptLoaded } = useAuth()
@@ -30,7 +29,6 @@ function App() {
       `https://www.google.com/recaptcha/api.js?render=${process.env.REACT_APP_RECAPCHA_PUB_KEY as string
       }`,
       function () {
-        
         // setIsScriptLoaded(true)
         console.log('Script Loaded')
 
