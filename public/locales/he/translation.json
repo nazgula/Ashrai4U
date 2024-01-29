@@ -325,11 +325,11 @@
 	"loginPage": {
 		"title": {
 			"LOGIN": "היי, שנתחבר?",
-			"VERIFICATION": "שלחנו קוד לנייד המסתיים בספרות {{phone}}"
+			"VERIFICATION": "הזן קוד אימות" 
 		},
 		"subTitle": {
 			"LOGIN": "היי, שנתחבר?",
-			"VERIFICATION": "יש להזין אותו בתיבה"
+			"VERIFICATION": "נשלח לטלפון המסתיים בספורת {{phone}}"
 		},
 		"sendAgain": "שלח שוב קוד",
 		"changePhone": "שנה מספר נייד",
