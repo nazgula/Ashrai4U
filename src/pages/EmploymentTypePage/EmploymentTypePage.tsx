@@ -4,8 +4,7 @@ import './style.scss'
 import {Button, Input, RadioButtonGroup} from '@/components/ui'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { LoginByPhone } from '@/components/LoginByPhone'
-import { RightSideContainer } from '@/components/sections/RightSideContainer'
+
 import { EEmplymentType } from '@/core/api/types'
 import classNames from 'classnames'
 import { LeftTitles } from '@/components/sections/LeftTitles'
@@ -54,11 +53,13 @@ export const EmploymentTypePage = (props:IEmploymentTypePageProps ) => {
       value: EEmplymentType.CONTRACT,
       name: 'button-types',
       label: t('employmentTypePage.type.contract'),
+      divClassName: 'w-30',
     },
     {
       value: EEmplymentType.FREELANCER,
       name: 'button-types',
       label: t('employmentTypePage.type.freelancer'),
+      divClassName: 'w-30',
     },
   ]
 
@@ -69,16 +70,16 @@ export const EmploymentTypePage = (props:IEmploymentTypePageProps ) => {
 
   return (
 
-    <div>
+    <div className="flex flex-col items-center h-full">
       <LeftTitles title="employmentTypePage.title" description="employmentTypePage.subTitle" showLoanAmount={true}/>
 
-      <form className="form">
-          <RadioButtonGroup label="" options={radioList} onChange={radioGroupHandler} className="flex-row"/> 
-          
-          <div className="form-button-group">
-            <Button onClick={saveGoalHandler} disabled={!employmentType ? true : false}> {t('goalPage.action')}</Button>
-          </div>
+      <form className="mt-8 w-92 md:w-96">
+          <RadioButtonGroup label="" options={radioList} onChange={radioGroupHandler} className="flex flex-row justify-center gap-2"/> 
       </form>
+
+      <div className="mt-32 lg:pb-20 lg:mt-auto">
+        <Button onClick={saveGoalHandler} disabled={!employmentType ? true : false}> {t('goalPage.action')}</Button>
+      </div>
 
     </div>    
 

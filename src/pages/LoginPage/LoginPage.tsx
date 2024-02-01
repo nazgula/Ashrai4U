@@ -54,8 +54,6 @@ export const LoginPage = (props: ILoginPageProps) => {
 
 
   useEffect(() => {
-    console.log(user, user?.username)
-
     if (user && user?.username ) {
       // wait 2000 ms for script to load before calling loginHandler
       setTimeout(() => {
@@ -227,7 +225,7 @@ export const LoginPage = (props: ILoginPageProps) => {
       return (
         <Input type="text" name="verificationCode" value={input.verificationCode}
           placeholder={t('loginPage.verificationPlaceholder')} autofocus={true}
-          error={!isValidCode && input.verificationCode.length >= 6 ? codeErrorMessage : ''} onInput={onInputChange}
+          error={!isValidCode || input.verificationCode.length >= 6 ? codeErrorMessage : ''} onInput={onInputChange}
         />
       )
     }
@@ -241,14 +239,14 @@ export const LoginPage = (props: ILoginPageProps) => {
     if (stage === EStage.VERIFICATION) {
       return (
         <div className="flex justify-between mt-2">
-          <Button isLinkView={true} className="text-sm font-thin "
+          <Button isLinkView={true} className="text-sm "
             onClick={() => {
               setIsResending(true)
               loginHandler(user?.username || '')
             }}>
             {t('loginPage.sendAgain')}
           </Button>
-          <Button isLinkView={true} className="text-sm font-thin" onClick={() => {
+          <Button isLinkView={true} className="text-sm " onClick={() => {
             setStage(EStage.LOGIN); setVerifyParams({ codeVerifier: '', session: '', username: '' })
           }}>
             {t('loginPage.changePhone')}
@@ -270,7 +268,9 @@ export const LoginPage = (props: ILoginPageProps) => {
           disabled={
             input.firstName.length === 0 || input.lastName.length === 0 || input.identifier.length === 0 || !isValidIdentifier
           }
-          onClick={() => loginHandler(input.identifier)}
+          // TestNoAPI
+          onClick={() => loginHandler(input.identifier)} 
+          // onClick={()=>setStage(EStage.VERIFICATION)}
         >
           {t('loginPage.sendCode')}
         </Button>
@@ -281,7 +281,9 @@ export const LoginPage = (props: ILoginPageProps) => {
         <Button
           type={EButtonType.button}
           disabled={input.verificationCode.length === 0 || !isValidCode}
+          // TestNoAPI
           onClick={() => verificationHandler(input.verificationCode)}
+          // onClick={() => onClickNext(null)}
         >
           {t('loginPage.next')}
         </Button>
@@ -290,22 +292,23 @@ export const LoginPage = (props: ILoginPageProps) => {
   }
 
   const getFormatedPhone = (): string => {
-    const originalString = user && user?.username || input.identifier
-    // return `${originalString.slice(-4)}`
-    if (originalString.length > 0)
-      return `${originalString.slice(-2)}${'*'.repeat(originalString.length - 6)}-${originalString.substring(0, 4)}`
-    else return ''
+      const originalString = user && user?.username || input.identifier
+      
+      if (originalString && originalString?.length > 6)
+        return `${originalString.slice(-2)}${'*'.repeat(originalString.length - 6)}-${originalString.substring(0, 4)}`
+      else
+        return ''
 
   }
 
   console.log('getFormatedPhone', getFormatedPhone())
   return (
-    <div>
+    <div className="flex flex-col items-center h-full">
       <LeftTitles title={`loginPage.title.${stage}`} description={`loginPage.subTitle.${stage}`}
         subTitleParam={stage == EStage.VERIFICATION ? { phone: getFormatedPhone() } as object : undefined} className='' />
       {/* {getForm()} */}
 
-      <form className="form">
+      <form className="mt-8 w-92 md:w-96">
         <fieldset>
           {getfirstNameInput()}
           {getlastNameInput()}
@@ -313,11 +316,12 @@ export const LoginPage = (props: ILoginPageProps) => {
           {getVerificationCodeInput()}
           {getResendAndChangePhone()}
         </fieldset>
+          <div className="p-4 mt-4 text-lg text-center text-sky bg-sky bg-opacity-10 rounded-xl">{t('loginPage.yourDataIsSafe')}</div>
 
-        <div className="form-button-group">
-          {getButton()}
-        </div>
       </form>
+      <div className="mt-12 lg:pb-20 lg:mt-auto">
+          {getButton()}
+      </div>
 
     </div>
   )

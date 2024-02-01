@@ -14,9 +14,9 @@ export const WhatsAppButton = () => {
 
     <div className="flex flex-col items-center justify-center w-full" onClick={handleWhatsAppClick}>
       <Icon
-        className="flex-grow mt-12"
-        viewBox="0 0 183 30"
-        size={'100%'}
+        className="flex-grow mt-4 lg:mt-16 w-28 h-28"
+        
+        // size={'35%'}
         icon="whatsapp"
       />
     </div>

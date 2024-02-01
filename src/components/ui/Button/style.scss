@@ -1,175 +1,173 @@
-@import '@/assets/styles/mixins';
+// @import '@/assets/styles/mixins';
 
 
-// <button class="button inline-flex items-center justify-center px-4 font-semibold text-xl w-[185px] h-[50px] rounded-[10px] border border-main-blue bg-yellow-300 text-dark-blue transition ease-in-out duration-400 focus:outline-none hover:bg-white hover:text-main-blue active:bg-white active:text-main-blue disabled:cursor-not-allowed disabled:bg-main-grey disabled:border-main-grey disabled:text-white disabled:hover:text-white disabled:focus:text-white md:w-[173px] md:h-[38px] md:font-size-[18px]">
-//   <!-- Button content goes here -->
-// </button>
+// // <button class="button inline-flex items-center justify-center px-4 font-semibold text-xl w-[185px] h-[50px] rounded-[10px] border border-main-blue bg-yellow-300 text-dark-blue transition ease-in-out duration-400 focus:outline-none hover:bg-white hover:text-main-blue active:bg-white active:text-main-blue disabled:cursor-not-allowed disabled:bg-main-grey disabled:border-main-grey disabled:text-white disabled:hover:text-white disabled:focus:text-white md:w-[173px] md:h-[38px] md:font-size-[18px]">
+// //   <!-- Button content goes here -->
+// // </button>
 
-// <button class="button--style2 inline-flex items-center justify-center px-4 font-semibold text-xl bg-white text-main-blue hover:bg-main-blue hover:text-white focus:bg-main-blue focus:text-white">
-//   <!-- Button content goes here -->
-// </button>
+// // <button class="inline-flex items-center justify-center px-4 text-xl font-semibold bg-white button--style2 text-main-blue hover:bg-main-blue hover:text-white focus:bg-main-blue focus:text-white">
+// //   <!-- Button content goes here -->
+// // </button>
 
-// <button class="button--login inline-flex items-center justify-center min-w-[134px] px-[18px] text-dark-purple bg-gray-200 border-gray-200 hover:border-dark-purple hover:bg-white hover:text-dark-purple focus:border-dark-purple focus:bg-white focus:text-dark-purple">
-//   <!-- Button content goes here -->
-// </button>
+// // <button class="button--login inline-flex items-center justify-center min-w-[134px] px-[18px] text-dark-purple bg-gray-200 border-gray-200 hover:border-dark-purple hover:bg-white hover:text-dark-purple focus:border-dark-purple focus:bg-white focus:text-dark-purple">
+// //   <!-- Button content goes here -->
+// // </button>
 
-// <button class="button--create-account inline-flex items-center justify-center min-w-[155px] px-[18px] text-white bg-dark-purple border-dark-purple hover:border-dark-purple hover:bg-white hover:text-dark-purple focus:border-dark-purple focus:bg-white focus:text-dark-purple">
-//   <!-- Button content goes here -->
-// </button>
+// // <button class="button--create-account inline-flex items-center justify-center min-w-[155px] px-[18px] text-white bg-dark-purple border-dark-purple hover:border-dark-purple hover:bg-white hover:text-dark-purple focus:border-dark-purple focus:bg-white focus:text-dark-purple">
+// //   <!-- Button content goes here -->
+// // </button>
 
-// <a href="#" class="button--link hover:text-link-hover active:text-link-active focus:text-link-hover disabled:cursor-not-allowed disabled:hover:text-link-hover disabled:focus:text-link-hover">
-//   <!-- Link content goes here -->
-// </a>
+// // <a href="#" class="button--link hover:text-link-hover active:text-link-active focus:text-link-hover disabled:cursor-not-allowed disabled:hover:text-link-hover disabled:focus:text-link-hover">
+// //   <!-- Link content goes here -->
+// // </a>
 
-// <button class="button inline-flex items-center justify-center px-4 font-semibold text-xl w-48 h-12 rounded-2xl border border-blue-500 bg-yellow-300 text-gray-800 transition ease-in-out duration-400 focus:outline-none hover:bg-white hover:text-blue-500 active:bg-white active:text-blue-500 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:border-gray-400 disabled:text-white disabled:hover:text-white disabled:focus:text-white md:w-44 md:h-9 md:font-semibold md:text-base">
-//   <!-- Button content goes here -->
-// </button>
+// // <button class="inline-flex items-center justify-center w-48 h-12 px-4 text-xl font-semibold text-gray-800 transition ease-in-out bg-yellow-300 border border-blue-500 button rounded-2xl duration-400 focus:outline-none hover:bg-white hover:text-blue-500 active:bg-white active:text-blue-500 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:border-gray-400 disabled:text-white disabled:hover:text-white disabled:focus:text-white md:w-44 md:h-9 md:font-semibold md:text-base">
+// //   <!-- Button content goes here -->
+// // </button>
 
-// <button class="button--style2 inline-flex items-center justify-center px-4 font-semibold text-xl bg-white text-blue-500 hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white">
-//   <!-- Button content goes here -->
-// </button>
+// // <button class="inline-flex items-center justify-center px-4 text-xl font-semibold text-blue-500 bg-white button--style2 hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white">
+// //   <!-- Button content goes here -->
+// // </button>
 
-// <button class="button--login inline-flex items-center justify-center min-w-36 px-5 text-dark-purple bg-gray-200 border-gray-200 hover:border-dark-purple hover:bg-white hover:text-dark-purple focus:border-dark-purple focus:bg-white focus:text-dark-purple">
-//   <!-- Button content goes here -->
-// </button>
+// // <button class="inline-flex items-center justify-center px-5 bg-gray-200 border-gray-200 button--login min-w-36 text-dark-purple hover:border-dark-purple hover:bg-white hover:text-dark-purple focus:border-dark-purple focus:bg-white focus:text-dark-purple">
+// //   <!-- Button content goes here -->
+// // </button>
 
-// <button class="button--create-account inline-flex items-center justify-center min-w-40 px-5 text-white bg-dark-purple border-dark-purple hover:border-dark-purple hover:bg-white hover:text-dark-purple focus:border-dark-purple focus:bg-white focus:text-dark-purple">
-//   <!-- Button content goes here -->
-// </button>
+// // <button class="inline-flex items-center justify-center px-5 text-white button--create-account min-w-40 bg-dark-purple border-dark-purple hover:border-dark-purple hover:bg-white hover:text-dark-purple focus:border-dark-purple focus:bg-white focus:text-dark-purple">
+// //   <!-- Button content goes here -->
+// // </button>
 
-// <a href="#" class="button--link hover:text-blue-700 active:text-blue-800 focus:text-blue-700 disabled:cursor-not-allowed disabled:hover:text-gray-600 disabled:focus:text-gray-600">
-//   <!-- Link content goes here -->
-// </a>
+// // <a href="#" class="button--link hover:text-blue-700 active:text-blue-800 focus:text-blue-700 disabled:cursor-not-allowed disabled:hover:text-gray-600 disabled:focus:text-gray-600">
+// //   <!-- Link content goes here -->
+// // </a>
 
 
-.button {
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: initial;
-  font-size: 22px;
-  font-weight: 600;
-  width: rem(185px);
-  height: rem(50px);
-  border-radius: rem(10px);
-  border: 1px solid var(--main-blue);
-  background-color: #F8D648;
-  color: #050419;
-  transition: 0.4s ease all;
-  outline: none;
+// .button {
+//   cursor: pointer;
+//   display: inline-flex;
+//   align-items: center;
+//   justify-content: center;
+//   padding: initial;
+//   font-size: 22px;
+//   font-weight: 600;
+//   width: rem(185px);
+//   height: rem(50px);
+//   border-radius: rem(10px);
+//   background-color: #F8D648;
+//   color: #050419;
+//   transition: 0.4s ease all;
+//   outline: none;
 
-  &:hover,
-  &:active {
-    background-color: var(--white);
-    color: var(--main-blue);
-  }
-  &:focus {
-    background-color: var(--white);
-    color: var(--main-blue);
-  }
-  &[disabled] {
-    cursor: not-allowed;
-    background-color: var(--main-grey) !important;
-    border-color: var(--main-grey) !important;
-    color: var(--white);
-    &:hover,
-    &:active {
-      color: var(--white) !important;
-    }
-    &:focus {
-      color: var(--white) !important;
-    }
-  }
-  &--style2 {
-    background-color: var(--white);
-    color: var(--main-blue);
-    &:hover,
-    &:active {
-      background-color: var(--main-blue);
-      color: var(--white);
-    }
-    &:focus {
-      background-color: var(--main-blue);
-      color: var(--white);
-    }
-  }
-  &--login {
-    width: auto;
-    min-width: rem(134px);
-    padding-left: rem(18px);
-    padding-right: rem(18px);
-    color: #2c2348;
-    background-color: #e3e3e3;
-    border-color: #e3e3e3;
-    &:hover,
-    &:active {
-      border-color: #2c2348;
-      background-color: var(--white);
-      color: #2c2348;
-    }
-    &:focus {
-      border-color: #2c2348;
-      background-color: var(--white);
-      color: #2c2348;
-    }
-  }
-  &--create-account {
-    width: auto;
-    min-width: rem(155px);
-    padding-left: rem(18px);
-    padding-right: rem(18px);
-    color: var(--white);
-    background-color: #2c2348;
-    border-color: #2c2348;
-    &:hover,
-    &:active {
-      border-color: #2c2348;
-      background-color: var(--white);
-      color: #2c2348;
-    }
-    &:focus {
-      border-color: #2c2348;
-      background-color: var(--white);
-      color: #2c2348;
-    }
-  }
+//   &:hover,
+//   &:active {
+//     background-color: var(--white);
+//     color: var(--main-blue);
+//   }
+//   &:focus {
+//     background-color: var(--white);
+//     color: var(--main-blue);
+//   }
+//   &[disabled] {
+//     cursor: not-allowed;
+//     background-color: var(--main-grey) !important;
+//     color: var(--white);
+//     &:hover,
+//     &:active {
+//       color: var(--white) !important;
+//     }
+//     &:focus {
+//       color: var(--white) !important;
+//     }
+//   }
+//   &--style2 {
+//     background-color: var(--white);
+//     color: var(--main-blue);
+//     &:hover,
+//     &:active {
+//       background-color: var(--main-blue);
+//       color: var(--white);
+//     }
+//     &:focus {
+//       background-color: var(--main-blue);
+//       color: var(--white);
+//     }
+//   }
+//   &--login {
+//     width: auto;
+//     min-width: rem(134px);
+//     padding-left: rem(18px);
+//     padding-right: rem(18px);
+//     color: #2c2348;
+//     background-color: #e3e3e3;
+//     border-color: #e3e3e3;
+//     &:hover,
+//     &:active {
+//       border-color: #2c2348;
+//       background-color: var(--white);
+//       color: #2c2348;
+//     }
+//     &:focus {
+//       border-color: #2c2348;
+//       background-color: var(--white);
+//       color: #2c2348;
+//     }
+//   }
+//   &--create-account {
+//     width: auto;
+//     min-width: rem(155px);
+//     padding-left: rem(18px);
+//     padding-right: rem(18px);
+//     color: var(--white);
+//     background-color: #2c2348;
+//     border-color: #2c2348;
+//     &:hover,
+//     &:active {
+//       border-color: #2c2348;
+//       background-color: var(--white);
+//       color: #2c2348;
+//     }
+//     &:focus {
+//       border-color: #2c2348;
+//       background-color: var(--white);
+//       color: #2c2348;
+//     }
+//   }
 
-  &--link {
-    &[disabled] {
-      background-color: initial !important;
-      color: #969696;
-      &:hover,
-      &:active {
-        background-color: initial !important;
-        color: #969696 !important;
-      }
-      &:focus {
-        color: #969696 !important;
-      }
-    }
-    &:hover,
-    &:active {
-      background-color: initial;
-      color: color-mix(in srgb, #1e75e5, #000 30%);
-    }
-    &:focus {
-      background-color: initial;
-    }
-    width: initial;
-    height: initial;
-    font-size: initial;
-    background: initial;
-    border: initial;
-    color: #1e75e5;
-    text-decoration: underline;
-  }
-}
+//   &--link {
+//     &[disabled] {
+//       background-color: initial !important;
+//       color: #969696;
+//       &:hover,
+//       &:active {
+//         background-color: initial !important;
+//         color: #969696 !important;
+//       }
+//       &:focus {
+//         color: #969696 !important;
+//       }
+//     }
+//     &:hover,
+//     &:active {
+//       background-color: initial;
+//       color: color-mix(in srgb, #1e75e5, #000 30%);
+//     }
+//     &:focus {
+//       background-color: initial;
+//     }
+//     width: initial;
+//     height: initial;
+//     font-size: initial;
+//     background: initial;
+//     border: initial;
+//     color: #1e75e5;
+//     text-decoration: underline;
+//   }
+// }
 
-@media screen and (max-width: 767px) {
-  .button {
-    width: rem(173px);
-    height: rem(38px);
-    font-size: rem(18px);
-  }
-}
+// @media screen and (max-width: 767px) {
+//   .button {
+//     width: rem(173px);
+//     height: rem(38px);
+//     font-size: rem(18px);
+//   }
+// }

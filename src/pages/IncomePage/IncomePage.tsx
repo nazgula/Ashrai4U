@@ -87,27 +87,31 @@ export const IncomePage = (props: IIncomePageProps) => {
 
 
   return (
-    <div>
-      <LeftTitles title="incomePage.title" description="incomePage.subTitle" showLoanAmount={true}/>
+    <div className="flex flex-col items-center h-full">
+      <LeftTitles title="incomePage.title" description={ input.alimony === '1' ? 'incomePage.subTitle.single' : 'incomePage.subTitle.married' } showLoanAmount={true}/>
       {/* {getForm()} */}
 
-      <form className="form">
+      <form className="mt-8 w-92 md:w-96 ">
         <fieldset className='flex flex-col items-center w-full'>
           <Input type="text" name="salary" value={input.salary} placeholder={t('incomePage.salary')} onInput={onInputChange}/>
-          <div className="text-xl text-justify text-sky">{t('incomePage.extraIncome')}</div>
-          <Input type="text" name="alimony" value={input.alimony} placeholder={t('incomePage.alimony')} onInput={onInputChange} className="w-1/2"/>
-          <Input type="text" name="pension" value={input.pension} placeholder={t('incomePage.pension')} onInput={onInputChange} className="w-1/2"/>
-          <Input type="text" name="allowance" value={input.allowance} placeholder={t('incomePage.allowance')} onInput={onInputChange} className="w-1/2"/>
-          <Input type="text" name="rent" value={input.rent} placeholder={t('incomePage.rent')} onInput={onInputChange} className="w-1/2"/>
+          <div className="p-4 mt-4 text-xl text-center text-sky bg-sky bg-opacity-10 rounded-xl">{t('incomePage.extraIncome')}</div>
+          <div className="pt-4 text-xl text-center text-sky ">{t('incomePage.YesIHave')}</div>
+          <div className="flex">
+            <Input type="text" name="alimony" value={input.alimony} placeholder={t('incomePage.alimony')} onInput={onInputChange} className="w-1/2 pl-2"/>
+            <Input type="text" name="pension" value={input.pension} placeholder={t('incomePage.pension')} onInput={onInputChange} className="w-1/2"/>
+          </div>
+          <div className="flex -mt-4">
+            <Input type="text" name="allowance" value={input.allowance} placeholder={t('incomePage.allowance')} onInput={onInputChange} className="w-1/2 pl-2"/>
+            <Input type="text" name="rent" value={input.rent} placeholder={t('incomePage.rent')} onInput={onInputChange} className="w-1/2"/>
+          </div>
         </fieldset>
-        
-        <div className="form-button-group">
-          <Button type={EButtonType.button} onClick={() => incomeHandler(input.salary, input.alimony, input.pension, input.allowance, input.rent)} disabled={input.salary.length === 0}>
-            
+      </form>
+
+      <div className="mt-12 lg:pb-20 lg:mt-auto">
+        <Button type={EButtonType.button} onClick={() => incomeHandler(input.salary, input.alimony, input.pension, input.allowance, input.rent)} disabled={input.salary.length === 0}>
           {t('incomePage.next')}
         </Button>
-        </div>
-      </form>
+      </div>
 
     </div>    
   )

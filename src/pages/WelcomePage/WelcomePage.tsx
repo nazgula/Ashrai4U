@@ -2,10 +2,7 @@ import { useCallback, useRef, useEffect } from 'react'
 import './style.scss'
 
 import {Button, Input} from '@/components/ui'
-import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { LoginByPhone } from '@/components/LoginByPhone'
-import { RightSideContainer } from '@/components/sections/RightSideContainer'
 
 export interface IWelcomePageProps{
   onClickNext: () => void

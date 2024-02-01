@@ -29,7 +29,7 @@ export const MainPage = () => {
   const { user } = useAuth()
 
   const [step, setStep] = useState(user && user.username ? ESteps.LOGIN : ESteps.WELCOME)
-  
+  // const [step, setStep] = useState(ESteps.WHATSAPP)
   useEffect(() => {
 
   }, [])
@@ -85,11 +85,14 @@ export const MainPage = () => {
     }
   }
 
+
+
+
+
   return (
     <>
       <Header />
       {showPage()}
-      <Footer />
     </>
   )
 }

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { LoginByPhone } from '@/components/LoginByPhone'
 import { RightSideContainer } from '@/components/sections/RightSideContainer'
-import { ELoanReason } from '@/core/api/types'
+import { ELoanReason, TUpdateLoanRequestPayload } from '@/core/api/types'
 import classNames from 'classnames'
 import { ESteps } from './Main'
 
@@ -24,11 +24,14 @@ export const InnerPage = (props:IInnerPageProps ) => {
     
   }, [])
 
+  // Your main function
+
+
   return (
  
-      <div className='flex h-[90vh] w-full'>
-        <RightSideContainer img='goal-page-right-img' step={props.step} className="w-4/12"/>
-        <div className="w-8/12 overflow-y-auto bg-white p-10">
+      <div className='flex flex-col w-full lg:flex-row lg:h-[90vh] text-black'>
+        <RightSideContainer img='goal-page-right-img' step={props.step}/>
+        <div className="w-full p-10 bg-white lg:w-7/12 lg:overflow-y-auto">
           {props.children}  
         </div>
       </div>

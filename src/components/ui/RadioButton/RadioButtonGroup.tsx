@@ -8,6 +8,8 @@ interface IOption {
   name?: string
   disabled?: boolean
   className?: string
+  divClassName?: string
+  divConditionClassName?: string
 }
 
 interface IRadioButtonGroupProps {
@@ -20,16 +22,18 @@ interface IRadioButtonGroupProps {
   randerOnCondition?: () => React.ReactNode
   conditionValue?: string
   isCondition?: boolean
+  divConditionClassName?: string
+  aligment?: 'vertical' | 'horizontal'
 }
 
 export const RadioButtonGroup = (props: IRadioButtonGroupProps) => {
   const renderOptions = () => {
-    return props.options.map(({ label, name, value, disabled, className }: IOption, index) => {
+    return props.options.map(({ label, name, value, disabled, className, divClassName, divConditionClassName }: IOption, index) => {
       // const shortenedOptionLabel = label.replace(/\s+/g, '')
       const optionId = `radio-option-${value}`
 
       return (
-        <div key={`div-${optionId}`}>
+        <div key={`div-${optionId}`} className={props.conditionValue === value && props.isCondition ? '' : 'mb-4'}>
           <RadioButton
             value={value}
             label={label}
@@ -40,6 +44,7 @@ export const RadioButtonGroup = (props: IRadioButtonGroupProps) => {
             defaultChecked={props.selectedValue === value}
             onChange={props.onChange}
             className={className}
+            divClassName={divClassName}
           />
         {props.conditionValue === value && props.isCondition && props.randerOnCondition ? props.randerOnCondition() : null}
         </div>

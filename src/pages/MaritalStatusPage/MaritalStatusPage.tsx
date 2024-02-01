@@ -108,8 +108,8 @@ export const MaritalStatusPage = (props:IMaritalStatusPageProps ) => {
       if (maritalStatus === EMaritalStatus.MARRIED) {
         return (
           <div className='mt-4'>
-            <div>{t('maritalStatusPage.partnerEmployment')}</div>
-            <RadioButtonGroup label="" options={PETradioList} onChange={partenrEmploymentRBHandler} className="flex-row justify-between gap-0 bg-red"/> 
+            <div className="mb-8 text-xl text-center md:mt-12 lg:mt-16 text-sky">{t('maritalStatusPage.partnerEmployment')}</div>
+            <RadioButtonGroup label="" options={PETradioList} onChange={partenrEmploymentRBHandler} className="flex flex-row justify-center gap-2"/> 
           </div>
         )
       }
@@ -118,18 +118,17 @@ export const MaritalStatusPage = (props:IMaritalStatusPageProps ) => {
 
   return (
 
-    <div>
+    <div className="flex flex-col items-center h-full">
       <LeftTitles title="maritalStatusPage.title" description="maritalStatusPage.subTitle" showLoanAmount={true}/>
 
-      <form className="w-form ">
-          <RadioButtonGroup label="" options={MSradioList} onChange={maritalStatusRGHandler} className="flex-row"/> 
+      <form className="mt-8 w-92 md:w-96 ">
+          <RadioButtonGroup label="" options={MSradioList} onChange={maritalStatusRGHandler} className="flex flex-row justify-center gap-2"/> 
           {renderPartnerEmploymentType()}
-          
-          <div className="form-button-group">
-            <Button onClick={saveGoalHandler} disabled={maritalStatus === EMaritalStatus.MARRIED && !partnerEmployment || !maritalStatus}> {t('goalPage.action')}</Button>
-          </div>
       </form>
-
+      
+      <div className="mt-12 lg:pb-20 lg:mt-auto">
+        <Button onClick={saveGoalHandler} disabled={maritalStatus === EMaritalStatus.MARRIED && !partnerEmployment || !maritalStatus} > {t('goalPage.action')}</Button>
+      </div>
     </div>    
 
       

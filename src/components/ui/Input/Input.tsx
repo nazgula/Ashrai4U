@@ -47,7 +47,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             disabled={disabled}
             readOnly={true}
             autoComplete="false"
-            className="cursor-not-allowed margin20"
+            className="margin20"
             autoFocus={autofocus}
             onFocus={() => {
               console.log(

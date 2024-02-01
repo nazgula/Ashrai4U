@@ -8,6 +8,7 @@ interface IRadioButtonProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: boolean
   disabled?: boolean
   className?: string
+  divClassName?: string
 }
 export const RadioButton = ({
   id,
@@ -15,11 +16,12 @@ export const RadioButton = ({
   value,
   disabled,
   className,
+  divClassName,
   ...rest
 }: IRadioButtonProps) => {
   console.log('className', className)
   return (
-    <div className="flex px-4 py-6 border-2 border-solid rounded-lg  border-sky hover:border-gray">
+    <div className={`flex px-4 py-6 border border-solid rounded-lg border-sky hover:border-gray ${divClassName}`}>
       
         <input
           id={id}

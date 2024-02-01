@@ -25,7 +25,7 @@ export const RightSideContainer = (props: IRightSideContainer) => {
   const tSubStep = props.subStep ? `.${props.subStep}` : ''
 // ${props.img}
   return (
-    <div className={`${props.className} p-20 flex flex-col items-center bg-purple`}>
+    <div className={`${props.className} w-full lg:w-5/12 p-8 md:p-10 lg:p-20  flex flex-col items-center bg-purple `}>
 
       {/* <h1 className="text-4xl text-center text-white bold"> {t(`innerPageRightTitle.${props.step}${tSubStep}`)}</h1>
       <h2 className="mt-3 text-xl text-center text-white"> {t(`innerPageRightSubTitle.${props.step}${tSubStep}`)}</h2>  */}
@@ -35,6 +35,7 @@ export const RightSideContainer = (props: IRightSideContainer) => {
       */}
 
         <ImageTest />
+        <h1 className="my-1 text-3xl text-center text-white md:text-4xl md:my-4 bold"> כותרת חמודה לאווירה</h1>
       {/* </div> */}
     </div>
   )

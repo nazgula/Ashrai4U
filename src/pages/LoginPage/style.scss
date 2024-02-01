@@ -1,59 +1,59 @@
-@import '@/assets/styles/mixins';
+// @import '@/assets/styles/mixins';
 
 
-.side-by-side{
-  display: flex;
-  flex-direction: row;
-  height: 90vh;
-  width:100%;
-}
+// .side-by-side{
+//   display: flex;
+//   flex-direction: row;
+//   height: 90vh;
+//   width:100%;
+// }
 
-.left{
-  flex: 0.6;
-  overflow-y: auto; /* Enable vertical scroll if needed */
-  background-color: #6A4AE3;
-  padding: 20px;
-}
+// .left{
+//   flex: 0.6;
+//   overflow-y: auto; /* Enable vertical scroll if needed */
+//   background-color: #6A4AE3;
+//   padding: 20px;
+// }
 
 
 
-.loading {
-  display: inline-flex;
-  justify-content: center;
-  gap: rem(8px);
-  width: 100%;
-  color: currentColor;
-  &__dot {
-    color: currentColor;
-    animation: dot-keyframes 1.5s infinite ease-in-out;
-    background-color: currentColor;
-    border-radius: rem(6px);
-    display: inline-block;
-    height: rem(6px);
-    width: rem(6px);
+// .loading {
+//   display: inline-flex;
+//   justify-content: center;
+//   gap: rem(8px);
+//   width: 100%;
+//   color: currentColor;
+//   &__dot {
+//     color: currentColor;
+//     animation: dot-keyframes 1.5s infinite ease-in-out;
+//     background-color: currentColor;
+//     border-radius: rem(6px);
+//     display: inline-block;
+//     height: rem(6px);
+//     width: rem(6px);
 
-    &:nth-child(2) {
-      animation-delay: 0.5s;
-    }
+//     &:nth-child(2) {
+//       animation-delay: 0.5s;
+//     }
 
-    &:nth-child(3) {
-      animation-delay: 1s;
-    }
-  }
-}
-@keyframes dot-keyframes {
-  0% {
-    opacity: 0.4;
-    transform: scale(1, 1);
-  }
+//     &:nth-child(3) {
+//       animation-delay: 1s;
+//     }
+//   }
+// }
+// @keyframes dot-keyframes {
+//   0% {
+//     opacity: 0.4;
+//     transform: scale(1, 1);
+//   }
 
-  50% {
-    opacity: 1;
-    transform: scale(1.2, 1.2);
-  }
+//   50% {
+//     opacity: 1;
+//     transform: scale(1.2, 1.2);
+//   }
 
-  100% {
-    opacity: 0.4;
-    transform: scale(1, 1);
-  }
-}
+//   100% {
+//     opacity: 0.4;
+//     transform: scale(1, 1);
+//   }
+// }

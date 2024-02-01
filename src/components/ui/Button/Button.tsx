@@ -7,7 +7,8 @@ import {
 } from 'react'
 import cn from 'classnames'
 import { Loading } from '@/components/ui'
-import './style.scss'
+
+// import './style.scss'
 
 export enum EButtonType {
   submit = 'submit',
@@ -22,7 +23,7 @@ interface IButtonProps {
   isLoading?: boolean
   isLinkView?: boolean
   className?: string
-  onClick?: (e?: SyntheticEvent) => void | Promise<void>
+  onClick?: (e?: SyntheticEvent ) => void | Promise<void>
 }
 
 export const Button = ({
@@ -62,13 +63,13 @@ export const Button = ({
 
   const getCss = (): string => {
     if (isLinkView) return 'text-sky underline hover:text-blue bg-transparent active:text-blue-800 focus:text-blue-700 disabled:hover:text-gray-600 disabled:focus:text-gray-600'
-    else return 'w-48 py-6 rounded-xl border border-sky text-white active:bg-white active:text-blue-500 hover:bg-yellow disabled:bg-gray-400 disabled:border-gray-400 disabled:text-white disabled:hover:text-white disabled:focus:text-white md:w-44 md:h-9 md:font-semibold md:text-base md:px-4 md:text-xl'
+    else return 'w-48 py-2 md:py-6 rounded-xl text-white active:bg-white active:text-blue-500 hover:bg-yellow disabled:bg-grey-200  disabled:text-white disabled:hover:text-white disabled:focus:text-white md:w-44 md:h-9 md:font-semibold md:text-base md:px-4 md:text-xl'
   }
 
   return (
     <button
        // className={cn('button', {'button--link': isLinkView,[`${customClassName}`]: customClassName,})}
-      className={`inline-flex items-center justify-center cursor-pointer text-lg font-semibold transition ease-in-out duration-400 disabled:cursor-not-allowed bg-purple disabled:bg-gray  ${getCss()} ${customClassName}`}
+      className={`inline-flex items-center justify-center cursor-pointer text-lg font-semibold transition ease-in-out duration-400 disabled:cursor-not-allowed bg-purple disabled:bg-gray-200  ${getCss()} ${customClassName}`}
       type={type}
       onClick={handleClick}
       disabled={showLoader || isInternalLoading || disabled}
