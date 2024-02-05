@@ -11,6 +11,23 @@ type TIconContent = {
 export type TIconContents = Record<string, TIconContent>
 
 export const icons: TIconContents = {
+  back: {
+    group: EIconGroup.icon,
+    jsx: (
+      <>
+        <svg viewBox="0 -2 32 32" xmlns="http://www.w3.org/2000/svg" >
+          <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+          <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+          <g id="SVGRepo_iconCarrier"> 
+            <g id="Lager_86" data-name="Lager 86" transform="translate(0 -3)"> 
+              <path id="Path_94" data-name="Path 94" d="M16.587,6.42,27.167,17,16.587,27.58a2,2,0,0,0,2.833,2.833L31.414,18.42a2.013,2.013,0,0,0,0-2.84L19.42,3.587A2,2,0,0,0,16.587,6.42Z" fill="currentColor"></path> 
+              <path id="Rectangle_45" data-name="Rectangle 45" d="M0,0H26a2,2,0,0,1,2,2V2a2,2,0,0,1-2,2H0A0,0,0,0,1,0,4V0A0,0,0,0,1,0,0Z" transform="translate(28 19) rotate(180)" fill="currentColor"></path> 
+            </g> 
+          </g>
+        </svg>
+      </>
+    ),
+  },
   language: {
     group: EIconGroup.icon,
     jsx: (

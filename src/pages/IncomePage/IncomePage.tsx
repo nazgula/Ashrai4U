@@ -15,10 +15,12 @@ import { Button, EButtonType, Input } from '@/components/ui'
 // import './style.scss'
 import { LeftTitles } from '@/components/sections/LeftTitles'
 import { Console } from 'console'
+import { BackLink } from '@/components/ui/BackLink'
 
 
 export interface IIncomePageProps {
   onClickNext: () => void
+  onClickBack: () => void
 }
 
 export const IncomePage = (props: IIncomePageProps) => {
@@ -58,15 +60,11 @@ export const IncomePage = (props: IIncomePageProps) => {
 
   const incomeHandler = async (salary: string, alimony: string, pension: string, allowance: string, rent: string) => {
     try {
-      console.log('incomeHandler:', salary, alimony, pension, allowance, rent)
-      // onClickNext()
-      // return
       if (user) {
         try {
           const response =   await updateLoanRequestApiCall({salary: salary, alimony: alimony, pension: pension, allowance: allowance, rent: rent}, user)
   
           if (response) {
-            console.log ('save income response', response)
             onClickNext()
           }
         } catch (error) {
@@ -88,7 +86,8 @@ export const IncomePage = (props: IIncomePageProps) => {
 
   return (
     <div className="flex flex-col items-center h-full">
-      <LeftTitles title="incomePage.title" description={ input.alimony === '1' ? 'incomePage.subTitle.single' : 'incomePage.subTitle.married' } showLoanAmount={true}/>
+      <BackLink backLinkText={t('incomePage.backLink')} onClickBack={props.onClickBack}/>
+      <LeftTitles title="incomePage.title" description={ input.alimony === '1' ? 'incomePage.subTitle.single' : 'incomePage.subTitle.married' } onClickBack={props.onClickBack} backString={t('incomePage.backLink')}/>
       {/* {getForm()} */}
 
       <form className="mt-8 w-92 md:w-96 ">

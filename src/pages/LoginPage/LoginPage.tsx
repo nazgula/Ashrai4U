@@ -55,11 +55,20 @@ export const LoginPage = (props: ILoginPageProps) => {
 
   useEffect(() => {
     if (user && user?.username ) {
-      // wait 2000 ms for script to load before calling loginHandler
+      // wait 2000 ms for script to load before calling loginHandler / loanRequestHandler
       setTimeout(() => {
-        loginHandler(user.username)
-      }, 2000)
-      loginHandler(user.username)
+        const currentTimestamp = new Date().getTime()  
+        // console.log('currentTimestamp', currentTimestamp, user.ExpireTime, user.ExpireTime && user.ExpireTime > currentTimestamp)   
+        if (user.ExpireTime && user.ExpireTime > currentTimestamp) {
+          // console.log('currentTimestamp loan request')
+          loanRequestHandler()
+        }
+        else  {
+          // console.log('currentTimestamp loginHandler')
+  
+          loginHandler(user.username)
+        }      }, 2000)
+      
     }
   }, [])
 
@@ -121,59 +130,13 @@ export const LoginPage = (props: ILoginPageProps) => {
   const verificationHandler = async (code: string) => {
     try {
       const vPayload = { code: code, ...verifyParams }
-      let response = await verifyLoginApiCall(vPayload)
+      const response = await verifyLoginApiCall(vPayload)
 
       if (response) {
         login({ ...response, username: vPayload.username })
         console.log('user: ', user)
-
-        if (user) {
-          try {
-            // get loan request, update storage and sefine next step
-            const loanRequest = await getLoanRequestApiCall(user)
-            console.log('loanRequest', loanRequest)
-            // if first/last name are missing (first login) or new agentId
-            if (loanRequest) {
-              const uPayload : TUpdateLoanRequestPayload = {}
-              if (loanRequest?.firstName === 'N/A') 
-                { 
-                  uPayload.firstName = input.firstName
-                  loanRequest.firstName = input.firstName
-                }
-              if (loanRequest?.lastName === 'N/A') {
-                  uPayload.lastName = input.lastName
-                  loanRequest.lastName = input.lastName
-                }
-              if (agentId !== '' && loanRequest.agentId !== agentId) {
-                uPayload.agentId = agentId
-                loanRequest.agentId = agentId
-              }
-
-    
-              if ( Object.keys(uPayload).length > 0) {
-                try {
-                  response = await updateLoanRequestApiCall(uPayload, user)
-                } catch (error) {
-                  // @ts-ignore
-                  alert (error.message) 
-                }
-              }
-
-              setProfile(loanRequest as TUpdateLoanRequestPayload)
-
-            }
-
-            console.log('get loan request: ', loanRequest)
-            onClickNext(loanRequest)
-
-          } catch (error) {
-            console.log ('user not found:' , user, error)
-            onClickNext(null)
-          }
-        }
-        else {
-          onClickNext(null)
-        }
+        console.log ('verificationHandler')
+        await loanRequestHandler()
 
       }
     } catch (error) {
@@ -182,6 +145,57 @@ export const LoginPage = (props: ILoginPageProps) => {
       alert(error?.message || 'error')
     }
   }
+
+  const loanRequestHandler = async () => {
+    if (user) {
+          console.log ('request loan')
+      try {  
+        // get loan request, update storage and sefine next step
+        const loanRequest = await getLoanRequestApiCall(user)
+        // if first/last name are missing (first login) or new agentId
+        
+        if (loanRequest) {
+          const uPayload : TUpdateLoanRequestPayload = {}
+          if (loanRequest?.firstName === 'N/A' && input.firstName !== '') 
+            { 
+              uPayload.firstName = input.firstName
+              loanRequest.firstName = input.firstName
+            }
+          if (loanRequest?.lastName === 'N/A' && input.lastName !== '') {
+              uPayload.lastName = input.lastName
+              loanRequest.lastName = input.lastName
+            }
+          if (agentId !== '' && loanRequest.agentId !== agentId) {
+            uPayload.agentId = agentId
+            loanRequest.agentId = agentId
+          }
+
+
+          if ( Object.keys(uPayload).length > 0) {
+            try {
+              const response = await updateLoanRequestApiCall(uPayload, user)
+            } catch (error) {
+              // @ts-ignore
+              alert (error.message) 
+            }
+          }
+
+          setProfile(loanRequest as TUpdateLoanRequestPayload)
+
+        }
+
+        onClickNext(loanRequest)
+
+      } catch (error) {
+        console.log ('user not found:' , user, error)
+        onClickNext(null)
+      }
+    }
+    else {
+      onClickNext(null)
+    }
+  }
+
 
   // ------------- render -------------
 

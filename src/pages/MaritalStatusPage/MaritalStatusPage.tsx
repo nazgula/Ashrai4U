@@ -7,10 +7,12 @@ import { EEmplymentType, EMaritalStatus } from '@/core/api/types'
 import { LeftTitles } from '@/components/sections/LeftTitles'
 import { useAuth } from '@/core/context'
 import { updateLoanRequestApiCall } from '@/core/api/calls'
+import { BackLink } from '@/components/ui/BackLink'
 
 
 export interface IMaritalStatusPageProps{
   onClickNext: () => void
+  onClickBack: () => void
 }
 
 export const MaritalStatusPage = (props:IMaritalStatusPageProps ) => {
@@ -25,16 +27,10 @@ export const MaritalStatusPage = (props:IMaritalStatusPageProps ) => {
   }, [])
 
   const saveGoalHandler = async () => {
-    // onClickNext()
-    // return
-
     const palyload = { 
       maritalStatus: maritalStatus, 
       partnerEmploymentType: maritalStatus === EMaritalStatus.MARRIED ? partnerEmployment as EEmplymentType : '' as EEmplymentType
     }
-
-    console.log('maritalStatus:', palyload)
-
 
     if (user) {
       try {
@@ -119,7 +115,9 @@ export const MaritalStatusPage = (props:IMaritalStatusPageProps ) => {
   return (
 
     <div className="flex flex-col items-center h-full">
-      <LeftTitles title="maritalStatusPage.title" description="maritalStatusPage.subTitle" showLoanAmount={true}/>
+      <BackLink backLinkText={t('maritalStatusPage.backLink')} onClickBack={props.onClickBack}/>
+
+      <LeftTitles title="maritalStatusPage.title" description="maritalStatusPage.subTitle" onClickBack={props.onClickBack} backString={t('maritalStatusPage.backLink')}/>
 
       <form className="mt-8 w-92 md:w-96 ">
           <RadioButtonGroup label="" options={MSradioList} onChange={maritalStatusRGHandler} className="flex flex-row justify-center gap-2"/> 

@@ -67,7 +67,6 @@ export const GoalPage = (props: IGoalPageProps) => {
         const response = await updateLoanRequestApiCall(payload, user)
 
         if (response) {
-          console.log('save goal response', response)
           onClickNext()
         }
       } catch (error) {

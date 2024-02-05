@@ -19,7 +19,7 @@ export const RadioButton = ({
   divClassName,
   ...rest
 }: IRadioButtonProps) => {
-  console.log('className', className)
+
   return (
     <div className={`flex px-4 py-6 border border-solid rounded-lg border-sky hover:border-gray ${divClassName}`}>
       

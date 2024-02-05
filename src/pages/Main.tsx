@@ -12,7 +12,7 @@ import { MaritalStatusPage } from './MaritalStatusPage'
 import { WhatsAppPage } from './WhatsAppPage'
 import { useAuth } from '@/core/context'
 import { TUpdateLoanRequestPayload } from '@/core/api/types'
-import { getQueryParamFromLocation } from '@/utilities/utilities'
+import { useTranslation } from 'react-i18next'
 
 export enum ESteps {
   WELCOME = 'WELCOME',
@@ -27,6 +27,8 @@ export enum ESteps {
 
 export const MainPage = () => {
   const { user } = useAuth()
+  const { t } = useTranslation()
+
 
   const [step, setStep] = useState(user && user.username ? ESteps.LOGIN : ESteps.WELCOME)
   // const [step, setStep] = useState(ESteps.WHATSAPP)
@@ -69,24 +71,21 @@ export const MainPage = () => {
       return <GoalPage onClickNext={() => setStep(ESteps.LOAN)} />
     }
     else if (step == ESteps.LOAN) {
-      return <LoanResuestPage onClickNext={() => setStep(ESteps.EMPLOYMENT)} />
+      return <LoanResuestPage onClickNext={() => setStep(ESteps.EMPLOYMENT)} onClickBack={() => setStep(ESteps.GOAL)} />
     }
     else if (step == ESteps.EMPLOYMENT) {
-      return <EmploymentTypePage onClickNext={() => setStep(ESteps.MERITAL_STATUS)} />
+      return <EmploymentTypePage onClickNext={() => setStep(ESteps.MERITAL_STATUS)} onClickBack={() => setStep(ESteps.LOAN)}/>
     }
     else if (step == ESteps.MERITAL_STATUS) {
-      return <MaritalStatusPage onClickNext={() => setStep(ESteps.INCOME)} />
+      return <MaritalStatusPage onClickNext={() => setStep(ESteps.INCOME)} onClickBack={() => setStep(ESteps.EMPLOYMENT)} />
     }
     else if (step == ESteps.INCOME) {
-      return <IncomePage onClickNext={() => setStep(ESteps.WHATSAPP)} />
+      return <IncomePage onClickNext={() => setStep(ESteps.WHATSAPP)} onClickBack={() => setStep(ESteps.MERITAL_STATUS)} />
     }
     else if (step == ESteps.WHATSAPP) {
-      return <WhatsAppPage />
+      return <WhatsAppPage onClickBack={() => setStep(ESteps.INCOME)}/>
     }
   }
-
-
-
 
 
   return (

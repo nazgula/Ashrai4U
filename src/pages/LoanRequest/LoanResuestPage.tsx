@@ -6,10 +6,12 @@ import { LeftTitles } from '@/components/sections/LeftTitles'
 import { useAuth } from '@/core/context'
 import { formatNumber, unformatNumber } from '@/utilities/utilities'
 import { updateLoanRequestApiCall } from '@/core/api/calls'
+import { BackLink } from '@/components/ui/BackLink'
 
 
 export interface ILoanRequestPageProps{
   onClickNext: () => void
+  onClickBack: () => void
 }
 
 export const LoanResuestPage = (props:ILoanRequestPageProps ) => {
@@ -25,25 +27,25 @@ export const LoanResuestPage = (props:ILoanRequestPageProps ) => {
   }, [])
 
   const updateProfileHandler = async () => {
+    try {
+      if (user) {
+        try {
+          const response =   await updateLoanRequestApiCall({monthlyReturn: loanReturn, requestedLoan: loanRequest}, user)
 
-    console.log('monthlyReturn:', loanReturn, 'requestedLoan:', loanRequest) 
-    // onClickNext()
-    // return
-    if (user) {
-      try {
-        const response =   await updateLoanRequestApiCall({monthlyReturn: loanReturn, requestedLoan: loanRequest}, user)
-
-        if (response) {
-          console.log ('save loan request response', response)
-          onClickNext()
-        }
-      } catch (error) {
-        console.log(error)
-      } 
-    }
-    else {
-      // Alert ERROR
-      console.log('user not found')
+          if (response) {
+            console.log ('save loan request response', response)
+            onClickNext()
+          }
+        } catch (error) {
+          console.log(error)
+        } 
+      }
+      else {
+        // Alert ERROR
+        console.log('user not found')
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -65,9 +67,9 @@ export const LoanResuestPage = (props:ILoanRequestPageProps ) => {
   }
 
   return (
-
     <div className="flex flex-col items-center h-full">
-      <LeftTitles title="loanRequest.title" description="loanRequest.subTitle" />
+      <BackLink backLinkText={t('loanRequest.backLink')} onClickBack={props.onClickBack}/>
+      <LeftTitles title="loanRequest.title" description="loanRequest.subTitle" onClickBack={props.onClickBack} backString={t('loanRequest.backLink')}/>
       <div className="mt-8 w-92 md:w-96">    
         <form className="flex flex-col items-center justify-center">
             <div className="py-4 text-4xl font-semibold">

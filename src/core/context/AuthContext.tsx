@@ -33,21 +33,17 @@ export const AuthProvider = ({ children }: any) => {
   const [profileUpdated, setProfileUpdated] = useLocalStorage('profile', null) as [string, (status: string) => void];
  
   const login = async (data: TVerifyLoginApiCallResponse) => {
+    // Add 3600 seconds (1 hour) to the current time
+    const currentTime = new Date();
+    const timestamp = currentTime.getTime() + 3600 * 1000;
+    data.ExpireTime = timestamp ;
+    
     setUser(data)
   }
 
   const setProfile = async (data: TUpdateLoanRequestPayload) => {
     setLoanRequest(data)
   }
-
-
-  
-  // const setProfile = async (status: string) => {
-  //   console.log(`status ${status}`)
-  //   if(status){
-  //     setProfileUpdated(status)
-  //   }
-  // }
 
 
   const logout = () => {
@@ -59,9 +55,6 @@ export const AuthProvider = ({ children }: any) => {
     setUser(data)
   }
 
-
-
-
   const value = useMemo(
     () => ({
       user,
@@ -71,12 +64,6 @@ export const AuthProvider = ({ children }: any) => {
       setProfile,
       profileUpdated,
       loanRequest
-
-      // ,
-      // session,
-      // setSession,
-      // codeVerifier,
-      // setCodeVerifier
     }),
     [user],
   )

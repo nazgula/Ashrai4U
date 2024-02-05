@@ -100,6 +100,7 @@ interface ILoginApiCallResponse {
   TokenType: EUserApiTokenType
   RefreshToken: string
   IdToken: string
+  ExpireTime?:number
 }
 
 export type TVerifyLoginApiCallResponse = ILoginApiCallResponse & {
