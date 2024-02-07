@@ -26,14 +26,14 @@ export interface IIncomePageProps {
 export const IncomePage = (props: IIncomePageProps) => {
   const useProfileStore = useStore(EStore.profile)
   const { onClickNext } = props
-  const {  user } = useAuth()
+  const {  user, loanRequest, setProfile } = useAuth()
   const { t } = useTranslation()
   const [input, setInput] = useState({
-    salary: '',
-    alimony: '',
-    pension: '',
-    allowance: '',
-    rent: '',
+    salary: loanRequest && loanRequest.salary && loanRequest.salary !== 'N/A' ? loanRequest?.salary : '',
+    alimony: loanRequest && loanRequest.alimony && loanRequest.alimony !== 'N/A' ? loanRequest?.alimony : '',
+    pension: loanRequest && loanRequest.pension && loanRequest.pension !== 'N/A' ? loanRequest?.pension : '',
+    allowance: loanRequest && loanRequest.allowance && loanRequest.allowance !== 'N/A' ? loanRequest?.allowance : '',
+    rent: loanRequest && loanRequest.rent && loanRequest.rent !== 'N/A' ? loanRequest?.rent : ''
   })
 
 
@@ -62,9 +62,18 @@ export const IncomePage = (props: IIncomePageProps) => {
     try {
       if (user) {
         try {
-          const response =   await updateLoanRequestApiCall({salary: salary, alimony: alimony, pension: pension, allowance: allowance, rent: rent}, user)
-  
-          if (response) {
+          if (loanRequest?.salary !== salary || loanRequest?.alimony !== alimony || loanRequest?.pension !== pension || loanRequest?.allowance !== allowance || loanRequest?.rent !== rent) {
+            const payload = { salary: salary, alimony: alimony, pension: pension, allowance: allowance, rent: rent }
+            const response =   await updateLoanRequestApiCall(payload, user)
+              if (response) {
+                onClickNext()
+              }
+            // update loan request with payload data
+            setProfile({ ...loanRequest, ...payload })
+                
+          }
+          else {
+            console.log('no changes')
             onClickNext()
           }
         } catch (error) {

@@ -17,11 +17,22 @@ export interface IMaritalStatusPageProps{
 
 export const MaritalStatusPage = (props:IMaritalStatusPageProps ) => {
   const { onClickNext } = props
-  const [maritalStatus, setMaritalStatus] = useState('' as EMaritalStatus)
-  const [partnerEmployment, setPartnerEmployment] = useState('' as EEmplymentType)
+  const { user, loanRequest } = useAuth()
+
+  const [maritalStatus, setMaritalStatus] = useState(
+    loanRequest && loanRequest.maritalStatus && 
+    loanRequest.maritalStatus !== 'N/A'  as EMaritalStatus 
+      ? loanRequest?.maritalStatus 
+      : '' as EMaritalStatus)
+
+  const [partnerEmployment, setPartnerEmployment] = useState(
+    loanRequest && loanRequest.partnerEmploymentType && 
+    loanRequest.partnerEmploymentType !== 'N/A' as EEmplymentType
+      ? loanRequest?.maritalStatus 
+      : '' as EEmplymentType)
   const aiRef = useRef(null)
   const { t } = useTranslation()
-  const { user } = useAuth()
+  
   useEffect(() => {
     
   }, [])

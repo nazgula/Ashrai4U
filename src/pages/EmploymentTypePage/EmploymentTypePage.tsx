@@ -53,13 +53,13 @@ export const EmploymentTypePage = (props:IEmploymentTypePageProps ) => {
       value: EEmplymentType.CONTRACT,
       name: 'button-types',
       label: t('employmentTypePage.type.contract'),
-      divClassName: 'w-30',
+      divClassName: 'w-30'
     },
     {
       value: EEmplymentType.FREELANCER,
       name: 'button-types',
       label: t('employmentTypePage.type.freelancer'),
-      divClassName: 'w-30',
+      divClassName: 'w-30'
     },
   ]
 

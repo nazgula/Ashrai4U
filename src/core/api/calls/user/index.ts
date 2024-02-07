@@ -156,6 +156,8 @@ export const updateLoanRequestApiCall = async (
 // ----------------getLoanRequest
 export const getLoanRequestApiCall = async (user: TVerifyLoginApiCallResponse) => {
   try {
+    console.log('getProfileApiCall: ', user)
+    console.log(`Authorization: ${user.TokenType} ${user.AccessToken}`)
     const response = await apiRequest({
       apiEndpoint,
       path: EUserApiPath.profile,
@@ -358,6 +360,7 @@ export const deleteUserApiCall = async ({
 // Profile
 // ----------------profile
 export const getProfileApiCall = async (user: TLoginApiCallResponse) => {
+
   try {
     const response = await apiRequest({
       apiEndpoint,

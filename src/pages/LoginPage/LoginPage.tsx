@@ -7,7 +7,7 @@ import { useAuth, useModal } from '@/core/context'
 import { getLoanRequestApiCall, loginApiCall, updateLoanRequestApiCall, verifyLoginApiCall } from '@/core/api/calls'
 import { Button, EButtonType, Input } from '@/components/ui'
 import { LeftTitles } from '@/components/sections/LeftTitles'
-import { TUpdateLoanRequestPayload } from '@/core/api/types'
+import { TUpdateLoanRequestPayload, TVerifyApiCallPayload, TVerifyLoginApiCallResponse } from '@/core/api/types'
 import { useLocation } from 'react-router-dom'
 import { getQueryParamFromLocation } from '@/utilities/utilities'
 
@@ -25,7 +25,7 @@ export interface ILoginPageProps {
 export const LoginPage = (props: ILoginPageProps) => {
   // const useProfileStore = useStore(EStore.profile)
   const { onClickNext } = props
-  const { login, user, setProfile } = useAuth()
+  const { login, user, setProfile} = useAuth()
 
   const { setModal } = useModal()
   const { t } = useTranslation()
@@ -58,14 +58,10 @@ export const LoginPage = (props: ILoginPageProps) => {
       // wait 2000 ms for script to load before calling loginHandler / loanRequestHandler
       setTimeout(() => {
         const currentTimestamp = new Date().getTime()  
-        // console.log('currentTimestamp', currentTimestamp, user.ExpireTime, user.ExpireTime && user.ExpireTime > currentTimestamp)   
         if (user.ExpireTime && user.ExpireTime > currentTimestamp) {
-          // console.log('currentTimestamp loan request')
-          loanRequestHandler()
+          loanRequestHandler(user)
         }
-        else  {
-          // console.log('currentTimestamp loginHandler')
-  
+        else  {  
           loginHandler(user.username)
         }      }, 2000)
       
@@ -133,10 +129,10 @@ export const LoginPage = (props: ILoginPageProps) => {
       const response = await verifyLoginApiCall(vPayload)
 
       if (response) {
-        login({ ...response, username: vPayload.username })
+        await login({ ...response, username: vPayload.username })
         console.log('user: ', user)
         console.log ('verificationHandler')
-        await loanRequestHandler()
+        await loanRequestHandler({ ...response, username: vPayload.username })
 
       }
     } catch (error) {
@@ -146,7 +142,7 @@ export const LoginPage = (props: ILoginPageProps) => {
     }
   }
 
-  const loanRequestHandler = async () => {
+  const loanRequestHandler = async (user: TVerifyLoginApiCallResponse) => {
     if (user) {
           console.log ('request loan')
       try {  
@@ -155,6 +151,9 @@ export const LoginPage = (props: ILoginPageProps) => {
         // if first/last name are missing (first login) or new agentId
         
         if (loanRequest) {
+
+          
+
           const uPayload : TUpdateLoanRequestPayload = {}
           if (loanRequest?.firstName === 'N/A' && input.firstName !== '') 
             { 
@@ -165,7 +164,7 @@ export const LoginPage = (props: ILoginPageProps) => {
               uPayload.lastName = input.lastName
               loanRequest.lastName = input.lastName
             }
-          if (agentId !== '' && loanRequest.agentId !== agentId) {
+          if (agentId && loanRequest.agentId !== agentId) {
             uPayload.agentId = agentId
             loanRequest.agentId = agentId
           }
@@ -180,10 +179,9 @@ export const LoginPage = (props: ILoginPageProps) => {
             }
           }
 
-          setProfile(loanRequest as TUpdateLoanRequestPayload)
-
         }
-
+        
+        setProfile(loanRequest as TUpdateLoanRequestPayload)
         onClickNext(loanRequest)
 
       } catch (error) {
